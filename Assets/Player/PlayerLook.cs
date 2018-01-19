@@ -25,6 +25,7 @@ public class PlayerLook : MonoBehaviour {
 		}
 		originalRotation = transform.localRotation;
 	}
+	
 	void Update () {
 		// Read the mouse input axis
 		rotationX += Input.GetAxis("Mouse X") * sensitivityX;
