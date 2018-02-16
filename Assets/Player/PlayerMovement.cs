@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	public Vector3 currentVelocity {
 		get {
-			return m_Velocity;
+			return m_Rigidbody.velocity;
 		}
 	}
 
@@ -45,8 +45,13 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	
 	void Update () {
+		Vector3 m_Velocity = m_Rigidbody.velocity;
+
 		bool lastGround = m_IsGrounded;
 		m_IsGrounded = this.CheckGrounded();
+		if(m_IsGrounded && Input.GetKeyDown(KeyCode.Space)) {
+			m_Rigidbody.AddForce(transform.up * jumpForce);
+		}
 
 		if(m_IsGrounded) {
 			if(!lastGround) {
@@ -54,8 +59,8 @@ public class PlayerMovement : MonoBehaviour {
 				m_SidewaysSpeed = 0f;
 				m_Velocity = Vector3.zero;
 			} else {
-				m_ForwardSpeed = Input.GetAxisRaw("Vertical") * Time.deltaTime;
-				m_SidewaysSpeed = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
+				m_ForwardSpeed = Input.GetAxisRaw("Vertical");
+				m_SidewaysSpeed = Input.GetAxisRaw("Horizontal");
 			}
 
 			m_ForwardDirection = transform.forward;
@@ -64,7 +69,7 @@ public class PlayerMovement : MonoBehaviour {
 			float fowardAirSpeed = Input.GetAxisRaw("Vertical") * Time.deltaTime;
 			if(fowardAirSpeed < 0f) {
 				float oSign = Mathf.Sign(m_ForwardSpeed);
-				m_ForwardSpeed = Mathf.Clamp(Mathf.Abs(m_ForwardSpeed) - (acceleration * .2f * Time.deltaTime), 0f, m_ForwardSpeed);
+				m_ForwardSpeed = Mathf.Clamp(Mathf.Abs(m_ForwardSpeed) - (acceleration * .2f * Time.deltaTime), 0f, Mathf.Abs(m_ForwardSpeed));
 				m_ForwardSpeed *= oSign;
 			}
 		}
@@ -72,36 +77,29 @@ public class PlayerMovement : MonoBehaviour {
 		float m_CurrentMoveSpeed = moveSpeed;
 		if(m_ForwardSpeed != 0 && m_SidewaysSpeed != 0) m_CurrentMoveSpeed *= .7f;
 
-		if(m_IsGrounded && Input.GetKeyDown(KeyCode.Space)) {
-			m_Rigidbody.AddForce(transform.up * jumpForce);
-		}
-
 		m_DesiredVelocity = (m_ForwardDirection * m_ForwardSpeed + m_SidewaysDirection * m_SidewaysSpeed) * m_CurrentMoveSpeed;
 
-		float deltaX = Mathf.Abs(m_DesiredVelocity.x - m_Velocity.x) / Mathf.Abs(m_DesiredVelocity.z - m_Velocity.z);
-		float deltaY = 1;
-		float deltaSum = deltaX + deltaY;
+		float zDiff = Mathf.Abs(m_DesiredVelocity.z - m_Velocity.z);
+		
+		float deltaX = 0f;
+		if(zDiff != 0) deltaX = Mathf.Abs(m_DesiredVelocity.x - m_Velocity.x) / zDiff;
+		float deltaZ = 1;
+		float deltaSum = deltaX + deltaZ;
 
-		deltaX = deltaX / deltaSum;
-		deltaY = deltaY / deltaSum;
-
-		float acelX = acceleration * Time.deltaTime * deltaX;
+		float acelX = acceleration * Time.deltaTime * ( deltaX / deltaSum );
 		if(m_Velocity.x < m_DesiredVelocity.x) m_Velocity.x = Mathf.Clamp(m_Velocity.x + acelX, m_Velocity.x, m_DesiredVelocity.x);
 		else if(m_Velocity.x > m_DesiredVelocity.x) m_Velocity.x = Mathf.Clamp(m_Velocity.x - acelX, m_DesiredVelocity.x, m_Velocity.x);
 
-		float acelY = acceleration * Time.deltaTime * deltaY;
+		float acelY = acceleration * Time.deltaTime * ( deltaZ / deltaSum );
 		if(m_Velocity.z < m_DesiredVelocity.z) m_Velocity.z = Mathf.Clamp(m_Velocity.z + acelY, m_Velocity.z, m_DesiredVelocity.z);
 		else if(m_Velocity.z > m_DesiredVelocity.z) m_Velocity.z = Mathf.Clamp(m_Velocity.z - acelY, m_DesiredVelocity.z, m_Velocity.z);
-
-		m_Velocity.y = m_Rigidbody.velocity.y;
+		
+		if(m_LastVelocity != m_Velocity) {
+			m_LastVelocity = m_Velocity;
+		}
+		m_Velocity.y = m_Rigidbody.velocity.y;		
 		m_Rigidbody.velocity = m_Velocity;
-		m_LastVelocity = m_Velocity;
 		// transform.Translate(m_Velocity);		
-	}
-
-	void LateUpdate() {
-		Vector3 diff = m_LastVelocity - m_Rigidbody.velocity;
-		// Debug.Log(diff);
 	}
 
 	bool CheckGrounded() {

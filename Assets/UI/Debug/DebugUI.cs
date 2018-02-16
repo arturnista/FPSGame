@@ -7,18 +7,21 @@ public class DebugUI : MonoBehaviour {
 
 	private Text m_DesiredVelocityText;
 	private Text m_VelocityText;
+	private Text m_PositionText;
 
 	private PlayerMovement m_PlayerMovement;
 
 	void Awake () {
 		m_DesiredVelocityText = transform.Find("DesiredVelocityText").GetComponent<Text>();
 		m_VelocityText = transform.Find("VelocityText").GetComponent<Text>();
+		m_PositionText = transform.Find("PositionText").GetComponent<Text>();
 
 		m_PlayerMovement = GameObject.FindObjectOfType<PlayerMovement>();
 	}
 	
 	void Update () {
-		m_DesiredVelocityText.text = "D: " + m_PlayerMovement.desiredVelocity + "(" + Mathf.Round(m_PlayerMovement.desiredVelocity.magnitude) + ")";
-		m_VelocityText.text = "V: " + m_PlayerMovement.currentVelocity + "(" + Mathf.Round(m_PlayerMovement.currentVelocity.magnitude) + ")";
+		m_DesiredVelocityText.text = "D: " + m_PlayerMovement.desiredVelocity + " (" + Mathf.Round(m_PlayerMovement.desiredVelocity.magnitude) + ")";
+		m_VelocityText.text = "V: " + m_PlayerMovement.currentVelocity + " (" + Mathf.Round(m_PlayerMovement.currentVelocity.magnitude) + ")";
+		m_PositionText.text = "P: " + m_PlayerMovement.transform.position;
 	}
 }

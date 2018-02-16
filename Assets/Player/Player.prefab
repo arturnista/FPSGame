@@ -130,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229206084585054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 5}
+  m_LocalPosition: {x: 2.29, y: 1, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4971548552651588}
@@ -317,8 +317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2c0c752658c44f57bc656345b502973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivityX: 5
-  sensitivityY: 5
+  sensitivityX: 3
+  sensitivityY: 3
   minimumX: -360
   maximumX: 360
   minimumY: -60
@@ -334,9 +334,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66eebbe2851004505af830c88b61e676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 100
-  moveSpeed: 500
-  jumpForce: 13000
+  acceleration: 30
+  moveSpeed: 15
+  jumpForce: 12000
   groundLayers:
     serializedVersion: 2
     m_Bits: 256
