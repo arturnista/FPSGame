@@ -168,6 +168,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 return;
             }
+            if(m_FootstepSounds.Length <= 0) {
+                return;
+            }
+            
             // pick & play a random footstep sound from the array,
             // excluding sound at index 0
             int n = Random.Range(1, m_FootstepSounds.Length);
