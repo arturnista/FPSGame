@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class PlayerMovement : PhysicEntity {
 
-	private Transform m_Head;
-	
 	protected bool m_IsWalking;
 	protected bool m_IsCrouched;
 
 	protected override void Awake () {
 		base.Awake();
-		m_Head = transform.Find("Head");
 
 		m_IsCrouched = false;
 	}
