@@ -74,11 +74,14 @@ public class PlayerMovement : MonoBehaviour {
 		else if(m_Velocity.z > m_DesiredVelocity.z) m_Velocity.z = Mathf.Clamp(m_Velocity.z - acelY, m_DesiredVelocity.z, m_Velocity.z);
 
 		if(m_Controller.isGrounded) {
+			m_Velocity.y = 0f;
 			if(Input.GetKeyDown(KeyCode.Space)) m_Velocity.y = jumpForce;
 		} else {
-			m_Velocity.y -= 4f;
+			m_Velocity.y -= .9f;
 		}
 		m_Controller.Move(m_Velocity * Time.deltaTime);
+
+		Debug.Log(m_Controller.isGrounded);
 	}
 	
 	void Move () {
