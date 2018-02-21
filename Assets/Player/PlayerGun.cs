@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerGun : MonoBehaviour {
 
 	[SerializeField]
+	private float m_Damage;
+
+	[SerializeField]
 	private bool m_IsAutomatic;
 
 	[SerializeField]
@@ -35,7 +38,7 @@ public class PlayerGun : MonoBehaviour {
 
 		Debug.DrawRay(m_Head.transform.position, m_Head.transform.forward * 10f, Color.red, 10f);
 
-		float force = 1f;
+		float force = m_Damage;
 		RaycastHit[] hits = Physics.RaycastAll(m_Head.transform.position, m_Head.transform.forward);
 		foreach(RaycastHit hit in hits) {
 			MaterialType material = hit.transform.GetComponent<MaterialType>();

@@ -23,8 +23,9 @@ public class PlayerLook : MonoBehaviour {
 		if (m_Rigidbody) {
 			m_Rigidbody.freezeRotation = true;
 		}
-		originalRotation = transform.localRotation;
-		Cursor.lockState = CursorLockMode.None;
+		
+		originalRotation = Quaternion.identity;
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 	void Update () {

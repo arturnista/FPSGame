@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlassMaterial : MaterialType {
+public class MetalMaterial : MaterialType {
 
-	protected override void Awake () {
-		base.Awake();
-		this.Config("glass");
+	void Start () {
+		this.Config("metal");
 	}
 
 	public override float Impact(Vector3 position, Vector3 normal, float force) {
 		float newForce = base.Impact(position, normal, force);
-		Debug.Log("Impact on Glass with " + force + "(" + newForce + ")" + " on " + normal);
+		Debug.Log("Impact on Metal with " + force + "(" + newForce + ")" + " on " + normal);
 		return newForce;
 	}
 

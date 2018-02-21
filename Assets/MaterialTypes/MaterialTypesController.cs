@@ -13,7 +13,9 @@ public class MaterialTypesController : MonoBehaviour {
 	void Awake() {
 		if(i_Instance == null) i_Instance = this;
 		materialsConfig = new Dictionary<string, MaterialTypeConfig>();
-		foreach(MaterialTypeConfig c in materialsConfigList) materialsConfig.Add(c.name, c);
+		foreach(MaterialTypeConfig c in materialsConfigList) {
+			materialsConfig.Add(c.name, c);
+		}
 	}
 	
 	public MaterialTypeConfig GetConfig(string name) {

@@ -54,7 +54,9 @@ MonoBehaviour:
   materialsConfigList:
   - name: metal
     penetration: 0
-    impactAudios: []
+    impactAudios:
+    - {fileID: 8300000, guid: 7661b6c846dac48939a7917d8eb1b51c, type: 3}
+    - {fileID: 8300000, guid: c0fe0c23bb7504fd0a5782686fb49566, type: 3}
     bulletHoleDecals:
     - {fileID: 1326317616144618, guid: 7085636b7d8304060aa9fa51353aa2ed, type: 2}
   - name: glass
@@ -63,6 +65,8 @@ MonoBehaviour:
     bulletHoleDecals:
     - {fileID: 1326317616144618, guid: 7085636b7d8304060aa9fa51353aa2ed, type: 2}
   - name: flesh
-    penetration: 0
-    impactAudios: []
+    penetration: 0.6
+    impactAudios:
+    - {fileID: 8300000, guid: b5249bec242fb4ff392d818414f56306, type: 3}
+    - {fileID: 8300000, guid: 6531e4f5d902f48a7bab3d8fc8b02c24, type: 3}
     bulletHoleDecals: []
