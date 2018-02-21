@@ -24,9 +24,14 @@ public class PlayerLook : MonoBehaviour {
 			m_Rigidbody.freezeRotation = true;
 		}
 		originalRotation = transform.localRotation;
+		Cursor.lockState = CursorLockMode.None;
 	}
 	
 	void Update () {
+		if(Input.GetKeyDown(KeyCode.P)) {
+			if(Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+			else Cursor.lockState = CursorLockMode.Locked;
+		}
 		// Read the mouse input axis
 		rotationX += Input.GetAxis("Mouse X") * sensitivityX;
 		rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
