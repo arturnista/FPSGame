@@ -33,13 +33,15 @@ public class PlayerGun : MonoBehaviour {
 	void Shot() {
 		m_Flash.Play();
 
-		// Debug.DrawRay(m_Head.transform.position, m_Head.transform.forward * 10f, Color.red, 10f);
+		Debug.DrawRay(m_Head.transform.position, m_Head.transform.forward * 10f, Color.red, 10f);
 
+		float force = 1f;
 		RaycastHit[] hits = Physics.RaycastAll(m_Head.transform.position, m_Head.transform.forward);
 		foreach(RaycastHit hit in hits) {
 			MaterialType material = hit.transform.GetComponent<MaterialType>();
 			if(material) {
-				material.Impact(hit.point, hit.normal);
+				force = material.Impact(hit.point, hit.normal, force);
+				if(force <= 0f) break;
 			}
 			// Instantiate(impactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
 		}

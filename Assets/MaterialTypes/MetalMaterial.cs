@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class MetalMaterial : MaterialType {
 
-	
-	public override void Impact(Vector3 position, Vector3 normal) {
-		base.Impact(position, normal);
-		Debug.Log("Impact on Metal with " + normal);
+	protected override void Awake () {
+		base.Awake();
+		this.Config("metal");
+	}
+
+	public override float Impact(Vector3 position, Vector3 normal, float force) {
+		float newForce = base.Impact(position, normal, force);
+		Debug.Log("Impact on Metal with " + force + "(" + newForce + ")" + " on " + normal);
+		return newForce;
 	}
 
 }
