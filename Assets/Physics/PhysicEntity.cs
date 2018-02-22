@@ -28,6 +28,12 @@ public class PhysicEntity : MonoBehaviour {
 		}
 	}
 
+	public bool isGrounded {
+		get {
+			return m_Controller.isGrounded;
+		}
+	}
+
 	protected float m_VerticalSpeed;
 	protected float m_ForwardSpeed;
 	protected float m_SidewaysSpeed;
