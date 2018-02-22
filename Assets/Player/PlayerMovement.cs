@@ -7,10 +7,13 @@ public class PlayerMovement : PhysicEntity {
 	protected bool m_IsWalking;
 	protected bool m_IsCrouched;
 
+	private Transform m_Head;
+
 	protected override void Awake () {
 		base.Awake();
 
 		m_IsCrouched = false;
+		m_Head = transform.Find("Head");
 	}
 
 	void Update() {
