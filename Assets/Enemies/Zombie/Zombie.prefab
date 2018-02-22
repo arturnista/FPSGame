@@ -265,7 +265,7 @@ MonoBehaviour:
   acceleration: 30
   moveSpeed: 5
   jumpForce: 3
-  gravity: 0.7
+  gravity: 12
   height: 1.8
 --- !u!114 &114768386050223696
 MonoBehaviour:

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieMovement : PhysicEntity {
+public class ZombieMovement : EnemyMovement {
 
 	protected PlayerMovement m_Player;
 
@@ -15,11 +15,16 @@ public class ZombieMovement : PhysicEntity {
 	void Update () {
 		m_ForwardSpeed = .3f;
 
-		Vector3 diff = Vector3.Normalize( m_Player.transform.position - transform.position );
-		float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-		transform.eulerAngles = new Vector3(0f, angle, 0f);
+		transform.LookAt(m_Player.transform);
+		Vector3 nRot = transform.eulerAngles;
+		nRot.x = nRot.z = 0f;
+		transform.eulerAngles = nRot;
 
 		float speed = this.ComputeSpeed();
 		this.Move(speed);
 	}
+
+    public override void TakeDamage() {
+		m_Velocity = Vector3.zero;
+    }
 }

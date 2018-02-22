@@ -77,7 +77,7 @@ public class PhysicEntity : MonoBehaviour {
 
 			m_DesiredVelocity = (m_ForwardDirection * m_ForwardSpeed + m_SidewaysDirection * m_SidewaysSpeed) * speed;
 		} else {
-			m_Velocity.y -= gravity;
+			m_Velocity.y -= gravity * Time.deltaTime;
 		}
 	}
 
