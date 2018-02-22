@@ -16,6 +16,12 @@ public class PhysicEntity : MonoBehaviour {
 		}
 	}
 
+	public Vector3 planeVelocity {
+		get {
+			return new Vector3(m_Velocity.x, 0f, m_Velocity.z);
+		}
+	}
+
 	public Vector3 desiredVelocity {
 		get {
 			return m_DesiredVelocity;

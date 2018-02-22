@@ -15,12 +15,20 @@ public class PlayerGun : MonoBehaviour {
 	private float m_FireDelay;
 
 	private Transform m_Head;
+	private PlayerMovement m_PlayerMovement;
+	private Animator m_Animator;
 	private ParticleSystem m_Flash;
 
 	void Awake () {
 		m_Flash = GetComponentInChildren<ParticleSystem>();
+		m_PlayerMovement = GetComponentInParent<PlayerMovement>();
+		m_Animator = GetComponent<Animator>();
 
 		m_FireDelay = 1 / m_FireRate;
+	}
+
+	void Update() {
+		m_Animator.SetInteger("speed", Mathf.RoundToInt(m_PlayerMovement.planeVelocity.sqrMagnitude));
 	}
 	
 	public void StartShoting (Transform head) {
