@@ -37,10 +37,16 @@ public class PlayerGun : MonoBehaviour {
 	private List<PlayerGunSpread> m_SpreadList;
 	private int m_CurrentSpread;
 
+	private Vector3 m_OriginalPosition;
+	private Vector3 m_OriginalEuler;
+
 	private int m_CurrentMagazine;
 	private int m_PlayerSpeed;
 
+	private float m_NextShootTime;
+
 	private bool m_IsShooting;
+	private bool m_IsReloading;
 
 	private Transform m_Head;
 	private PlayerMovement m_PlayerMovement;
@@ -57,6 +63,9 @@ public class PlayerGun : MonoBehaviour {
 
 		m_CurrentSpread = 0;
 		m_CurrentSpreadBullet = 0;
+
+		m_OriginalPosition = transform.localPosition;
+		m_OriginalEuler = transform.localEulerAngles;
 	}
 
 	void Update() {
@@ -72,9 +81,15 @@ public class PlayerGun : MonoBehaviour {
 				if(m_CurrentSpread > 0 && m_SpreadList[m_CurrentSpread].bullet > m_CurrentSpreadBullet) m_CurrentSpread--;
 			}
 		}
+		transform.localEulerAngles = m_OriginalEuler;
+		transform.localPosition = m_OriginalPosition;
 	}
 	
 	public void StartShooting (Transform head) {
+		if(m_IsReloading) return;
+		if(Time.time < m_NextShootTime) return;
+
+		m_NextShootTime = Time.time + m_FireDelay;
 		m_Head = head;
 
 		m_RecoverSpreadTime = 0f;
@@ -84,25 +99,43 @@ public class PlayerGun : MonoBehaviour {
 		else Shoot();
 	}
 	
-	public void StopShooting () {
+	public void StopShooting (bool reload = true) {
+		if(m_IsReloading) return;
 		m_RecoverSpreadTime = 0f;
 		m_IsShooting = false;
 
-		CancelInvoke();
+		if(m_IsAutomatic) CancelInvoke();
+		if(reload && m_CurrentMagazine <= 0) Reload();
 	}
 
 	public void Reload() {
+		m_IsReloading = true;
+		this.StopShooting(false);
+
 		m_Animator.SetTrigger("reload");
 		Invoke("FinishReload", m_ReloadTime);
 	}
 
+	public void Select() {
+		transform.localPosition = m_OriginalPosition;
+		transform.localEulerAngles = m_OriginalEuler;
+	}
+
+	public void Deselect() {
+		this.StopShooting();
+		m_IsReloading = false;
+		CancelInvoke();
+	}
+
 	void FinishReload() {
+		m_IsReloading = false;
 		m_CurrentMagazine = m_MagazineSize;
 		m_CurrentSpread = 0;
 		m_CurrentSpreadBullet = 0;
 	}
 
 	void Shoot() {
+		if(m_IsReloading) return;
 		if(m_CurrentMagazine <= 0) {
 			// Play empty sound
 			return;
@@ -114,9 +147,6 @@ public class PlayerGun : MonoBehaviour {
 			m_CurrentSpread++;
 			cSpread = m_SpreadList[m_CurrentSpread];
 		}
-
-		float currentRandomSpread = m_DefaultSpread;
-		if(m_PlayerSpeed > 10) currentRandomSpread *= 5f;
 
 		float cBulletOff = m_CurrentSpread > 0 ? m_SpreadList[m_CurrentSpread - 1].bullet : 0;
 		cBullet -= cBulletOff;
@@ -132,13 +162,12 @@ public class PlayerGun : MonoBehaviour {
 		m_Animator.SetTrigger("fire");
 
 		// Debug.DrawRay(m_Head.transform.position, m_Head.transform.forward * 10f, Color.red, 10f);
-		Debug.Log(spreadOffset + " F: " + m_Head.transform.forward);
 
 		float force = m_Damage;
 		Vector3 dir = new Vector3(
-			Random.Range(-currentRandomSpread, currentRandomSpread) + m_Head.transform.forward.x - (Mathf.Sign(m_Head.transform.forward.x) * m_Head.transform.forward.z * spreadOffset.x), 
-			Random.Range(-currentRandomSpread, currentRandomSpread) + m_Head.transform.forward.y + spreadOffset.y, 
-			Random.Range(-currentRandomSpread, currentRandomSpread) + m_Head.transform.forward.z - (Mathf.Sign(m_Head.transform.forward.z) * m_Head.transform.forward.x * spreadOffset.x)
+			Random.Range(-m_DefaultSpread, m_DefaultSpread) + m_Head.transform.forward.x - (Mathf.Sign(m_Head.transform.forward.x) * m_Head.transform.forward.z * spreadOffset.x), 
+			Random.Range(-m_DefaultSpread, m_DefaultSpread) + m_Head.transform.forward.y + spreadOffset.y, 
+			Random.Range(-m_DefaultSpread, m_DefaultSpread) + m_Head.transform.forward.z - (Mathf.Sign(m_Head.transform.forward.z) * m_Head.transform.forward.x * spreadOffset.x)
 		);
 		RaycastHit[] hits = Physics.RaycastAll(m_Head.transform.position, dir);
 		foreach(RaycastHit hit in hits) {
