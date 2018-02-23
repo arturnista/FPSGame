@@ -28,10 +28,16 @@ public class PlayerGun : MonoBehaviour {
 
 	[Header("Spread")]
 	[SerializeField]
+	private float m_RecoverSpreadDelay = .2f;
+	private float m_RecoverSpreadTime;
+	private int m_CurrentSpreadBullet;
+	[SerializeField]
 	private List<PlayerGunSpread> m_SpreadList;
 	private int m_CurrentSpread;
 
 	private int m_CurrentMagazine;
+
+	private bool m_IsShooting;
 
 	private Transform m_Head;
 	private PlayerMovement m_PlayerMovement;
@@ -47,20 +53,37 @@ public class PlayerGun : MonoBehaviour {
 		m_CurrentMagazine = m_MagazineSize;
 
 		m_CurrentSpread = 0;
+		m_CurrentSpreadBullet = 0;
 	}
 
 	void Update() {
 		m_Animator.SetInteger("sqrSpeed", Mathf.RoundToInt(m_PlayerMovement.planeVelocity.sqrMagnitude));
 		m_Animator.SetBool("isGrounded", m_PlayerMovement.isGrounded);
+
+		if(!m_IsShooting && m_CurrentSpreadBullet > 0) {
+			m_RecoverSpreadTime += Time.deltaTime;
+			if(m_RecoverSpreadTime > m_RecoverSpreadDelay) {
+				m_RecoverSpreadTime = 0f;
+				m_CurrentSpreadBullet--;
+				if(m_CurrentSpread > 0 && m_SpreadList[m_CurrentSpread].bullet > m_CurrentSpreadBullet) m_CurrentSpread--;
+			}
+		}
 	}
 	
 	public void StartShooting (Transform head) {
 		m_Head = head;
+
+		m_RecoverSpreadTime = 0f;
+		m_IsShooting = true;
+
 		if(m_IsAutomatic) InvokeRepeating("Shoot", 0f, m_FireDelay);
 		else Shoot();
 	}
 	
 	public void StopShooting () {
+		m_RecoverSpreadTime = 0f;
+		m_IsShooting = false;
+
 		CancelInvoke();
 	}
 
@@ -72,6 +95,7 @@ public class PlayerGun : MonoBehaviour {
 	void FinishReload() {
 		m_CurrentMagazine = m_MagazineSize;
 		m_CurrentSpread = 0;
+		m_CurrentSpreadBullet = 0;
 	}
 
 	void Shoot() {
@@ -80,7 +104,7 @@ public class PlayerGun : MonoBehaviour {
 			return;
 		}
 
-		float cBullet = m_MagazineSize - m_CurrentMagazine;
+		float cBullet = m_CurrentSpreadBullet;
 		PlayerGunSpread cSpread = m_SpreadList[m_CurrentSpread];
 		if(cSpread.bullet < cBullet) {
 			m_CurrentSpread++;
@@ -88,13 +112,14 @@ public class PlayerGun : MonoBehaviour {
 		}
 
 		float cBulletOff = m_CurrentSpread > 0 ? m_SpreadList[m_CurrentSpread - 1].bullet : 0;
-		Vector3 lastPos = m_CurrentSpread > 0 ? m_SpreadList[m_CurrentSpread - 1].position : Vector3.zero;
-		Vector3 spreadOffset = Vector3.Lerp(lastPos, cSpread.position, cBullet / cSpread.bullet);
+		cBullet -= cBulletOff;
 
-		Debug.Log("Last: " + lastPos + " to: " + cSpread.position + " t: " + cBullet / cSpread.bullet + " b: " + cBullet + " n: " + cBulletOff);
+		Vector3 lastPos = m_CurrentSpread > 0 ? m_SpreadList[m_CurrentSpread - 1].position : Vector3.zero;
+		Vector3 spreadOffset = Vector3.Slerp(lastPos, cSpread.position, cBullet / (cSpread.bullet - cBulletOff));
 
 		// Play shot sound
 		m_CurrentMagazine--;
+		m_CurrentSpreadBullet++;
 		m_Flash.Play();
 		m_Animator.SetTrigger("fire");
 
