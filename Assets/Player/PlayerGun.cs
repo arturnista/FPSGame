@@ -37,7 +37,7 @@ public class PlayerGun : MonoBehaviour {
 	}
 
 	void Update() {
-		// m_Animator.SetInteger("sqrSpeed", Mathf.RoundToInt(m_PlayerMovement.planeVelocity.sqrMagnitude));
+		m_Animator.SetInteger("sqrSpeed", Mathf.RoundToInt(m_PlayerMovement.planeVelocity.sqrMagnitude));
 		m_Animator.SetBool("isGrounded", m_PlayerMovement.isGrounded);
 	}
 	
