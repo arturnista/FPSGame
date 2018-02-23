@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ad53e6e916e44a58b4701af89270edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxHealth: 500
+  m_MaxHealth: 30
 --- !u!114 &114590929843925468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84649d436de1948e7be502bf7767f1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 30
+  acceleration: 1
   moveSpeed: 5
   jumpForce: 3
   gravity: 12

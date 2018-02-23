@@ -502,9 +502,9 @@ MonoBehaviour:
   m_MagazineSize: 30
   m_MaxAmmo: 100
   m_ReloadTime: 2
-  m_Damage: 25
+  m_Damage: 7
   m_IsAutomatic: 1
-  m_FireRate: 10
+  m_FireRate: 20
   m_DefaultSpread: 0.01
   m_RecoverSpreadDelay: 0.2
   m_SpreadList:
