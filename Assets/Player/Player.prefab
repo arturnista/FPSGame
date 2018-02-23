@@ -354,15 +354,19 @@ MonoBehaviour:
   m_Damage: 25
   m_IsAutomatic: 1
   m_FireRate: 10
+  m_DefaultSpread: 0.01
+  m_RecoverSpreadDelay: 0.2
   m_SpreadList:
   - bullet: 5
-    position: {x: 0, y: 0.1, z: 0}
-  - bullet: 15
-    position: {x: 0.1, y: 0.2, z: 0}
-  - bullet: 25
-    position: {x: -0.2, y: 0.3, z: 0}
+    position: {x: 0, y: 0.06}
+  - bullet: 10
+    position: {x: 0, y: 0.1}
+  - bullet: 17
+    position: {x: -0.1, y: 0.2}
+  - bullet: 23
+    position: {x: -0.2, y: 0.25}
   - bullet: 30
-    position: {x: -0.1, y: 0.3, z: 0}
+    position: {x: -0.1, y: 0.3}
 --- !u!114 &114473489566362374
 MonoBehaviour:
   m_ObjectHideFlags: 1

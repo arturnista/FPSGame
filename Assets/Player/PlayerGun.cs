@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerGunSpread {
 	public int bullet;
-	public Vector3 position;
+	public Vector2 position;
 }
 
 public class PlayerGun : MonoBehaviour {
@@ -28,6 +28,8 @@ public class PlayerGun : MonoBehaviour {
 
 	[Header("Spread")]
 	[SerializeField]
+	private float m_DefaultSpread = .1f;
+	[SerializeField]
 	private float m_RecoverSpreadDelay = .2f;
 	private float m_RecoverSpreadTime;
 	private int m_CurrentSpreadBullet;
@@ -36,6 +38,7 @@ public class PlayerGun : MonoBehaviour {
 	private int m_CurrentSpread;
 
 	private int m_CurrentMagazine;
+	private int m_PlayerSpeed;
 
 	private bool m_IsShooting;
 
@@ -57,7 +60,8 @@ public class PlayerGun : MonoBehaviour {
 	}
 
 	void Update() {
-		m_Animator.SetInteger("sqrSpeed", Mathf.RoundToInt(m_PlayerMovement.planeVelocity.sqrMagnitude));
+		m_PlayerSpeed = Mathf.RoundToInt(m_PlayerMovement.planeVelocity.sqrMagnitude);
+		m_Animator.SetInteger("sqrSpeed", m_PlayerSpeed);
 		m_Animator.SetBool("isGrounded", m_PlayerMovement.isGrounded);
 
 		if(!m_IsShooting && m_CurrentSpreadBullet > 0) {
@@ -111,10 +115,14 @@ public class PlayerGun : MonoBehaviour {
 			cSpread = m_SpreadList[m_CurrentSpread];
 		}
 
+		float currentRandomSpread = m_DefaultSpread;
+		if(m_PlayerSpeed > 10) currentRandomSpread *= 5f;
+
 		float cBulletOff = m_CurrentSpread > 0 ? m_SpreadList[m_CurrentSpread - 1].bullet : 0;
 		cBullet -= cBulletOff;
 
-		Vector3 lastPos = m_CurrentSpread > 0 ? m_SpreadList[m_CurrentSpread - 1].position : Vector3.zero;
+		Vector2 lastPos = m_CurrentSpread > 0 ? m_SpreadList[m_CurrentSpread - 1].position : Vector2.zero;
+		// Vector3 spreadOffset = Vector3.Slerp(lastPos, cSpread.position, cBullet / (cSpread.bullet - cBulletOff));
 		Vector3 spreadOffset = Vector3.Slerp(lastPos, cSpread.position, cBullet / (cSpread.bullet - cBulletOff));
 
 		// Play shot sound
@@ -124,9 +132,15 @@ public class PlayerGun : MonoBehaviour {
 		m_Animator.SetTrigger("fire");
 
 		// Debug.DrawRay(m_Head.transform.position, m_Head.transform.forward * 10f, Color.red, 10f);
+		Debug.Log(spreadOffset + " F: " + m_Head.transform.forward);
 
 		float force = m_Damage;
-		RaycastHit[] hits = Physics.RaycastAll(m_Head.transform.position, m_Head.transform.forward + spreadOffset);
+		Vector3 dir = new Vector3(
+			Random.Range(-currentRandomSpread, currentRandomSpread) + m_Head.transform.forward.x - (Mathf.Sign(m_Head.transform.forward.x) * m_Head.transform.forward.z * spreadOffset.x), 
+			Random.Range(-currentRandomSpread, currentRandomSpread) + m_Head.transform.forward.y + spreadOffset.y, 
+			Random.Range(-currentRandomSpread, currentRandomSpread) + m_Head.transform.forward.z - (Mathf.Sign(m_Head.transform.forward.z) * m_Head.transform.forward.x * spreadOffset.x)
+		);
+		RaycastHit[] hits = Physics.RaycastAll(m_Head.transform.position, dir);
 		foreach(RaycastHit hit in hits) {
 			MaterialType material = hit.transform.GetComponent<MaterialType>();
 			if(material) {
