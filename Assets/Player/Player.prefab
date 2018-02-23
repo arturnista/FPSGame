@@ -354,6 +354,15 @@ MonoBehaviour:
   m_Damage: 25
   m_IsAutomatic: 1
   m_FireRate: 10
+  m_SpreadList:
+  - bullet: 5
+    position: {x: 0, y: 0.1, z: 0}
+  - bullet: 15
+    position: {x: 0.1, y: 0.2, z: 0}
+  - bullet: 25
+    position: {x: -0.2, y: 0.3, z: 0}
+  - bullet: 30
+    position: {x: -0.1, y: 0.3, z: 0}
 --- !u!114 &114473489566362374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -371,8 +380,8 @@ MonoBehaviour:
   maximumX: 360
   minimumY: -60
   maximumY: 60
-  m_HeadBobbingMin: 0.05
-  m_HeadBobbingDuration: 0.3
+  m_HeadBobbingMin: 0.006
+  m_HeadBobbingDuration: 2.5
 --- !u!114 &114637877290954564
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -14,7 +14,7 @@ public class FleshMaterial : MaterialType {
 
 	public override float Impact(Vector3 position, Vector3 normal, float force) {
 		float newForce = base.Impact(position, normal, force);
-		Debug.Log("Impact on Flesh with " + force + "(" + newForce + ")" + " on " + normal);
+		// Debug.Log("Impact on Flesh with " + force + "(" + newForce + ")" + " on " + normal);
 
 		m_BodyPart.DealDamage(force);
 

@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class PlayerGunSpread {
+	public int bullet;
+	public Vector3 position;
+}
+
 public class PlayerGun : MonoBehaviour {
 
 	[SerializeField]
@@ -20,6 +26,11 @@ public class PlayerGun : MonoBehaviour {
 	private float m_FireRate;
 	private float m_FireDelay;
 
+	[Header("Spread")]
+	[SerializeField]
+	private List<PlayerGunSpread> m_SpreadList;
+	private int m_CurrentSpread;
+
 	private int m_CurrentMagazine;
 
 	private Transform m_Head;
@@ -34,6 +45,8 @@ public class PlayerGun : MonoBehaviour {
 
 		m_FireDelay = 1 / m_FireRate;
 		m_CurrentMagazine = m_MagazineSize;
+
+		m_CurrentSpread = 0;
 	}
 
 	void Update() {
@@ -58,6 +71,7 @@ public class PlayerGun : MonoBehaviour {
 
 	void FinishReload() {
 		m_CurrentMagazine = m_MagazineSize;
+		m_CurrentSpread = 0;
 	}
 
 	void Shoot() {
@@ -66,15 +80,28 @@ public class PlayerGun : MonoBehaviour {
 			return;
 		}
 
+		float cBullet = m_MagazineSize - m_CurrentMagazine;
+		PlayerGunSpread cSpread = m_SpreadList[m_CurrentSpread];
+		if(cSpread.bullet < cBullet) {
+			m_CurrentSpread++;
+			cSpread = m_SpreadList[m_CurrentSpread];
+		}
+
+		float cBulletOff = m_CurrentSpread > 0 ? m_SpreadList[m_CurrentSpread - 1].bullet : 0;
+		Vector3 lastPos = m_CurrentSpread > 0 ? m_SpreadList[m_CurrentSpread - 1].position : Vector3.zero;
+		Vector3 spreadOffset = Vector3.Lerp(lastPos, cSpread.position, cBullet / cSpread.bullet);
+
+		Debug.Log("Last: " + lastPos + " to: " + cSpread.position + " t: " + cBullet / cSpread.bullet + " b: " + cBullet + " n: " + cBulletOff);
+
 		// Play shot sound
 		m_CurrentMagazine--;
 		m_Flash.Play();
 		m_Animator.SetTrigger("fire");
 
-		Debug.DrawRay(m_Head.transform.position, m_Head.transform.forward * 10f, Color.red, 10f);
+		// Debug.DrawRay(m_Head.transform.position, m_Head.transform.forward * 10f, Color.red, 10f);
 
 		float force = m_Damage;
-		RaycastHit[] hits = Physics.RaycastAll(m_Head.transform.position, m_Head.transform.forward);
+		RaycastHit[] hits = Physics.RaycastAll(m_Head.transform.position, m_Head.transform.forward + spreadOffset);
 		foreach(RaycastHit hit in hits) {
 			MaterialType material = hit.transform.GetComponent<MaterialType>();
 			if(material) {
