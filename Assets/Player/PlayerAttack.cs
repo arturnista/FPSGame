@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour {
 	
-	public GameObject impactEffectPrefab;
-
 	private Transform m_Head;
 	private PlayerGun m_Gun;
 
