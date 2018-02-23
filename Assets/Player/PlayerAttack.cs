@@ -17,9 +17,13 @@ public class PlayerAttack : MonoBehaviour {
 	
 	void Update () {
 		if(Input.GetMouseButtonDown(0)) {
-			m_Gun.StartShoting(m_Head);
+			m_Gun.StartShooting(m_Head);
 		} else if(Input.GetMouseButtonUp(0)) {
-			m_Gun.StopShoting();
+			m_Gun.StopShooting();
+		}
+
+		if(Input.GetKeyDown(KeyCode.R)) {
+			m_Gun.Reload();
 		}
 	}
 }

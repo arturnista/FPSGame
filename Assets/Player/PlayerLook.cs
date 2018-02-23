@@ -15,8 +15,13 @@ public class PlayerLook : MonoBehaviour {
 	float rotationX = 0F;
 	float rotationY = 0F;
 	Quaternion originalRotation;
+	private Vector3 m_EulerTarget;
+
+	private Camera m_FPSCamera;
 
 	void Awake () {
+		m_FPSCamera = GameObject.Find("FPSCamera").GetComponent<Camera>();
+
 		m_Rigidbody = GetComponent<Rigidbody>();
 		m_Head = transform.Find("Head");
 		// Make the rigid body not change rotation
@@ -25,7 +30,7 @@ public class PlayerLook : MonoBehaviour {
 		}
 		
 		originalRotation = Quaternion.identity;
-		Cursor.lockState = CursorLockMode.Locked;
+		// Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 	void Update () {
@@ -45,6 +50,11 @@ public class PlayerLook : MonoBehaviour {
 
 		transform.localRotation = originalRotation * xQuaternion;
 		m_Head.localRotation = originalRotation * yQuaternion;
+	}
+
+	void LateUpdate() {
+		m_FPSCamera.transform.position = m_Head.position;
+		m_FPSCamera.transform.rotation = m_Head.rotation;
 	}
 
 	public static float ClampAngle (float angle, float min, float max) {
