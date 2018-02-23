@@ -10,48 +10,59 @@ public class PlayerGunSpread {
 
 public class PlayerGun : MonoBehaviour {
 
-	[SerializeField]
-	private int m_MagazineSize;
-	[SerializeField]
-	private int m_MaxAmmo;
-	[SerializeField]
-	private float m_ReloadTime;
-	[SerializeField]
-	private float m_Damage;
+	public int currentMagazine {
+		get {
+			return m_CurrentMagazine;
+		}
+	}
+	public int maxMagazine {
+		get {
+			return m_MaxAmmo;
+		}
+	}
 
 	[SerializeField]
-	private bool m_IsAutomatic;
+	protected int m_MagazineSize;
+	[SerializeField]
+	protected int m_MaxAmmo;
+	[SerializeField]
+	protected float m_ReloadTime;
+	[SerializeField]
+	protected float m_Damage;
 
 	[SerializeField]
-	private float m_FireRate;
-	private float m_FireDelay;
+	protected bool m_IsAutomatic;
+
+	[SerializeField]
+	protected float m_FireRate;
+	protected float m_FireDelay;
 
 	[Header("Spread")]
 	[SerializeField]
-	private float m_DefaultSpread = .1f;
+	protected float m_DefaultSpread = .1f;
 	[SerializeField]
-	private float m_RecoverSpreadDelay = .2f;
-	private float m_RecoverSpreadTime;
-	private int m_CurrentSpreadBullet;
+	protected float m_RecoverSpreadDelay = .2f;
+	protected float m_RecoverSpreadTime;
+	protected int m_CurrentSpreadBullet;
 	[SerializeField]
-	private List<PlayerGunSpread> m_SpreadList;
-	private int m_CurrentSpread;
+	protected List<PlayerGunSpread> m_SpreadList;
+	protected int m_CurrentSpread;
 
-	private Vector3 m_OriginalPosition;
-	private Vector3 m_OriginalEuler;
+	protected Vector3 m_OriginalPosition;
+	protected Vector3 m_OriginalEuler;
 
-	private int m_CurrentMagazine;
-	private int m_PlayerSpeed;
+	protected int m_CurrentMagazine;
+	protected int m_PlayerSpeed;
 
-	private float m_NextShootTime;
+	protected float m_NextShootTime;
 
-	private bool m_IsShooting;
-	private bool m_IsReloading;
+	protected bool m_IsShooting;
+	protected bool m_IsReloading;
 
-	private Transform m_Head;
-	private PlayerMovement m_PlayerMovement;
-	private Animator m_Animator;
-	private ParticleSystem m_Flash;
+	protected Transform m_Head;
+	protected PlayerMovement m_PlayerMovement;
+	protected Animator m_Animator;
+	protected ParticleSystem m_Flash;
 
 	void Awake () {
 		m_Flash = GetComponentInChildren<ParticleSystem>();
@@ -85,7 +96,7 @@ public class PlayerGun : MonoBehaviour {
 		transform.localPosition = m_OriginalPosition;
 	}
 	
-	public void StartShooting (Transform head) {
+	public virtual void StartShooting (Transform head) {
 		if(m_IsReloading) return;
 		if(Time.time < m_NextShootTime) return;
 
@@ -99,7 +110,7 @@ public class PlayerGun : MonoBehaviour {
 		else Shoot();
 	}
 	
-	public void StopShooting (bool reload = true) {
+	public virtual void StopShooting (bool reload = true) {
 		if(m_IsReloading) return;
 		m_RecoverSpreadTime = 0f;
 		m_IsShooting = false;
@@ -108,7 +119,11 @@ public class PlayerGun : MonoBehaviour {
 		if(reload && m_CurrentMagazine <= 0) Reload();
 	}
 
-	public void Reload() {
+	public virtual void Reload() {
+		if(m_CurrentMagazine >= m_MagazineSize) {
+			return;
+		}
+
 		m_IsReloading = true;
 		this.StopShooting(false);
 
@@ -116,25 +131,25 @@ public class PlayerGun : MonoBehaviour {
 		Invoke("FinishReload", m_ReloadTime);
 	}
 
-	public void Select() {
+	public virtual void Select() {
 		transform.localPosition = m_OriginalPosition;
 		transform.localEulerAngles = m_OriginalEuler;
 	}
 
-	public void Deselect() {
+	public virtual void Deselect() {
 		this.StopShooting();
 		m_IsReloading = false;
 		CancelInvoke();
 	}
 
-	void FinishReload() {
+	protected virtual void FinishReload() {
 		m_IsReloading = false;
 		m_CurrentMagazine = m_MagazineSize;
 		m_CurrentSpread = 0;
 		m_CurrentSpreadBullet = 0;
 	}
 
-	void Shoot() {
+	protected virtual void Shoot() {
 		if(m_IsReloading) return;
 		if(m_CurrentMagazine <= 0) {
 			// Play empty sound

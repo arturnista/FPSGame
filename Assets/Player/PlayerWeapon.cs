@@ -7,6 +7,17 @@ public class PlayerWeapon : MonoBehaviour {
 	private Transform m_Head;
 	private PlayerGun m_Gun;
 
+	public int ammo {
+		get {
+			return m_Gun.currentMagazine;
+		}
+	}
+	public int maxAmmo {
+		get {
+			return m_Gun.maxMagazine;
+		}
+	}
+
 	private int m_CurrentWeapon;
 
 	void Awake () {
@@ -32,6 +43,8 @@ public class PlayerWeapon : MonoBehaviour {
 			SelectWeapon(0);
 		} else if(Input.GetKeyDown(KeyCode.Alpha2)) {
 			SelectWeapon(1);
+		} else if(Input.GetKeyDown(KeyCode.Alpha3)) {
+			SelectWeapon(2);
 		}
 	}
 
