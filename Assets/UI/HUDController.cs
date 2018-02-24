@@ -14,6 +14,6 @@ public class HUDController : MonoBehaviour {
 	}
 	
 	void Update () {
-		m_AmmoText.text = m_PlayerWeapon.ammo + " / " + m_PlayerWeapon.maxAmmo;
+		m_AmmoText.text = m_PlayerWeapon.magazine + " / " + m_PlayerWeapon.ammo;
 	}
 }

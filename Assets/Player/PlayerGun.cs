@@ -10,16 +10,24 @@ public class PlayerGunSpread {
 
 public class PlayerGun : MonoBehaviour {
 
+	public int currentAmmo {
+		get {
+			return m_CurrentAmmo;
+		}
+	}
 	public int currentMagazine {
 		get {
 			return m_CurrentMagazine;
 		}
 	}
-	public int maxMagazine {
+	public string gunName {
 		get {
-			return m_MaxAmmo;
+			return m_GunName;
 		}
 	}
+
+	[SerializeField]
+	private string m_GunName;
 
 	[SerializeField]
 	protected int m_MagazineSize;
@@ -37,6 +45,17 @@ public class PlayerGun : MonoBehaviour {
 	protected float m_FireRate;
 	protected float m_FireDelay;
 
+	[Header("Sound")]
+	protected AudioSource m_AudioSource;
+	[SerializeField]
+	protected AudioClip[] m_ShotAudios;
+	[SerializeField]
+	protected AudioClip m_EmptyAudio;
+	[SerializeField]
+	protected AudioClip m_ReloadAudio;
+	[SerializeField]
+	protected AudioClip m_SelectAudio;
+
 	[Header("Spread")]
 	[SerializeField]
 	protected float m_DefaultSpread = .1f;
@@ -52,6 +71,7 @@ public class PlayerGun : MonoBehaviour {
 	protected Vector3 m_OriginalEuler;
 
 	protected int m_CurrentMagazine;
+	protected int m_CurrentAmmo;
 	protected int m_PlayerSpeed;
 
 	protected float m_NextShootTime;
@@ -68,9 +88,11 @@ public class PlayerGun : MonoBehaviour {
 		m_Flash = GetComponentInChildren<ParticleSystem>();
 		m_PlayerMovement = GetComponentInParent<PlayerMovement>();
 		m_Animator = GetComponent<Animator>();
+		m_AudioSource = GetComponent<AudioSource>();
 
 		m_FireDelay = 1 / m_FireRate;
 		m_CurrentMagazine = m_MagazineSize;
+		m_CurrentAmmo = m_MaxAmmo;
 
 		m_CurrentSpread = 0;
 		m_CurrentSpreadBullet = 0;
@@ -94,6 +116,16 @@ public class PlayerGun : MonoBehaviour {
 		}
 		transform.localEulerAngles = m_OriginalEuler;
 		transform.localPosition = m_OriginalPosition;
+	}
+
+	public virtual int GiveAmmo(int amount) {
+		m_CurrentAmmo += amount;
+		if(m_CurrentAmmo > m_MaxAmmo) {
+			int diff = m_CurrentAmmo - m_MaxAmmo;
+			m_CurrentAmmo = m_MaxAmmo;
+			return diff;
+		}
+		return 0;
 	}
 	
 	public virtual void StartShooting (Transform head) {
@@ -120,18 +152,22 @@ public class PlayerGun : MonoBehaviour {
 	}
 
 	public virtual void Reload() {
-		if(m_CurrentMagazine >= m_MagazineSize) {
+		if(m_CurrentMagazine >= m_MagazineSize || m_CurrentAmmo == 0) {
 			return;
 		}
 
 		m_IsReloading = true;
 		this.StopShooting(false);
+		
+		if(m_ReloadAudio) SoundController.PlaySound(m_AudioSource, m_ReloadAudio);
 
 		m_Animator.SetTrigger("reload");
 		Invoke("FinishReload", m_ReloadTime);
 	}
 
 	public virtual void Select() {
+		if(m_SelectAudio) SoundController.PlaySound(m_AudioSource, m_SelectAudio);
+
 		transform.localPosition = m_OriginalPosition;
 		transform.localEulerAngles = m_OriginalEuler;
 	}
@@ -144,7 +180,14 @@ public class PlayerGun : MonoBehaviour {
 
 	protected virtual void FinishReload() {
 		m_IsReloading = false;
-		m_CurrentMagazine = m_MagazineSize;
+		if(m_CurrentAmmo > m_MagazineSize) {
+			int ammoToReload = m_MagazineSize - m_CurrentMagazine;
+			m_CurrentMagazine = m_MagazineSize;
+			m_CurrentAmmo -= ammoToReload;
+		} else {
+			m_CurrentMagazine = m_CurrentAmmo;
+			m_CurrentAmmo = 0;
+		}
 		m_CurrentSpread = 0;
 		m_CurrentSpreadBullet = 0;
 	}
@@ -152,7 +195,7 @@ public class PlayerGun : MonoBehaviour {
 	protected virtual void Shoot() {
 		if(m_IsReloading) return;
 		if(m_CurrentMagazine <= 0) {
-			// Play empty sound
+			if(m_EmptyAudio) SoundController.PlaySound(m_AudioSource, m_EmptyAudio);
 			return;
 		}
 
@@ -171,6 +214,9 @@ public class PlayerGun : MonoBehaviour {
 		Vector3 spreadOffset = Vector3.Slerp(lastPos, cSpread.position, cBullet / (cSpread.bullet - cBulletOff));
 
 		// Play shot sound
+		if(m_ShotAudios.Length > 0) {
+			SoundController.PlaySound(m_AudioSource, m_ShotAudios);
+		}
 		m_CurrentMagazine--;
 		m_CurrentSpreadBullet++;
 		m_Flash.Play();

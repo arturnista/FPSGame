@@ -3,19 +3,25 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour {
 
     [SerializeField]
-    private float m_MaxHealth;
-    private float m_CurrentHealth;
+    protected float m_MaxHealth;
+    protected float m_CurrentHealth;
 
-    private EnemyMovement m_EnemyMovement;
+    protected EnemyMovement m_EnemyMovement;
+
+    public float healthPerc {
+        get {
+            return m_CurrentHealth / m_MaxHealth;
+        }
+    }
     
     void Awake() {
         m_CurrentHealth = m_MaxHealth;
         m_EnemyMovement = GetComponent<EnemyMovement>();
     }
 
-    public void DealDamage(float damage) {
+    public virtual void DealDamage(float damage) {
         m_CurrentHealth -= damage;
-        m_EnemyMovement.TakeDamage();
+        m_EnemyMovement.TakeDamage(damage);
         
         if(m_CurrentHealth <= 0f) {
             gameObject.SetActive(false);

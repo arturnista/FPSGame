@@ -5,16 +5,17 @@ using UnityEngine;
 public class PlayerWeapon : MonoBehaviour {
 	
 	private Transform m_Head;
-	private PlayerGun m_Gun;
+	private List<PlayerGun> m_Guns;
+	private PlayerGun m_CurrentGun;
 
-	public int ammo {
+	public int magazine {
 		get {
-			return m_Gun.currentMagazine;
+			return m_CurrentGun.currentMagazine;
 		}
 	}
-	public int maxAmmo {
+	public int ammo {
 		get {
-			return m_Gun.maxMagazine;
+			return m_CurrentGun.currentAmmo;
 		}
 	}
 
@@ -22,6 +23,12 @@ public class PlayerWeapon : MonoBehaviour {
 
 	void Awake () {
 		m_Head = transform.Find("Head");
+
+		m_Guns = new List<PlayerGun>();
+		foreach(Transform child in m_Head) {
+			PlayerGun g = child.GetComponent<PlayerGun>();
+			if(g) m_Guns.Add(g);
+		}
 	}
 
 	void Start() {
@@ -30,13 +37,13 @@ public class PlayerWeapon : MonoBehaviour {
 	
 	void Update () {
 		if(Input.GetMouseButtonDown(0)) {
-			m_Gun.StartShooting(m_Head);
+			m_CurrentGun.StartShooting(m_Head);
 		} else if(Input.GetMouseButtonUp(0)) {
-			m_Gun.StopShooting();
+			m_CurrentGun.StopShooting();
 		}
 
 		if(Input.GetKeyDown(KeyCode.R)) {
-			m_Gun.Reload();
+			m_CurrentGun.Reload();
 		}
 
 		if(Input.GetKeyDown(KeyCode.Alpha1)) {
@@ -51,13 +58,23 @@ public class PlayerWeapon : MonoBehaviour {
 	void SelectWeapon(int index, bool force = false) {
 		if(!force && m_CurrentWeapon == index) return;
 
-		if(m_Gun) m_Gun.Deselect();
+		if(m_CurrentGun) m_CurrentGun.Deselect();
 
-		m_Head.GetChild(m_CurrentWeapon).gameObject.SetActive(false);
+		m_Guns[m_CurrentWeapon].gameObject.SetActive(false);
 		m_CurrentWeapon = index;
-		m_Head.GetChild(m_CurrentWeapon).gameObject.SetActive(true);
+		m_Guns[m_CurrentWeapon].gameObject.SetActive(true);
 
-		m_Gun = m_Head.GetChild(m_CurrentWeapon).GetComponent<PlayerGun>();
-		m_Gun.Select();
+		m_CurrentGun = m_Guns[m_CurrentWeapon];
+		m_CurrentGun.Select();
+	}
+
+	public int GiveAmmo(string gunName, int amount) {
+		PlayerGun gun = m_Guns.Find(x => x.gunName == gunName);
+		if(gun == null) {
+			Debug.LogWarning("Giving ammo to unknown gun " + gunName);
+			return amount;
+		}
+
+		return gun.GiveAmmo(amount);
 	}
 }

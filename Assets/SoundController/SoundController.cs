@@ -5,12 +5,31 @@ using UnityEngine;
 public class SoundController : MonoBehaviour {
 
 	private static AudioSource i_AudioSource;
+	private static SoundController i_Instance;
+
+	[SerializeField]
+	[Range(0f, 1f)]
+	private float m_MasterVolume = 1f;
 
 	void Awake () {
+		i_Instance = this;
 		i_AudioSource = GetComponent<AudioSource>();
 	}
-	
+
 	public static void PlaySound (AudioClip audio, Vector3 position, float volume = 1f) {
-		AudioSource.PlayClipAtPoint(audio, position, volume);
+		float soundVolume = volume * i_Instance.m_MasterVolume;
+		if(soundVolume <= 0f) return;
+		AudioSource.PlayClipAtPoint(audio, position, soundVolume);
+	}
+	
+	public static void PlaySound (AudioSource source, AudioClip[] audiosClip) {
+		AudioClip audio = audiosClip[Random.Range(0, audiosClip.Length)];
+		PlaySound(source, audio);
+	}
+	
+	public static void PlaySound (AudioSource source, AudioClip audioClip) {
+		float soundVolume = source.volume * i_Instance.m_MasterVolume;
+		if(soundVolume <= 0f) return;
+		source.PlayOneShot(audioClip, soundVolume);
 	}
 }

@@ -172,9 +172,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a88ad07cb1574af3a6495b4a0d65088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_GunName: m4a4
+  m_MagazineSize: 0
+  m_MaxAmmo: 0
+  m_ReloadTime: 0
   m_Damage: 25
   m_IsAutomatic: 1
   m_FireRate: 5
+  m_ShotAudios: []
+  m_DefaultSpread: 0.1
+  m_RecoverSpreadDelay: 0.2
+  m_SpreadList: []
 --- !u!198 &198523061982673732
 ParticleSystem:
   m_ObjectHideFlags: 1

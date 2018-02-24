@@ -24,7 +24,7 @@ public class ZombieMovement : EnemyMovement {
 		this.Move(speed);
 	}
 
-    public override void TakeDamage() {
+    public override void TakeDamage(float damage) {
 		m_Velocity = Vector3.zero;
     }
 }
