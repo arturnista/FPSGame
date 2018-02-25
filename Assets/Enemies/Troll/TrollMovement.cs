@@ -28,7 +28,7 @@ public class TrollMovement : EnemyMovement {
 		nRot.x = nRot.z = 0f;
 		transform.eulerAngles = nRot;
 
-		if(m_IsAttacking || m_IsTakingHit) return;
+		if(m_IsAttacking) return;
 
 		if(Vector3.Distance(m_Player.transform.position, transform.position) <= 2f) {
 			this.Attack();
@@ -67,7 +67,7 @@ public class TrollMovement : EnemyMovement {
 			Invoke("FinishDeath", 2f);
 		} else {
 			Invoke("FinishTakeDamage", 1f);
-			m_Animation.CrossFade("Hit");
+			m_Animation.Blend("Hit", .3f, 1f);
 		}
     }
 
