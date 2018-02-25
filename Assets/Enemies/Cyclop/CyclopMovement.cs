@@ -7,11 +7,16 @@ public class CyclopMovement : EnemyMovement {
 	protected PlayerMovement m_Player;
 	private Animation m_Animation;
 	private CyclopHealth m_Health;
+	
+	[SerializeField]
+	private float m_RunSpeed;
+	private float m_WalkSpeed;
 
 	private bool m_IsAttacking;
 	private bool m_IsTakingHit;
 	private bool m_IsStunned;
 	private bool m_IsDying;
+	private bool m_IsAngry;
 
 	protected override void Awake () {
 		base.Awake();
@@ -19,6 +24,8 @@ public class CyclopMovement : EnemyMovement {
 		m_Animation = GetComponent<Animation>();
 		m_Player = GameObject.FindObjectOfType<PlayerMovement>();
 		m_Health = GetComponent<CyclopHealth>();
+
+		m_WalkSpeed = moveSpeed;
 	}
 	
 	void Update () {
@@ -36,8 +43,9 @@ public class CyclopMovement : EnemyMovement {
 			return;
 		}
 
-        if (planeVelocity.magnitude > 6f) m_Animation.CrossFade("run");
+        if (planeVelocity.magnitude > 2f) m_Animation.CrossFade("run");
         else if (planeVelocity.magnitude > 0.1f) m_Animation.CrossFade("walk");
+        else if (m_IsStunned) m_Animation.CrossFade("stunned_idle");
         else m_Animation.CrossFade("idle");
 		m_ForwardSpeed = 1f;
 
@@ -47,9 +55,21 @@ public class CyclopMovement : EnemyMovement {
 
 	void Attack() {
 		m_IsAttacking = true;
-		if(Random.Range(0f, 1f) > .5f) m_Animation.CrossFade("attack_1");
-		else m_Animation.CrossFade("attack_2");
-		Invoke("FinishAttack", 2f);		
+		if(Random.Range(0f, 1f) > .5f) {
+			m_Animation.CrossFade("attack_1");
+			Invoke("HitCheck", m_IsAngry ? .2f : .4f);		
+		} else {
+			m_Animation.CrossFade("attack_2");
+			Invoke("HitCheck", m_IsAngry ? .175f : .35f);		
+		}
+		
+		Invoke("FinishAttack", m_IsAngry ? 1f : 2f);		
+	}
+
+	void HitCheck() {
+		if(Vector3.Distance(m_Player.transform.position, transform.position) <= 2f) {
+			Debug.Log("HIT!");
+		}		
 	}
 
 	void FinishAttack() {
@@ -62,18 +82,22 @@ public class CyclopMovement : EnemyMovement {
 		m_IsTakingHit = true;
 		m_Velocity = Vector3.zero;
 
-		if(m_Health.healthPerc <= .5f) moveSpeed = 8f;
+		if(m_Health.healthPerc <= .5f) {
+			acceleration *= 2f;
+			moveSpeed = m_RunSpeed;
+			m_IsAngry = true;
+			foreach (AnimationState state in m_Animation) state.speed = 2f;
+		}
 		
 		if(m_Health.healthPerc <= 0f) {
 			m_IsDying = true;
 			m_Animation.CrossFade("death");
 			Invoke("FinishDeath", 10f);
 		} else {
-			Invoke("FinishTakeDamage", 1f);
+			Invoke("FinishTakeDamage", m_IsAngry ? .5f : 1f);
 			if(m_IsStunned) m_Animation.CrossFade("stunned_idle_hit");
 			else m_Animation.CrossFade("hit");
-			Debug.Log(damage);
-			if(damage >= 14f) {
+			if(!m_IsAngry && damage >= 14f) {
 				m_IsStunned = true;
 				m_Animation.CrossFade("stunned_idle", 2f);
 				Invoke("FinishStunned", 10f);

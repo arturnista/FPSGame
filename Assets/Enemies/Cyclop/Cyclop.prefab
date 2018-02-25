@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114774267401080708}
   - component: {fileID: 143309139926337386}
   m_Layer: 0
-  m_Name: cyclop_soldier
+  m_Name: Cyclop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1321,7 +1321,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1019909225572802}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.115, y: -1.012, z: 12.991}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.7}
   m_Children:
@@ -1831,7 +1831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ed210510fea4e48b879ede1426c273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxHealth: 1000
+  m_MaxHealth: 50
 --- !u!114 &114594836710118190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1856,10 +1856,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 20
-  moveSpeed: 5
+  moveSpeed: 2
   jumpForce: 1
   gravity: 12
   height: 2
+  m_RunSpeed: 10
 --- !u!114 &114807065673552658
 MonoBehaviour:
   m_ObjectHideFlags: 1
