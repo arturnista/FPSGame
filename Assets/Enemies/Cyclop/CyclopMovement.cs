@@ -18,6 +18,8 @@ public class CyclopMovement : EnemyMovement {
 	private bool m_IsDying;
 	private bool m_IsAngry;
 
+	private bool m_IsFollowingPlayer = false;
+
 	protected override void Awake () {
 		base.Awake();
 
@@ -29,7 +31,15 @@ public class CyclopMovement : EnemyMovement {
 	}
 	
 	void Update () {
-		if(m_IsDying || m_IsStunned) return;
+		if(m_IsDying) return;
+
+		if(m_IsStunned) {
+			m_Animation.CrossFade("stunned_idle");
+			return;
+		} else if(!m_IsFollowingPlayer) {
+			m_Animation.CrossFade("idle");
+			return;
+		}
 
 		transform.LookAt(m_Player.transform);
 		Vector3 nRot = transform.eulerAngles;
@@ -45,7 +55,6 @@ public class CyclopMovement : EnemyMovement {
 
         if (planeVelocity.magnitude > 2f) m_Animation.CrossFade("run");
         else if (planeVelocity.magnitude > 0.1f) m_Animation.CrossFade("walk");
-        else if (m_IsStunned) m_Animation.CrossFade("stunned_idle");
         else m_Animation.CrossFade("idle");
 		m_ForwardSpeed = 1f;
 
@@ -78,6 +87,7 @@ public class CyclopMovement : EnemyMovement {
 
     public override void TakeDamage(float damage) {
 		if(m_IsDying) return;
+		m_IsFollowingPlayer = true;
 
 		m_IsTakingHit = true;
 		m_Velocity = Vector3.zero;
@@ -94,14 +104,18 @@ public class CyclopMovement : EnemyMovement {
 			m_Animation.CrossFade("death");
 			Invoke("FinishDeath", 10f);
 		} else {
-			if(m_IsAngry) return;
+			if(m_IsAngry) {
+				if(m_IsStunned) m_Animation.CrossFade("stunned_idle_hit");				
+				Invoke("FinishTakeDamage", m_IsAngry ? .5f : 1f);
+				return;
+			}
 
 			Invoke("FinishTakeDamage", m_IsAngry ? .5f : 1f);
 			if(m_IsStunned) m_Animation.CrossFade("stunned_idle_hit");
 			else m_Animation.CrossFade("hit");
 			if(!m_IsAngry && damage >= 14f) {
 				m_IsStunned = true;
-				m_Animation.Blend("stunned_idle", 1f, 1f);
+				m_Animation.CrossFade("stunned_idle");
 				Invoke("FinishStunned", 10f);
 			}
 		}
