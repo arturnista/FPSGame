@@ -15,6 +15,7 @@ public class HUDController : MonoBehaviour {
 	private PlayerWeapon m_PlayerWeapon;
 	private PlayerHealth m_PlayerHealth;
 
+	private bool m_TakeHit = false;
 	private float m_HitDuration = .5f;
 	private float m_HitStartTime;
 
@@ -23,7 +24,6 @@ public class HUDController : MonoBehaviour {
 		m_HealthText = transform.Find("HealthText").GetComponent<Text>();
 		m_HitIndicator = transform.Find("HitIndicator").GetComponent<Image>();
 		m_HitColorTransparent = new Color(1f, 0f, 0f, 0f);
-		m_HitStartTime = Time.time + m_HitDuration;
 
 		m_PlayerWeapon = GameObject.FindObjectOfType<PlayerWeapon>();
 		m_PlayerHealth = GameObject.FindObjectOfType<PlayerHealth>();
@@ -33,11 +33,16 @@ public class HUDController : MonoBehaviour {
 		m_AmmoText.text = m_PlayerWeapon.magazine + " / " + m_PlayerWeapon.ammo;
 		m_HealthText.text = Mathf.RoundToInt(m_PlayerHealth.health).ToString();
 
-		float t = (Time.time - m_HitStartTime) / m_HitDuration;
-		m_HitIndicator.color = Color.Lerp(m_HitColor, m_HitColorTransparent, t);
+		if(m_TakeHit) {
+			float t = (Time.time - m_HitStartTime) / m_HitDuration;
+			m_HitIndicator.color = Color.Lerp(m_HitColor, m_HitColorTransparent, t);
+			if(t >= 1) m_TakeHit = false;
+		}
 	}
 
 	public void TakeDamage() {
+		m_TakeHit = true;
+
 		Color col = m_HitColor;
 		m_HitIndicator.color = col;
 		m_HitStartTime = Time.time;

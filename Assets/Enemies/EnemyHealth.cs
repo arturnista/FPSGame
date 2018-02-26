@@ -19,9 +19,9 @@ public class EnemyHealth : MonoBehaviour {
         m_EnemyMovement = GetComponent<EnemyMovement>();
     }
 
-    public virtual void DealDamage(float damage) {
+    public virtual void DealDamage(float damage, string name) {
         m_CurrentHealth -= damage;
-        m_EnemyMovement.TakeDamage(damage);
+        m_EnemyMovement.TakeDamage(damage, name);
         
         if(m_CurrentHealth <= 0f) {
             gameObject.SetActive(false);

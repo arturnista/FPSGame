@@ -6,7 +6,7 @@ public class EnemyMovement : PhysicEntity {
         base.Awake();
     }
 
-    public virtual void TakeDamage(float damage) {
+    public virtual void TakeDamage(float damage, string name) {
 
     }
 }

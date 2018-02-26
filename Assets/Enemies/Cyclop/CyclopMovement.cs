@@ -7,7 +7,9 @@ public class CyclopMovement : EnemyMovement {
 	protected PlayerHealth m_Player;
 	private Animation m_Animation;
 	private CyclopHealth m_Health;
-	
+
+	[SerializeField]	
+	private float m_StunTime;
 	[SerializeField]
 	private float m_RunSpeed;
 	private float m_WalkSpeed;
@@ -17,6 +19,7 @@ public class CyclopMovement : EnemyMovement {
 	private bool m_IsStunned;
 	private bool m_IsDying;
 	private bool m_IsAngry;
+
 
 	private bool m_IsFollowingPlayer = false;
 
@@ -85,7 +88,7 @@ public class CyclopMovement : EnemyMovement {
 		m_IsAttacking = false;
 	}
 
-    public override void TakeDamage(float damage) {
+    public override void TakeDamage(float damage, string name) {
 		if(m_IsDying) return;
 		m_IsFollowingPlayer = true;
 
@@ -113,10 +116,11 @@ public class CyclopMovement : EnemyMovement {
 			Invoke("FinishTakeDamage", m_IsAngry ? .5f : 1f);
 			if(m_IsStunned) m_Animation.CrossFade("stunned_idle_hit");
 			else m_Animation.CrossFade("hit");
-			if(!m_IsAngry && damage >= 14f) {
+			if(!m_IsAngry && name == "head") {
 				m_IsStunned = true;
+				m_IsAngry = true;
 				m_Animation.CrossFade("stunned_idle");
-				Invoke("FinishStunned", 10f);
+				Invoke("FinishStunned", m_StunTime);
 			}
 		}
     }

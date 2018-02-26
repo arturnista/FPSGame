@@ -55,7 +55,7 @@ public class TrollMovement : EnemyMovement {
 		m_IsAttacking = false;
 	}
 
-    public override void TakeDamage(float damage) {
+    public override void TakeDamage(float damage, string name) {
 		if(m_IsDying) return;
 
 		m_IsTakingHit = true;
