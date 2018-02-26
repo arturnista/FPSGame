@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4721372496711782}
   - component: {fileID: 108900661893426552}
+  - component: {fileID: 114731627698378880}
   m_Layer: 0
   m_Name: Point light
   m_TagString: Untagged
@@ -40,7 +41,7 @@ GameObject:
   - component: {fileID: 64684873680237650}
   - component: {fileID: 114397911554324042}
   m_Layer: 0
-  m_Name: CeilingLamp
+  m_Name: FlickeringCeilingLamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1914133649000450}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4721372496711782}
@@ -178,4 +179,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_OnMaterial: {fileID: 2100000, guid: fe3d7f74bcb386249b9f331665436fd5, type: 2}
   m_OffMaterial: {fileID: 2100000, guid: 5a39bd3dffc95dc4ca4759d5823e6622, type: 2}
-  m_IsOn: 1
+  m_IsOnInitially: 1
+--- !u!114 &114731627698378880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1538154730736706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4a12155d2ae4ecda202900235f7df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FlickeringRange: 0.3
+  m_FlickeringRate: 40

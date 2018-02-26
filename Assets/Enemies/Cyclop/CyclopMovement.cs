@@ -79,6 +79,10 @@ public class CyclopMovement : EnemyMovement {
 	}
 
 	void HitCheck() {
+		if((!m_IsAngry && m_IsTakingHit)) return;
+		if(m_IsDying) return;
+		if(m_IsStunned) return;
+
 		if(Vector3.Distance(m_Player.transform.position, transform.position) <= 2f) {
 			m_Player.TakeDamage(25f, this);
 		}		

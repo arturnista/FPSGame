@@ -9,7 +9,9 @@ public class Lamp : MaterialType {
 	[SerializeField]
 	private Material m_OffMaterial;
 
-	private bool m_IsOn;
+	[SerializeField]
+	private bool m_IsOnInitially = true;
+	private bool m_IsOn = true;
 	private bool m_IsBroken;
 
 	private Light m_Light;
@@ -17,7 +19,8 @@ public class Lamp : MaterialType {
 	void Start () {
 		this.Config("metal");
 		m_Light = GetComponentInChildren<Light>();
-		m_IsOn = true;
+		if(m_IsOnInitially) this.On();
+		else this.Off();
 	}
 
 	public override float Impact(Vector3 position, Vector3 normal, float force) {
