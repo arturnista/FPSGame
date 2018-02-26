@@ -58,6 +58,8 @@ public class PlayerGun : MonoBehaviour {
 
 	[Header("Spread")]
 	[SerializeField]
+	protected float m_InitialSpread = 0f;
+	[SerializeField]
 	protected float m_DefaultSpread = .1f;
 	[SerializeField]
 	protected float m_RecoverSpreadDelay = .2f;
@@ -199,6 +201,46 @@ public class PlayerGun : MonoBehaviour {
 			return;
 		}
 
+		// Play shot sound
+		if(m_ShotAudios.Length > 0) {
+			SoundController.PlaySound(m_AudioSource, m_ShotAudios);
+		}
+		m_CurrentMagazine--;
+		m_CurrentSpreadBullet++;
+		m_Flash.Play();
+		m_Animator.SetTrigger("fire");
+
+		// Debug.DrawRay(m_Head.transform.position, m_Head.transform.forward * 10f, Color.red, 10f);
+		float force = m_Damage;
+		RaycastHit[] hits = Physics.RaycastAll(m_Head.transform.position, Spread());
+		foreach(RaycastHit hit in hits) {
+			MaterialType material = hit.transform.GetComponent<MaterialType>();
+			if(material) {
+				force = material.Impact(hit.point, hit.normal, force);
+				if(force <= 0f) break;
+			}
+			// Instantiate(impactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
+		}
+	}
+
+	private Vector3 Spread() {
+		if(m_SpreadList.Count == 0) {
+			return AmountBasedSpread();
+		} else {
+			return RecoilBasedSpread();
+		}
+	}
+
+	private Vector3 AmountBasedSpread() {
+		float cSpreadRange = (m_DefaultSpread * m_CurrentSpreadBullet / m_MagazineSize) + m_InitialSpread;
+		return new Vector3(
+			Random.Range(-cSpreadRange, cSpreadRange) + m_Head.transform.forward.x, // - (Mathf.Sign(m_Head.transform.forward.x) * m_Head.transform.forward.z * spreadOffset.x), 
+			Random.Range(-cSpreadRange, cSpreadRange) + m_Head.transform.forward.y, // + spreadOffset.y, 
+			Random.Range(-cSpreadRange, cSpreadRange) + m_Head.transform.forward.z // - (Mathf.Sign(m_Head.transform.forward.z) * m_Head.transform.forward.x * spreadOffset.x)
+		);
+	}
+
+	private Vector3 RecoilBasedSpread() {
 		float cBullet = m_CurrentSpreadBullet;
 		PlayerGunSpread cSpread = m_SpreadList[m_CurrentSpread];
 		if(cSpread.bullet < cBullet) {
@@ -212,31 +254,10 @@ public class PlayerGun : MonoBehaviour {
 		Vector2 lastPos = m_CurrentSpread > 0 ? m_SpreadList[m_CurrentSpread - 1].position : Vector2.zero;
 		Vector3 spreadOffset = Vector3.Slerp(lastPos, cSpread.position, cBullet / (cSpread.bullet - cBulletOff));
 
-		// Play shot sound
-		if(m_ShotAudios.Length > 0) {
-			SoundController.PlaySound(m_AudioSource, m_ShotAudios);
-		}
-		m_CurrentMagazine--;
-		m_CurrentSpreadBullet++;
-		m_Flash.Play();
-		m_Animator.SetTrigger("fire");
-
-		// Debug.DrawRay(m_Head.transform.position, m_Head.transform.forward * 10f, Color.red, 10f);
-
-		float force = m_Damage;
-		Vector3 dir = new Vector3(
+		return new Vector3(
 			Random.Range(-m_DefaultSpread, m_DefaultSpread) + m_Head.transform.forward.x - (Mathf.Sign(m_Head.transform.forward.x) * m_Head.transform.forward.z * spreadOffset.x), 
 			Random.Range(-m_DefaultSpread, m_DefaultSpread) + m_Head.transform.forward.y + spreadOffset.y, 
 			Random.Range(-m_DefaultSpread, m_DefaultSpread) + m_Head.transform.forward.z - (Mathf.Sign(m_Head.transform.forward.z) * m_Head.transform.forward.x * spreadOffset.x)
 		);
-		RaycastHit[] hits = Physics.RaycastAll(m_Head.transform.position, dir);
-		foreach(RaycastHit hit in hits) {
-			MaterialType material = hit.transform.GetComponent<MaterialType>();
-			if(material) {
-				force = material.Impact(hit.point, hit.normal, force);
-				if(force <= 0f) break;
-			}
-			// Instantiate(impactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
-		}
 	}
 }

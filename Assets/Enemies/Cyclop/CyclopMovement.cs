@@ -37,7 +37,7 @@ public class CyclopMovement : EnemyMovement {
 		if(m_IsDying) return;
 
 		if(m_IsStunned) {
-			m_Animation.CrossFade("stunned_idle");
+			if(!m_IsTakingHit) m_Animation.CrossFade("stunned_idle");
 			return;
 		} else if(!m_IsFollowingPlayer) {
 			m_Animation.CrossFade("idle");
@@ -95,12 +95,7 @@ public class CyclopMovement : EnemyMovement {
 		m_IsTakingHit = true;
 		m_Velocity = Vector3.zero;
 
-		if(m_Health.healthPerc <= .5f) {
-			acceleration *= 2f;
-			moveSpeed = m_RunSpeed;
-			m_IsAngry = true;
-			foreach (AnimationState state in m_Animation) state.speed = 2f;
-		}
+		if(m_Health.healthPerc <= .5f) this.SetAngry();
 		
 		if(m_Health.healthPerc <= 0f) {
 			m_IsDying = true;
@@ -108,7 +103,9 @@ public class CyclopMovement : EnemyMovement {
 			Invoke("FinishDeath", 10f);
 		} else {
 			if(m_IsAngry) {
-				if(m_IsStunned) m_Animation.CrossFade("stunned_idle_hit");				
+				if(m_IsStunned) {
+					m_Animation.CrossFade("stunned_idle_hit");				
+				}
 				Invoke("FinishTakeDamage", m_IsAngry ? .5f : 1f);
 				return;
 			}
@@ -118,12 +115,20 @@ public class CyclopMovement : EnemyMovement {
 			else m_Animation.CrossFade("hit");
 			if(!m_IsAngry && name == "head") {
 				m_IsStunned = true;
-				m_IsAngry = true;
 				m_Animation.CrossFade("stunned_idle");
 				Invoke("FinishStunned", m_StunTime);
+
+				this.SetAngry();
 			}
 		}
     }
+
+	void SetAngry() {
+		acceleration *= 2f;
+		moveSpeed = m_RunSpeed;
+		m_IsAngry = true;
+		foreach (AnimationState state in m_Animation) state.speed = 2f;
+	}
 
 	void FinishStunned() {
 		m_IsStunned = false;

@@ -172,12 +172,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a88ad07cb1574af3a6495b4a0d65088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_GunName: 
   m_MagazineSize: 30
   m_MaxAmmo: 100
   m_ReloadTime: 2
   m_Damage: 7
   m_IsAutomatic: 1
   m_FireRate: 20
+  m_ShotAudios:
+  - {fileID: 8300000, guid: b23ccb9d86db041c8bcd2e5ee5925a22, type: 3}
+  m_EmptyAudio: {fileID: 0}
+  m_ReloadAudio: {fileID: 0}
+  m_SelectAudio: {fileID: 0}
   m_DefaultSpread: 0.01
   m_RecoverSpreadDelay: 0.2
   m_SpreadList:
