@@ -156,6 +156,7 @@ public class PlayerGun : MonoBehaviour {
 	}
 
 	public virtual void Reload() {
+		if(m_IsReloading) return;
 		if(m_CurrentMagazine >= m_MagazineSize || m_CurrentAmmo == 0) {
 			return;
 		}
@@ -212,10 +213,18 @@ public class PlayerGun : MonoBehaviour {
 		m_Flash.Play();
 		m_Animator.SetTrigger("fire");
 
+		this.HitCheck();
+	}
+
+	protected virtual void HitCheck() {
 		// Debug.DrawRay(m_Head.transform.position, m_Head.transform.forward * 10f, Color.red, 10f);
 		float force = m_Damage;
 		RaycastHit[] hits = Physics.RaycastAll(m_Head.transform.position, Spread());
-		foreach(RaycastHit hit in hits) {
+		
+		List<RaycastHit> hitsList = new List<RaycastHit>(hits);
+		hitsList.Sort((p1,p2) => Mathf.RoundToInt(Vector3.Distance(p1.point, transform.position) - Vector3.Distance(p2.point, transform.position)));
+
+		foreach(RaycastHit hit in hitsList) {
 			MaterialType material = hit.transform.GetComponent<MaterialType>();
 			if(material) {
 				force = material.Impact(hit.point, hit.normal, force);
