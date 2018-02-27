@@ -90,7 +90,9 @@ public class PlayerGun : MonoBehaviour {
 		m_Flash = GetComponentInChildren<ParticleSystem>();
 		m_PlayerMovement = GetComponentInParent<PlayerMovement>();
 		m_Animator = GetComponent<Animator>();
-		m_AudioSource = GetComponent<AudioSource>();
+		m_AudioSource = GetComponentInParent<AudioSource>();
+		Renderer renderer = GetComponentInChildren<Renderer>();
+		renderer.sortingOrder = 5000;
 
 		m_FireDelay = 1 / m_FireRate;
 		m_CurrentMagazine = m_MagazineSize;
