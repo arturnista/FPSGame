@@ -232,7 +232,7 @@ public class PlayerGun : MonoBehaviour {
 			MaterialType material = hit.transform.GetComponent<MaterialType>();
 			if(material) {
 				force = material.Impact(hit.point, hit.normal, force) * m_Penetration;
-				if(force <= 0f) break;
+				if(force <= 1f) break;
 			}
 			// Instantiate(impactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
 		}
