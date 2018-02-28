@@ -45,6 +45,10 @@ public class PlayerGun : MonoBehaviour {
 	protected float m_FireRate;
 	protected float m_FireDelay;
 
+	[SerializeField]
+	[RangeAttribute(0f, 1f)]
+	protected float m_Penetration = 1f;
+
 	[Header("Sound")]
 	protected AudioSource m_AudioSource;
 	[SerializeField]
@@ -227,7 +231,7 @@ public class PlayerGun : MonoBehaviour {
 		foreach(RaycastHit hit in hitsList) {
 			MaterialType material = hit.transform.GetComponent<MaterialType>();
 			if(material) {
-				force = material.Impact(hit.point, hit.normal, force);
+				force = material.Impact(hit.point, hit.normal, force) * m_Penetration;
 				if(force <= 0f) break;
 			}
 			// Instantiate(impactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));

@@ -6857,6 +6857,7 @@ MonoBehaviour:
   m_Damage: 5
   m_IsAutomatic: 0
   m_FireRate: 8
+  m_Penetration: 0.2
   m_ShotAudios:
   - {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
   - {fileID: 8300000, guid: 4d6281aa604094f04839cffa502096c0, type: 3}
@@ -6888,6 +6889,7 @@ MonoBehaviour:
   m_Damage: 7
   m_IsAutomatic: 1
   m_FireRate: 20
+  m_Penetration: 1
   m_ShotAudios:
   - {fileID: 8300000, guid: 3b3cba36e2de14d228eaa17e24f4528f, type: 3}
   m_EmptyAudio: {fileID: 8300000, guid: a2785c76091ae4db1a285b14004512fb, type: 3}
@@ -6930,7 +6932,8 @@ MonoBehaviour:
   m_ReloadTime: 0.5
   m_Damage: 3
   m_IsAutomatic: 1
-  m_FireRate: 1.5
+  m_FireRate: 1
+  m_Penetration: 0.5
   m_ShotAudios:
   - {fileID: 8300000, guid: b23ccb9d86db041c8bcd2e5ee5925a22, type: 3}
   m_EmptyAudio: {fileID: 0}
