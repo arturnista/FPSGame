@@ -5,6 +5,8 @@ using UnityEngine;
 public class DoorActivate : Interactive {
 
 	private Door m_Door;
+	[SerializeField]
+	private EnemyMovement[] m_EnemyToNotice; 
 
 	void Awake () {
 		m_Door = GetComponentInParent<Door>();
@@ -17,5 +19,6 @@ public class DoorActivate : Interactive {
 
 	public override void Use() {
 		m_Door.Toggle();
+		foreach(EnemyMovement en in m_EnemyToNotice) en.NoticePlayer();
 	}
 }

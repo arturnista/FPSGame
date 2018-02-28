@@ -44,6 +44,8 @@ public class PhysicEntity : MonoBehaviour {
 	protected Vector3 m_Velocity;
 	protected Vector3 m_DesiredVelocity;
 
+	protected Vector3 m_ExtraVelocity;
+
 	protected CharacterController m_Controller;
 
 	protected virtual void Awake () {
@@ -79,7 +81,7 @@ public class PhysicEntity : MonoBehaviour {
 			m_Velocity = new Vector3(m_DesiredVelocity.x, m_Velocity.y, m_DesiredVelocity.z);
 		}
 
-		m_Controller.Move(m_Velocity * Time.deltaTime);		
+		m_Controller.Move((m_Velocity + m_ExtraVelocity) * Time.deltaTime);		
 
 		if(m_Controller.isGrounded) {
 			m_Velocity.y = -1f;
@@ -95,6 +97,14 @@ public class PhysicEntity : MonoBehaviour {
 
 	protected virtual void Jump() {
 		m_Velocity.y = jumpForce;
+	}
+
+	public virtual void AddExtraVelocity(Vector3 velocity) {
+		m_ExtraVelocity += velocity;
+	}
+
+	public virtual void RemoveExtraVelocity(Vector3 velocity) {
+		m_ExtraVelocity -= velocity;
 	}
 
 }

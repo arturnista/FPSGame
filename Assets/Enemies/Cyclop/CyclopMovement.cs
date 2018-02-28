@@ -20,9 +20,6 @@ public class CyclopMovement : EnemyMovement {
 	private bool m_IsDying;
 	private bool m_IsAngry;
 
-
-	private bool m_IsFollowingPlayer = false;
-
 	protected override void Awake () {
 		base.Awake();
 
