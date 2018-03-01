@@ -32,10 +32,15 @@ public class CyclopMovement : EnemyMovement {
 	}
 	
 	void Update () {
+		if(m_IsDying) {
+			m_Animation.CrossFade("death");
+			return;
+		}
+
 		bool lookAtPlayer = true;
 		bool canMove = true;
 
-		if(!m_IsFollowingPlayer || m_IsStunned || m_IsDying) {
+		if(!m_IsFollowingPlayer || m_IsStunned) {
 			lookAtPlayer = false;
 			canMove = false;
 		} else if(m_IsAttacking || (!m_IsAngry && m_IsTakingHit)) {
@@ -67,11 +72,6 @@ public class CyclopMovement : EnemyMovement {
 	}
 
 	void PlayAnimation() {
-		if(m_IsDying) {
-			m_Animation.CrossFade("death");
-			return;
-		}
-		
 		if(m_IsStunned) {
 			if(!m_IsTakingHit) {
 				m_Animation.CrossFade("stunned_idle");
@@ -108,13 +108,14 @@ public class CyclopMovement : EnemyMovement {
 		m_IsAttacking = true;
 		if(Random.Range(0f, 1f) > .5f) {
 			m_AttackingType = 1;
-			Invoke("HitCheck", m_IsAngry ? .4f : .8f);		
+			Invoke("HitCheck", m_IsAngry ? .45f : .9f);		
+			Invoke("FinishAttack", m_IsAngry ? .8f : 1.6f);		
 		} else {
 			m_AttackingType = 2;
-			Invoke("HitCheck", m_IsAngry ? .225f : .45f);		
+			Invoke("HitCheck", m_IsAngry ? .35f : .7f);		
+			Invoke("FinishAttack", m_IsAngry ? .75f : 1.5f);		
 		}
 		
-		Invoke("FinishAttack", m_IsAngry ? 1f : 2f);		
 	}
 
 	void HitCheck() {
@@ -144,7 +145,7 @@ public class CyclopMovement : EnemyMovement {
 			foreach(Collider coll in GetComponentsInChildren<Collider>()) coll.enabled = false;
 			Invoke("FinishDeath", 10f);
 		} else {
-			Invoke("FinishTakeDamage", m_IsAngry ? .5f : 1f);
+			Invoke("FinishTakeDamage", m_IsAngry ? .35f : .7f);
 
 			if(m_IsAngry) return;
 			if(name == "head") {

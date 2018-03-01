@@ -52,6 +52,8 @@ public class PlayerWeapon : MonoBehaviour {
 			SelectWeapon(1);
 		} else if(Input.GetKeyDown(KeyCode.Alpha3)) {
 			SelectWeapon(2);
+		} else if(Input.GetKeyDown(KeyCode.Alpha4)) {
+			SelectWeapon(3);
 		}
 	}
 

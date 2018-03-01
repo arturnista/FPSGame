@@ -214,7 +214,7 @@ public class PlayerGun : MonoBehaviour {
 		}
 		m_CurrentMagazine--;
 		m_CurrentSpreadBullet++;
-		m_Flash.Play();
+		if(m_Flash) m_Flash.Play();
 		m_Animator.SetTrigger("fire");
 
 		this.HitCheck();

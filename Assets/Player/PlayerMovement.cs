@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : PhysicEntity {
 
+	public static PlayerMovement Instance;
+
 	protected bool m_IsWalking;
 	protected bool m_IsCrouched;
 
@@ -12,6 +14,8 @@ public class PlayerMovement : PhysicEntity {
 
 	protected override void Awake () {
 		base.Awake();
+
+		Instance = this;
 
 		m_IsCrouched = false;
 		m_Head = transform.Find("Head");

@@ -26,11 +26,19 @@ public class Collectable : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider coll) {
-		PlayerWeapon weapon = coll.GetComponent<PlayerWeapon>();
-		if(weapon) {
-			int newAmount = weapon.GiveAmmo(m_GunName, m_Amount);
-			m_Amount = newAmount;
-			if(newAmount == 0) Destroy(this.gameObject);
+		if(m_Type == CollectableType.Ammo) {
+			PlayerWeapon weapon = coll.GetComponent<PlayerWeapon>();
+			if(weapon) {
+				int newAmount = weapon.GiveAmmo(m_GunName, m_Amount);
+				m_Amount = newAmount;
+				if(newAmount == 0) Destroy(this.gameObject);
+			}
+		} else if(m_Type == CollectableType.Health) {
+			PlayerHealth health = coll.GetComponent<PlayerHealth>();
+			if(health) {
+				health.GiveHealth(m_Amount);
+				Destroy(this.gameObject);
+			}
 		}
 	}
 }
