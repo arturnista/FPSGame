@@ -1184,7 +1184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1325223448961576
 GameObject:
   m_ObjectHideFlags: 1
@@ -1475,7 +1475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1411254350177910
 GameObject:
   m_ObjectHideFlags: 1
@@ -6937,8 +6937,8 @@ MonoBehaviour:
   m_ShotAudios:
   - {fileID: 8300000, guid: b23ccb9d86db041c8bcd2e5ee5925a22, type: 3}
   m_EmptyAudio: {fileID: 0}
-  m_ReloadAudio: {fileID: 0}
-  m_SelectAudio: {fileID: 0}
+  m_ReloadAudio: {fileID: 8300000, guid: 2a7ec8eb2a0974938a64e629225d1037, type: 3}
+  m_SelectAudio: {fileID: 8300000, guid: c91c229fd830d46289916db51df6ebd8, type: 3}
   m_InitialSpread: 0.01
   m_DefaultSpread: 0.1
   m_RecoverSpreadDelay: 0.2

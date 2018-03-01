@@ -14,6 +14,7 @@ public class CyclopMovement : EnemyMovement {
 	private float m_RunSpeed;
 	private float m_WalkSpeed;
 
+	private int m_AttackingType;
 	private bool m_IsAttacking;
 	private bool m_IsTakingHit;
 	private bool m_IsStunned;
@@ -31,44 +32,85 @@ public class CyclopMovement : EnemyMovement {
 	}
 	
 	void Update () {
-		if(m_IsDying) return;
+		bool lookAtPlayer = true;
+		bool canMove = true;
 
-		if(m_IsStunned) {
-			if(!m_IsTakingHit) m_Animation.CrossFade("stunned_idle");
-			return;
-		} else if(!m_IsFollowingPlayer) {
-			m_Animation.CrossFade("idle");
-			return;
+		if(!m_IsFollowingPlayer || m_IsStunned || m_IsDying) {
+			lookAtPlayer = false;
+			canMove = false;
+		} else if(m_IsAttacking || (!m_IsAngry && m_IsTakingHit)) {
+			canMove = false;
 		}
 
-		transform.LookAt(m_Player.transform);
-		Vector3 nRot = transform.eulerAngles;
-		nRot.x = nRot.z = 0f;
-		transform.eulerAngles = nRot;
+		PlayAnimation();
 
-		if(m_IsAttacking || (!m_IsAngry && m_IsTakingHit)) return;
-
-		if(Vector3.Distance(m_Player.transform.position, transform.position) <= 2f) {
-			this.Attack();
-			return;
+		if(lookAtPlayer) {
+			transform.LookAt(m_Player.transform);
+			Vector3 nRot = transform.eulerAngles;
+			nRot.x = nRot.z = 0f;
+			transform.eulerAngles = nRot;
 		}
 
-        if (planeVelocity.magnitude > 2f) m_Animation.CrossFade("run");
-        else if (planeVelocity.magnitude > 0.1f) m_Animation.CrossFade("walk");
-        else m_Animation.CrossFade("idle");
-		m_ForwardSpeed = 1f;
+		if(canMove) {
+			if(Vector3.Distance(m_Player.transform.position, transform.position) <= 2f) {
+				this.Attack();
+				return;
+			}
 
+			m_ForwardSpeed = 1f;	
+		} else {
+			m_ForwardSpeed = 0f;
+		}	
+		
 		float speed = this.ComputeSpeed();
 		this.Move(speed);
+	}
+
+	void PlayAnimation() {
+		if(m_IsDying) {
+			m_Animation.CrossFade("death");
+			return;
+		}
+		
+		if(m_IsStunned) {
+			if(!m_IsTakingHit) {
+				m_Animation.CrossFade("stunned_idle");
+				return;
+			} else {
+				m_Animation.CrossFade("stunned_idle_hit");
+				return;
+			}
+		}
+
+		if(!m_IsAngry) {
+			if(m_IsTakingHit) {
+				m_Animation.CrossFade("hit");
+				return;
+			}
+		}
+
+		if(m_IsAttacking) {
+			if(m_AttackingType == 1) {
+				m_Animation.CrossFade("attack_1");
+				return;
+			} else if(m_AttackingType == 2) {
+				m_Animation.CrossFade("attack_2");
+				return;
+			}
+		}
+
+        if (planeVelocity.magnitude > 3f) m_Animation.CrossFade("run");
+        else if (planeVelocity.magnitude > 0.1f) m_Animation.CrossFade("walk");
+		else m_Animation.CrossFade("idle");
 	}
 
 	void Attack() {
 		m_IsAttacking = true;
 		if(Random.Range(0f, 1f) > .5f) {
-			m_Animation.CrossFade("attack_1");
+			m_AttackingType = 1;
 			Invoke("HitCheck", m_IsAngry ? .4f : .8f);		
 		} else {
-			m_Animation.CrossFade("attack_2");
+			m_AttackingType = 2;
 			Invoke("HitCheck", m_IsAngry ? .225f : .45f);		
 		}
 		
@@ -76,7 +118,7 @@ public class CyclopMovement : EnemyMovement {
 	}
 
 	void HitCheck() {
-		if((!m_IsAngry && m_IsTakingHit)) return;
+		if(!m_IsAngry && m_IsTakingHit) return;
 		if(m_IsDying) return;
 		if(m_IsStunned) return;
 
@@ -94,29 +136,20 @@ public class CyclopMovement : EnemyMovement {
 		m_IsFollowingPlayer = true;
 
 		m_IsTakingHit = true;
-		m_Velocity = Vector3.zero;
 
 		if(m_Health.healthPerc <= .5f) this.SetAngry();
 		
 		if(m_Health.healthPerc <= 0f) {
 			m_IsDying = true;
-			m_Animation.CrossFade("death");
+			foreach(Collider coll in GetComponentsInChildren<Collider>()) coll.enabled = false;
 			Invoke("FinishDeath", 10f);
 		} else {
-			if(m_IsAngry) {
-				if(m_IsStunned) {
-					m_Animation.CrossFade("stunned_idle_hit");				
-				}
-				Invoke("FinishTakeDamage", m_IsAngry ? .5f : 1f);
-				return;
-			}
-
 			Invoke("FinishTakeDamage", m_IsAngry ? .5f : 1f);
-			if(m_IsStunned) m_Animation.CrossFade("stunned_idle_hit");
-			else m_Animation.CrossFade("hit");
-			if(!m_IsAngry && name == "head") {
+
+			if(m_IsAngry) return;
+			if(name == "head") {
+
 				m_IsStunned = true;
-				m_Animation.CrossFade("stunned_idle");
 				Invoke("FinishStunned", m_StunTime);
 
 				this.SetAngry();

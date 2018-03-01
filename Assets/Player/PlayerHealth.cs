@@ -25,6 +25,10 @@ public class PlayerHealth : MonoBehaviour {
 		
 	}
 
+	public void TakeDamage(float damage) {
+		TakeDamage(damage, null);
+	}
+
 	public void TakeDamage(float damage, EnemyMovement enemy) {
 		m_CurrentHealth -= damage;
 		m_HUDController.TakeDamage();
