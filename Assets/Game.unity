@@ -885,21 +885,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114531990874818884, guid: f09dd618b1c29443995e79eb0078c136,
+    - target: {fileID: 23676122981506842, guid: f09dd618b1c29443995e79eb0078c136,
         type: 2}
-      propertyPath: m_MaxHealth
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 114979673231825052, guid: f09dd618b1c29443995e79eb0078c136,
-        type: 2}
-      propertyPath: acceleration
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114979673231825052, guid: f09dd618b1c29443995e79eb0078c136,
-        type: 2}
-      propertyPath: m_MinDistance
-      value: 15
-      objectReference: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f663aa0d3dc3f44389306ed68c6c668, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f09dd618b1c29443995e79eb0078c136, type: 2}
   m_IsPrefabParent: 0

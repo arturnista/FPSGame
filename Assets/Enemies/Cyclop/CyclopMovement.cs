@@ -31,7 +31,6 @@ public class CyclopMovement : EnemyMovement {
 	
 	void Update () {
 		if(m_IsDying) {
-			m_Animation.CrossFade("death");
 			return;
 		}
 
@@ -140,6 +139,7 @@ public class CyclopMovement : EnemyMovement {
 		
 		if(m_Health.healthPerc <= 0f) {
 			m_IsDying = true;
+			m_Animation.CrossFade("death");
 			foreach(Collider coll in GetComponentsInChildren<Collider>()) coll.enabled = false;
 			Invoke("FinishDeath", 10f);
 		} else {
