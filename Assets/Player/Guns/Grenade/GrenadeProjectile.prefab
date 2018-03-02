@@ -445,4 +445,4 @@ MonoBehaviour:
   m_ExplosionTime: 2
   m_ThrowForce: 10
   m_Damage: 30
-  m_Radius: 2
+  m_Radius: 3

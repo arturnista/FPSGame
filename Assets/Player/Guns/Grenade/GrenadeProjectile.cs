@@ -38,7 +38,12 @@ public class GrenadeProjectile : MonoBehaviour {
         Collider[] colls = Physics.OverlapSphere(transform.position, m_Radius);
         foreach(Collider c in colls) {
             EnemyHealth en = c.GetComponent<EnemyHealth>();
-            if(en) en.DealDamage(m_Damage, "body");
+            if(en) {
+                float dm = m_Damage * 1 / Vector3.Distance(transform.position, c.transform.position);
+                en.DealDamage(dm, "body");
+
+                Debug.Log("Deal damage to " + c.name + " of " + dm);
+            }
         }
         Destroy(this.gameObject);
     }
