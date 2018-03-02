@@ -39,8 +39,14 @@ public class GrenadeProjectile : MonoBehaviour {
         foreach(Collider c in colls) {
             EnemyHealth en = c.GetComponent<EnemyHealth>();
             if(en) {
-                float dm = m_Damage * 1 / Vector3.Distance(transform.position, c.transform.position);
-                Debug.Log("Deal damage to " + c.name + " of " + dm);
+                float dm = m_Damage * 1 / Vector3.Distance(transform.position, en.transform.position);
+                en.DealDamage(dm, "body");
+            } else {
+                PlayerHealth pl = c.GetComponent<PlayerHealth>();
+                if(pl) {
+                    float dm = m_Damage * 1 / Vector3.Distance(transform.position, pl.transform.position);
+                    pl.TakeDamage(dm);
+                }
             }
         }
         Destroy(this.gameObject);

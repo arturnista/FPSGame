@@ -27,7 +27,6 @@ public class PlayerGunShotgun : PlayerGun {
             return;
         }
 
-		m_Animator.SetTrigger("reload");
-		Invoke("FinishReload", m_ReloadTime);
+		Reload();
 	}
 }

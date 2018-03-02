@@ -9,6 +9,7 @@ public class PhysicEntity : MonoBehaviour {
 	public float jumpForce = 500f; 
 	public float gravity = .9f;
 	public float height = 1f;
+	public bool ignoreGravity = false;
 
 	public Vector3 currentVelocity {
 		get {
@@ -74,21 +75,27 @@ public class PhysicEntity : MonoBehaviour {
 			if(m_Velocity.x < m_DesiredVelocity.x) m_Velocity.x = Mathf.Clamp(m_Velocity.x + acelX, m_Velocity.x, m_DesiredVelocity.x);
 			else if(m_Velocity.x > m_DesiredVelocity.x) m_Velocity.x = Mathf.Clamp(m_Velocity.x - acelX, m_DesiredVelocity.x, m_Velocity.x);
 
-			float acelY = acceleration * Time.deltaTime * ( deltaZ / deltaSum );
-			if(m_Velocity.z < m_DesiredVelocity.z) m_Velocity.z = Mathf.Clamp(m_Velocity.z + acelY, m_Velocity.z, m_DesiredVelocity.z);
-			else if(m_Velocity.z > m_DesiredVelocity.z) m_Velocity.z = Mathf.Clamp(m_Velocity.z - acelY, m_DesiredVelocity.z, m_Velocity.z);
+			float acelZ = acceleration * Time.deltaTime * ( deltaZ / deltaSum );
+			if(m_Velocity.z < m_DesiredVelocity.z) m_Velocity.z = Mathf.Clamp(m_Velocity.z + acelZ, m_Velocity.z, m_DesiredVelocity.z);
+			else if(m_Velocity.z > m_DesiredVelocity.z) m_Velocity.z = Mathf.Clamp(m_Velocity.z - acelZ, m_DesiredVelocity.z, m_Velocity.z);
+
+			if(ignoreGravity) {
+				float acelY = acceleration * Time.deltaTime;
+				if(m_Velocity.y < m_DesiredVelocity.y) m_Velocity.y = Mathf.Clamp(m_Velocity.y + acelY, m_Velocity.y, m_DesiredVelocity.y);
+				else if(m_Velocity.y > m_DesiredVelocity.y) m_Velocity.y = Mathf.Clamp(m_Velocity.y - acelY, m_DesiredVelocity.y, m_Velocity.y);
+			}
 		} else {
 			m_Velocity = new Vector3(m_DesiredVelocity.x, m_Velocity.y, m_DesiredVelocity.z);
 		}
 
 		m_Controller.Move((m_Velocity + m_ExtraVelocity) * Time.deltaTime);		
 
-		if(m_Controller.isGrounded) {
-			m_Velocity.y = -1f;
+		if(ignoreGravity || m_Controller.isGrounded) {
+			if(!ignoreGravity) m_Velocity.y = -1f;
 
 			m_ForwardDirection = transform.forward;
 			m_SidewaysDirection = transform.right;
-
+			
 			m_DesiredVelocity = (m_ForwardDirection * m_ForwardSpeed + m_SidewaysDirection * m_SidewaysSpeed) * speed;
 		} else {
 			m_Velocity.y -= gravity * Time.deltaTime;

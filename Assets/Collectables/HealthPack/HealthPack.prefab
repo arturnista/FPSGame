@@ -20,8 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4759733468040268}
   - component: {fileID: 33486907890835556}
+  - component: {fileID: 64473119207549302}
   - component: {fileID: 23844684467567570}
   - component: {fileID: 111425361355095996}
+  - component: {fileID: 114796882354208258}
   m_Layer: 0
   m_Name: HP_FBX
   m_TagString: Untagged
@@ -114,6 +116,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1382713946406478}
   m_Mesh: {fileID: 4300000, guid: 636cd0f2a00f6674eacba81ce53aabc0, type: 3}
+--- !u!64 &64473119207549302
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1382713946406478}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 636cd0f2a00f6674eacba81ce53aabc0, type: 3}
 --- !u!65 &65949159938993356
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -154,3 +170,14 @@ MonoBehaviour:
   m_Type: 1
   m_Amount: 20
   m_GunName: 
+--- !u!114 &114796882354208258
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1382713946406478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acaa61e1fd1a244fe9aa94f1d9b450aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

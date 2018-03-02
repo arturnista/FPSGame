@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CyclopMovement : EnemyMovement {
-
-	protected PlayerHealth m_Player;
+	
 	private Animation m_Animation;
 	private CyclopHealth m_Health;
 
@@ -25,7 +24,6 @@ public class CyclopMovement : EnemyMovement {
 		base.Awake();
 
 		m_Animation = GetComponent<Animation>();
-		m_Player = GameObject.FindObjectOfType<PlayerHealth>();
 		m_Health = GetComponent<CyclopHealth>();
 
 		m_WalkSpeed = moveSpeed;

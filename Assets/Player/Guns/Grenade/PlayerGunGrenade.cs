@@ -34,11 +34,10 @@ public class PlayerGunGrenade : PlayerGun {
 		}
 		
 		m_IsCharging = false;
-		m_Animator.SetTrigger("stopHolding");
 	}
 
 	protected override void HitCheck () {
-		GrenadeProjectile nade = Instantiate(grenadePrefab, m_Head.position + m_Head.forward, Quaternion.identity).GetComponent<GrenadeProjectile>();
-		nade.Throw(m_Head.transform.forward + m_Head.up * .3f, Time.time - m_HoldTime);
+		GrenadeProjectile nade = Instantiate(grenadePrefab, m_Head.position + m_Head.up * .3f, Quaternion.identity).GetComponent<GrenadeProjectile>();
+		nade.Throw(m_Head.transform.forward + m_Head.up * .4f, Time.time - m_HoldTime);
 	}
 }
