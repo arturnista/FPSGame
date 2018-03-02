@@ -22,7 +22,7 @@ public class PlayerGunGrenade : PlayerGun {
 		m_IsShooting = true;
 
 		m_HoldTime = Time.time;
-		m_Animator.SetTrigger("startHold");
+		m_Animator.SetTrigger("startHolding");
 	}
 	
 	public override void StopShooting (bool reload = true) {
@@ -34,7 +34,7 @@ public class PlayerGunGrenade : PlayerGun {
 		}
 		
 		m_IsCharging = false;
-		m_Animator.SetTrigger("fire");
+		m_Animator.SetTrigger("stopHolding");
 	}
 
 	protected override void HitCheck () {

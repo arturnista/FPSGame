@@ -40,8 +40,6 @@ public class GrenadeProjectile : MonoBehaviour {
             EnemyHealth en = c.GetComponent<EnemyHealth>();
             if(en) {
                 float dm = m_Damage * 1 / Vector3.Distance(transform.position, c.transform.position);
-                en.DealDamage(dm, "body");
-
                 Debug.Log("Deal damage to " + c.name + " of " + dm);
             }
         }
