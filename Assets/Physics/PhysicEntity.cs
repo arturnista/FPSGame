@@ -61,7 +61,7 @@ public class PhysicEntity : MonoBehaviour {
 		return currentSpeed;
 	}
 
-	protected virtual void Move(float speed) {
+	protected virtual CollisionFlags Move(float speed) {
 
 		if(acceleration > 0f) {
 			float zDiff = Mathf.Abs(m_DesiredVelocity.z - m_Velocity.z);
@@ -88,18 +88,20 @@ public class PhysicEntity : MonoBehaviour {
 			m_Velocity = new Vector3(m_DesiredVelocity.x, m_Velocity.y, m_DesiredVelocity.z);
 		}
 
-		m_Controller.Move((m_Velocity + m_ExtraVelocity) * Time.deltaTime);		
+		CollisionFlags coll = m_Controller.Move((m_Velocity + m_ExtraVelocity) * Time.deltaTime);		
 
-		if(ignoreGravity || m_Controller.isGrounded) {
-			if(!ignoreGravity) m_Velocity.y = -1f;
+		m_ForwardDirection = transform.forward;
+		m_SidewaysDirection = transform.right;
 
-			m_ForwardDirection = transform.forward;
-			m_SidewaysDirection = transform.right;
-			
-			m_DesiredVelocity = (m_ForwardDirection * m_ForwardSpeed + m_SidewaysDirection * m_SidewaysSpeed) * speed;
-		} else {
+		m_DesiredVelocity = (m_ForwardDirection * m_ForwardSpeed + m_SidewaysDirection * m_SidewaysSpeed) * speed;
+
+		if(m_Controller.isGrounded) {
+			m_Velocity.y = -1f;
+		} else if(!ignoreGravity) {
 			m_Velocity.y -= gravity * Time.deltaTime;
 		}
+
+		return coll;
 	}
 
 	protected virtual void Jump() {

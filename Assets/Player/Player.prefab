@@ -5364,15 +5364,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1410867884406770}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.3, y: -0.36, z: 0.5}
+  m_LocalRotation: {x: 0, y: 0.6427876, z: 0, w: 0.7660445}
+  m_LocalPosition: {x: 0.3, y: -0.37, z: 0.4}
   m_LocalScale: {x: 1.000001, y: 1, z: 1.000001}
   m_Children:
   - {fileID: 4035841420921428}
   - {fileID: 4759851929387620}
   m_Father: {fileID: 4971548552651588}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 80, z: 0}
 --- !u!4 &4276158399858516
 Transform:
   m_ObjectHideFlags: 1
@@ -5773,7 +5773,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229206084585054}
   m_LocalRotation: {x: -0, y: -0.9967171, z: -0, w: 0.08096369}
-  m_LocalPosition: {x: 3.2850003, y: 0.04000008, z: -17.325}
+  m_LocalPosition: {x: -8.88, y: 1.071, z: -0.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4971548552651588}
@@ -7249,7 +7249,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1089065113922850}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
   m_LocalPosition: {x: -0.208, y: 0.246, z: -0.044}
   m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
   m_Children:
@@ -7260,7 +7260,7 @@ Transform:
   - {fileID: 4146350473971582}
   m_Father: {fileID: 4272959890170478}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!4 &4774869649721364
 Transform:
   m_ObjectHideFlags: 1
@@ -9051,7 +9051,7 @@ Animator:
   m_GameObject: {fileID: 1410867884406770}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2e5aa9d85a6dc4420b2f06bf96d1824e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 64edd42a7676b4fd9b0b5a8387e1de9e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -9228,6 +9228,8 @@ MonoBehaviour:
   jumpForce: 4
   gravity: 12
   height: 1.8
+  ignoreGravity: 0
+  m_StairSpeed: 6
 --- !u!114 &114852379781225934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9241,7 +9243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GunName: grenade
   m_MagazineSize: 1
-  m_MaxAmmo: 10
+  m_MaxAmmo: 100
   m_ReloadTime: 0.5
   m_Damage: 100
   m_IsAutomatic: 0
@@ -9310,7 +9312,7 @@ MonoBehaviour:
   m_ReloadAudio: {fileID: 8300000, guid: 2a7ec8eb2a0974938a64e629225d1037, type: 3}
   m_SelectAudio: {fileID: 8300000, guid: c91c229fd830d46289916db51df6ebd8, type: 3}
   m_InitialSpread: 0.01
-  m_DefaultSpread: 0.1
+  m_DefaultSpread: 0.15
   m_RecoverSpreadDelay: 0.2
   m_SpreadList: []
   m_ShellsCount: 10

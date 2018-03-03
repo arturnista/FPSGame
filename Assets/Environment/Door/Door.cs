@@ -5,11 +5,19 @@ using UnityEngine;
 public class Door : MonoBehaviour {
 
 	private Transform m_Frame;
+	private Animator m_Animator;
 
 	private bool m_IsOpen;
 
+	public bool isOpen {
+		get {
+			return m_IsOpen;
+		}
+	}
+
 	void Awake () {
 		m_Frame = transform.Find("DoorFrame");
+		m_Animator = GetComponent<Animator>();
 		m_IsOpen = false;
 	}
 	
@@ -28,12 +36,14 @@ public class Door : MonoBehaviour {
 	public void Open() {
 		if(m_IsOpen) return;
 		m_IsOpen = true;
-		m_Frame.gameObject.SetActive(false);
+		if(m_Animator) m_Animator.SetBool("isOpen", m_IsOpen);
+		else m_Frame.gameObject.SetActive(false);
 	}
 
 	public void Close() {
 		if(!m_IsOpen) return;
 		m_IsOpen = false;
-		m_Frame.gameObject.SetActive(true);		
+		if(m_Animator) m_Animator.SetBool("isOpen", m_IsOpen);
+		else m_Frame.gameObject.SetActive(true);		
 	}
 }

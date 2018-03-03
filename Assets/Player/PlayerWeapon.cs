@@ -8,6 +8,8 @@ public class PlayerWeapon : MonoBehaviour {
 	private List<PlayerGun> m_Guns;
 	private PlayerGun m_CurrentGun;
 
+	private int m_LastWeapon;
+
 	public int magazine {
 		get {
 			return m_CurrentGun.currentMagazine;
@@ -54,6 +56,8 @@ public class PlayerWeapon : MonoBehaviour {
 			SelectWeapon(2);
 		} else if(Input.GetKeyDown(KeyCode.Alpha4)) {
 			SelectWeapon(3);
+		} else if(Input.GetKeyDown(KeyCode.Q)) {
+			SelectWeapon(m_LastWeapon);			
 		}
 	}
 
@@ -61,6 +65,7 @@ public class PlayerWeapon : MonoBehaviour {
 		if(!force && m_CurrentWeapon == index) return;
 
 		if(m_CurrentGun) m_CurrentGun.Deselect();
+		m_LastWeapon = m_CurrentWeapon;
 
 		m_Guns[m_CurrentWeapon].gameObject.SetActive(false);
 		m_CurrentWeapon = index;

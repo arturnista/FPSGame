@@ -1758,6 +1758,7 @@ GameObject:
   - component: {fileID: 33312955746848662}
   - component: {fileID: 23990393935725016}
   - component: {fileID: 64887547707898028}
+  - component: {fileID: 95508983075536560}
   - component: {fileID: 114877251109122344}
   - component: {fileID: 114691877319526946}
   m_Layer: 0
@@ -8483,6 +8484,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &95508983075536560
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1822758691350260}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f6ddd71e703f4aa8b521e155d2f4daf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!108 &108040040312619796
 Light:
   m_ObjectHideFlags: 1
@@ -9986,6 +10004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyToNotice:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &114896503215493442

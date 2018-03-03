@@ -16,6 +16,11 @@ public class Elevator : MonoBehaviour {
 	private Door m_FinalDoor;
 
 	private bool m_IsInitialPosition;
+	public bool isInitialPos {
+		get {
+			return m_IsInitialPosition;
+		}
+	}
 
 	private bool m_IsActive;
 	private float m_ActivateTime;
@@ -61,12 +66,13 @@ public class Elevator : MonoBehaviour {
 
 	public void Activate() {
 		if(m_IsActive) return;
+
 		m_IsActive = true;
 		m_ActivateTime = Time.time;
 
 		m_Player.AddExtraVelocity(m_Velocity);
 
-		if(m_IsInitialPosition) { if(m_InitialDoor) m_InitialDoor.Close(); }
-		else { if(m_FinalDoor) m_FinalDoor.Close(); } 
+		m_InitialDoor.Close();
+		m_FinalDoor.Close(); 
 	}
 }

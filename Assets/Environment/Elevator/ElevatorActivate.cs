@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class ElevatorActivate : Interactive {
 
-	private Elevator m_Elevator;
+	private Door m_Door;
+	public Elevator elevator;
+	[SerializeField]
+	private bool m_IsInitialActive;
 
 	void Awake () {
-		m_Elevator = GetComponentInParent<Elevator>();
+		m_Door = GetComponentInParent<Door>();
 	}
 	
 	// Update is called once per frame
@@ -16,6 +19,12 @@ public class ElevatorActivate : Interactive {
 	}
 
 	public override void Use() {
-		m_Elevator.Activate();
+		if(elevator.isInitialPos == m_IsInitialActive) {
+			if(!m_Door.isOpen) m_Door.Open();
+			else elevator.Activate();
+		} else {
+			elevator.Activate();
+		}
 	}
+	
 }
