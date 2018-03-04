@@ -9223,7 +9223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66eebbe2851004505af830c88b61e676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 50
+  acceleration: 100
   moveSpeed: 8
   jumpForce: 4
   gravity: 12
