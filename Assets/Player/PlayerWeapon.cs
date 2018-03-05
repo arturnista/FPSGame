@@ -29,7 +29,10 @@ public class PlayerWeapon : MonoBehaviour {
 		m_Guns = new List<PlayerGun>();
 		foreach(Transform child in m_Head) {
 			PlayerGun g = child.GetComponent<PlayerGun>();
-			if(g) m_Guns.Add(g);
+			if(g) {
+				m_Guns.Add(g);
+				g.gameObject.SetActive(false);
+			}
 		}
 	}
 

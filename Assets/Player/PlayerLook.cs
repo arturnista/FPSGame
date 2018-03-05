@@ -42,7 +42,6 @@ public class PlayerLook : MonoBehaviour {
 
 		m_FPSCamera = GameObject.Find("FPSCamera").GetComponent<Camera>();
 		m_PlayerMovement = GetComponent<PlayerMovement>();
-		m_PlayerGun = GetComponentInChildren<PlayerGun>();
 
 		m_Rigidbody = GetComponent<Rigidbody>();
 		m_Head = transform.Find("Head");
@@ -52,8 +51,10 @@ public class PlayerLook : MonoBehaviour {
 		}
 		
 		m_HeadOriginalPosition = m_Head.localPosition;
-		m_GunOriginalPosition = m_PlayerGun.transform.localPosition;
 		m_HeadBobbingDown = true;
+		
+		// m_PlayerGun = GetComponentInChildren<PlayerGun>();
+		// m_GunOriginalPosition = m_PlayerGun.transform.localPosition;
 
 		m_IsMoving = false;
 

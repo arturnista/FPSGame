@@ -1501,7 +1501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1325223448961576
 GameObject:
   m_ObjectHideFlags: 1
@@ -1901,7 +1901,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1410867884406770
 GameObject:
   m_ObjectHideFlags: 1
@@ -9417,7 +9417,7 @@ MonoBehaviour:
   gravity: 12
   height: 1.8
   ignoreGravity: 0
-  m_StairSpeed: 3
+  m_StairSpeed: 8
 --- !u!114 &114852379781225934
 MonoBehaviour:
   m_ObjectHideFlags: 1

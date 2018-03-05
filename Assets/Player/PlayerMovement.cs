@@ -6,9 +6,6 @@ public class PlayerMovement : PhysicEntity {
 
 	public static PlayerMovement Instance;
 
-	[SerializeField]
-	protected float m_StairSpeed = 3f;
-
 	protected bool m_IsWalking;
 	protected bool m_IsCrouched;
 	protected bool m_StairMode;
@@ -28,10 +25,13 @@ public class PlayerMovement : PhysicEntity {
 	}
 
 	void Update() {
+		float speed = this.ComputeSpeed();
+
+		ignoreGravity = false;		
 		if(m_StairMode) {
-			m_Velocity.y = Input.GetAxisRaw("Vertical") * m_StairSpeed * m_Head.forward.y;
-			m_ForwardSpeed = 0f;
-			m_SidewaysSpeed = Input.GetAxisRaw("Horizontal");
+			float cSpeed = Input.GetAxisRaw("Vertical");
+			ignoreGravity = true;
+			m_DesiredVelocity = cSpeed * speed * m_Head.forward;
 		} else if(m_Controller.isGrounded) {
 			m_ForwardSpeed = Input.GetAxisRaw("Vertical");
 			m_SidewaysSpeed = Input.GetAxisRaw("Horizontal");
@@ -40,7 +40,6 @@ public class PlayerMovement : PhysicEntity {
 		bool lastGrounded = m_Controller.isGrounded;
 		float verticalSpeed = m_Velocity.y;
 
-		float speed = this.ComputeSpeed();
 		CollisionFlags coll = this.Move(speed);
 
 		if(!lastGrounded && m_Controller.isGrounded) {
@@ -73,6 +72,7 @@ public class PlayerMovement : PhysicEntity {
 		float speed = base.ComputeSpeed();
 
 		if(m_IsWalking || m_IsCrouched) speed *= .4f;
+		if(m_StairMode) speed *= .6f;
 		return speed;
 	}
 
@@ -88,9 +88,10 @@ public class PlayerMovement : PhysicEntity {
 
     void CheckStair() {
 		bool lastStair = m_StairMode;
+		float mSize = m_Controller.radius + m_Controller.skinWidth + .1f;
 
 		m_StairMode = false;
-		Collider[] colls = Physics.OverlapBox(transform.position, new Vector3(1f, .3f, 1f), transform.rotation);
+		Collider[] colls = Physics.OverlapBox(transform.position, new Vector3(mSize, .3f, mSize), transform.rotation);
 		foreach(Collider c in colls) {
 			Stair stair = c.transform.GetComponent<Stair>();
 			if(stair) m_StairMode = true;
