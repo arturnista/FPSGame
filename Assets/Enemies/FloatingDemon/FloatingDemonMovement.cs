@@ -63,8 +63,8 @@ public class FloatingDemonMovement : EnemyMovement {
 
 	void Fire() {
 		RaycastHit hit;
-		if(Physics.Raycast(transform.position + transform.forward * 2f, transform.forward, out hit, 20f, m_Player.gameObject.layer)) {
+		// if(Physics.Raycast(transform.position + transform.forward * 2f, transform.forward, out hit, 20f, m_Player.gameObject.layer)) {
 			Instantiate(projectilePrefab, transform.position + transform.forward * 2f, Quaternion.Euler(transform.eulerAngles));
-		}
+		// }
 	}
 }

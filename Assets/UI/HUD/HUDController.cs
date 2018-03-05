@@ -15,6 +15,8 @@ public class HUDController : MonoBehaviour {
 	private PlayerWeapon m_PlayerWeapon;
 	private PlayerHealth m_PlayerHealth;
 
+	private bool m_IsDead = false;
+
 	private bool m_TakeHit = false;
 	private float m_HitDuration = .5f;
 	private float m_HitStartTime;
@@ -30,6 +32,8 @@ public class HUDController : MonoBehaviour {
 	}
 	
 	void Update () {
+		if(m_IsDead) return;
+
 		m_AmmoText.text = m_PlayerWeapon.magazine + " / " + m_PlayerWeapon.ammo;
 		m_HealthText.text = Mathf.RoundToInt(m_PlayerHealth.health).ToString();
 
@@ -46,5 +50,16 @@ public class HUDController : MonoBehaviour {
 		Color col = m_HitColor;
 		m_HitIndicator.color = col;
 		m_HitStartTime = Time.time;
+	}
+
+	public void Die() {
+		m_IsDead = true;
+
+		m_AmmoText.text = "";
+		m_HealthText.text = "";
+
+		Color col = m_HitColor;
+		col.a = 1f;
+		m_HitIndicator.color = col;
 	}
 }

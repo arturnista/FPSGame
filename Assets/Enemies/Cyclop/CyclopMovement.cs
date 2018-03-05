@@ -121,7 +121,7 @@ public class CyclopMovement : EnemyMovement {
 		if(m_IsStunned) return;
 
 		if(Vector3.Distance(m_Player.transform.position, transform.position) <= 2f) {
-			m_Player.TakeDamage(25f, this);
+			m_Player.TakeDamage(25f, Vector3.Normalize( m_Player.transform.position - transform.position ) * 10f);
 		}		
 	}
 

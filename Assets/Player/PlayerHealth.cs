@@ -12,6 +12,8 @@ public class PlayerHealth : MonoBehaviour {
 		}
 	}
 
+	private PlayerMovement m_Movement;
+
 	[SerializeField]
 	private float m_MaxHealth;
 	private float m_CurrentHealth;
@@ -22,6 +24,7 @@ public class PlayerHealth : MonoBehaviour {
 		Instance = this;
 		m_CurrentHealth = m_MaxHealth;
 		m_HUDController = GameObject.FindObjectOfType<HUDController>();
+		m_Movement = GetComponent<PlayerMovement>();
 	}
 	
 	void Update () {
@@ -34,15 +37,18 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
 	public void TakeDamage(float damage) {
-		TakeDamage(damage, null);
+		TakeDamage(damage, Vector3.zero);
 	}
 
-	public void TakeDamage(float damage, EnemyMovement enemy) {
+	public void TakeDamage(float damage, Vector3 pushVelocity) {
 		m_CurrentHealth -= damage;
-		m_HUDController.TakeDamage();
+
+		if(pushVelocity != Vector3.zero) m_Movement.AddVelocity(pushVelocity);
 		
 		if(m_CurrentHealth <= 0f) {
-			Debug.Log("DED");
+			m_HUDController.Die();
+		} else {
+			m_HUDController.TakeDamage();
 		}
 	}
 }

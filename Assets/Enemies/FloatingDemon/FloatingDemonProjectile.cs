@@ -28,7 +28,7 @@ public class FloatingDemonProjectile : MonoBehaviour {
 	void OnCollisionEnter(Collision other) {
 		PlayerHealth pHealth = other.transform.GetComponent<PlayerHealth>();
 		if(pHealth) {
-			pHealth.TakeDamage(10f);
+			pHealth.TakeDamage(10f, Vector3.Normalize( pHealth.transform.position - transform.position ) * 50f);
 		}
 		Destroy(this.gameObject);
 	}

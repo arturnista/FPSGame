@@ -89,6 +89,9 @@ public class PhysicEntity : MonoBehaviour {
 		}
 
 		CollisionFlags coll = m_Controller.Move((m_Velocity + m_ExtraVelocity) * Time.deltaTime);		
+		if(coll == CollisionFlags.Sides) {
+			Debug.Log("Sides");
+		}
 
 		m_ForwardDirection = transform.forward;
 		m_SidewaysDirection = transform.right;
@@ -106,6 +109,10 @@ public class PhysicEntity : MonoBehaviour {
 
 	protected virtual void Jump() {
 		m_Velocity.y = jumpForce;
+	}
+
+	public virtual void AddVelocity(Vector3 velocity) {
+		m_Velocity += velocity;
 	}
 
 	public virtual void AddExtraVelocity(Vector3 velocity) {
