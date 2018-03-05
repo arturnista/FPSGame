@@ -352,6 +352,7 @@ GameObject:
   - component: {fileID: 64129759397387750}
   - component: {fileID: 114580660384146342}
   - component: {fileID: 114303931776727688}
+  - component: {fileID: 95842955056227644}
   m_Layer: 0
   m_Name: InitialGateElevator
   m_TagString: Untagged
@@ -903,6 +904,7 @@ GameObject:
   - component: {fileID: 64746978850735872}
   - component: {fileID: 114716797327696134}
   - component: {fileID: 114319502158597656}
+  - component: {fileID: 95513612119974684}
   m_Layer: 0
   m_Name: FinalGateElevator
   m_TagString: Untagged
@@ -941,6 +943,7 @@ GameObject:
   - component: {fileID: 65166815642641624}
   - component: {fileID: 54705074859645220}
   - component: {fileID: 114798595682646204}
+  - component: {fileID: 114587222709789124}
   m_Layer: 0
   m_Name: Stair
   m_TagString: Untagged
@@ -13583,6 +13586,40 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.5, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &95513612119974684
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1254604586769608}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f6ddd71e703f4aa8b521e155d2f4daf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95842955056227644
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1099301028836014}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f6ddd71e703f4aa8b521e155d2f4daf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!108 &108033662822337542
 Light:
   m_ObjectHideFlags: 1
@@ -15235,6 +15272,17 @@ MonoBehaviour:
   m_OnMaterial: {fileID: 2100000, guid: fe3d7f74bcb386249b9f331665436fd5, type: 2}
   m_OffMaterial: {fileID: 2100000, guid: 5a39bd3dffc95dc4ca4759d5823e6622, type: 2}
   m_IsOnInitially: 1
+--- !u!114 &114587222709789124
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1277178109215414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acaa61e1fd1a244fe9aa94f1d9b450aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114593705457671616
 MonoBehaviour:
   m_ObjectHideFlags: 1

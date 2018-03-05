@@ -441,7 +441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5344e654a51745cb869f861efc47c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionEffect: {fileID: 131164, guid: 3c5f4e32698bdb04eaed647f60310510, type: 2}
+  explosionEffect: {fileID: 1000013462590818, guid: a0f80e100110b4fdd856841867e0de7a,
+    type: 2}
   m_ExplosionTime: 2
   m_ThrowForce: 11
   m_Damage: 70

@@ -88,10 +88,12 @@ public class PlayerGun : MonoBehaviour {
 	protected Transform m_Head;
 	protected PlayerMovement m_PlayerMovement;
 	protected Animator m_Animator;
+	[SerializeField]
 	protected ParticleSystem m_Flash;
+	[SerializeField]
+	protected ParticleSystem m_Cartridge;
 
 	void Awake () {
-		m_Flash = GetComponentInChildren<ParticleSystem>();
 		m_PlayerMovement = GetComponentInParent<PlayerMovement>();
 		m_Animator = GetComponent<Animator>();
 		m_AudioSource = GetComponentInParent<AudioSource>();
@@ -215,6 +217,7 @@ public class PlayerGun : MonoBehaviour {
 		m_CurrentMagazine--;
 		m_CurrentSpreadBullet++;
 		if(m_Flash) m_Flash.Play();
+		if(m_Cartridge) m_Cartridge.Play();
 		m_Animator.SetTrigger("fire");
 
 		this.HitCheck();

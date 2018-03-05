@@ -35,7 +35,7 @@ public class MaterialType : MonoBehaviour {
 		imp.transform.position -= imp.transform.forward * .01f;
 		imp.transform.SetParent(transform);
 
-		if(doubleSide) {
+		if(doubleSide && m_Renderer != null) {
 			GameObject imp2 = Instantiate(impactPrefab, position, Quaternion.LookRotation(normal)) as GameObject;
 
 			Vector3 impDirection = normal;

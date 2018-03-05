@@ -62,9 +62,12 @@ MonoBehaviour:
     impactAudios: []
     bulletHoleDecals:
     - {fileID: 1326317616144618, guid: f86c92d5cd3aa466a9694081b2c33cdc, type: 2}
+    - {fileID: 1326317616144618, guid: a5f8464bce9814b099877b5afcfc9b3c, type: 2}
+    - {fileID: 1326317616144618, guid: a77667a361ad4430d93fc46f8033eefe, type: 2}
   - name: flesh
     penetration: 0.6
     impactAudios:
     - {fileID: 8300000, guid: b5249bec242fb4ff392d818414f56306, type: 3}
     - {fileID: 8300000, guid: 6531e4f5d902f48a7bab3d8fc8b02c24, type: 3}
-    bulletHoleDecals: []
+    bulletHoleDecals:
+    - {fileID: 1000010191825552, guid: 83e55d3418297934fab882559d009285, type: 2}
