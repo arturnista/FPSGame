@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 64113239155099132}
   - component: {fileID: 114293905584025132}
   - component: {fileID: 114082960179390072}
+  - component: {fileID: 95327869753707436}
   m_Layer: 0
   m_Name: GateSmallFrameB
   m_TagString: Untagged
@@ -1705,6 +1706,7 @@ GameObject:
   - component: {fileID: 23287296911019118}
   - component: {fileID: 64350773585812664}
   - component: {fileID: 114711863363308056}
+  - component: {fileID: 95035768191852422}
   m_Layer: 0
   m_Name: GateSmallFrameC
   m_TagString: Untagged
@@ -8484,6 +8486,40 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &95035768191852422
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1815241886629604}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f6ddd71e703f4aa8b521e155d2f4daf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95327869753707436
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094893336199496}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f6ddd71e703f4aa8b521e155d2f4daf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95508983075536560
 Animator:
   serializedVersion: 3

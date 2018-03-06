@@ -89,9 +89,7 @@ public class PhysicEntity : MonoBehaviour {
 		}
 
 		CollisionFlags coll = m_Controller.Move((m_Velocity + m_ExtraVelocity) * Time.deltaTime);		
-		if(coll == CollisionFlags.Sides) {
-			Debug.Log("Sides");
-		}
+		if(coll == CollisionFlags.Above && m_Velocity.y > 0f) m_Velocity.y = 0f;
 
 		m_ForwardDirection = transform.forward;
 		m_SidewaysDirection = transform.right;
@@ -122,5 +120,13 @@ public class PhysicEntity : MonoBehaviour {
 	public virtual void RemoveExtraVelocity(Vector3 velocity) {
 		m_ExtraVelocity -= velocity;
 	}
+
+    void OnControllerColliderHit(ControllerColliderHit hit) {
+		if((m_Controller.collisionFlags & CollisionFlags.Sides) != 0) {
+			Vector3 dir = Vector3.Normalize( hit.point - transform.position );
+			dir.y = 0f;
+        	m_Velocity -= dir * m_Velocity.magnitude;
+		}
+    }
 
 }

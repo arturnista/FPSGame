@@ -224,12 +224,13 @@ public class PlayerGun : MonoBehaviour {
 	}
 
 	protected virtual void HitCheck() {
-		// Debug.DrawRay(m_Head.transform.position, m_Head.transform.forward * 10f, Color.red, 10f);
+		Debug.DrawRay(m_Head.transform.position, m_Head.transform.forward * 10f, Color.red, 10f);
+
 		float force = m_Damage;
 		RaycastHit[] hits = Physics.RaycastAll(m_Head.transform.position, Spread());
 		
 		List<RaycastHit> hitsList = new List<RaycastHit>(hits);
-		hitsList.Sort((p1,p2) => Mathf.RoundToInt(Vector3.Distance(p1.point, transform.position) - Vector3.Distance(p2.point, transform.position)));
+		hitsList.Sort((p1,p2) => Mathf.RoundToInt( p1.distance - p2.distance ));
 
 		foreach(RaycastHit hit in hitsList) {
 			MaterialType material = hit.transform.GetComponent<MaterialType>();
@@ -237,7 +238,6 @@ public class PlayerGun : MonoBehaviour {
 				force = material.Impact(hit.point, hit.normal, force) * m_Penetration;
 				if(force <= 1f) break;
 			}
-			// Instantiate(impactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
 		}
 	}
 

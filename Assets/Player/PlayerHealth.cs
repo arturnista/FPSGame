@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour {
 			return m_CurrentHealth;
 		}
 	}
+	public bool godMode;
 
 	private PlayerMovement m_Movement;
 
@@ -41,7 +42,7 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
 	public void TakeDamage(float damage, Vector3 pushVelocity) {
-		m_CurrentHealth -= damage;
+		if(!godMode) m_CurrentHealth -= damage;
 
 		if(pushVelocity != Vector3.zero) m_Movement.AddVelocity(pushVelocity);
 		

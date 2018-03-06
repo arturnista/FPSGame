@@ -19,6 +19,7 @@ public class ElevatorActivate : Interactive {
 	}
 
 	public override void Use() {
+		base.Use();
 		if(elevator.isInitialPos == m_IsInitialActive) {
 			if(!m_Door.isOpen) m_Door.Open();
 			else elevator.Activate();

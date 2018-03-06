@@ -6,6 +6,10 @@ public class FloatingDemonProjectile : MonoBehaviour {
 
 	private Rigidbody m_Rigidbody;
 
+	[SerializeField]	
+	private float m_Damage = 25f;
+	[SerializeField]	
+	private float m_DamagePush = 15f;
 	[SerializeField]
 	private float m_Acceleration = 2f;
 	private float m_CurrentSpeed;
@@ -28,7 +32,9 @@ public class FloatingDemonProjectile : MonoBehaviour {
 	void OnCollisionEnter(Collision other) {
 		PlayerHealth pHealth = other.transform.GetComponent<PlayerHealth>();
 		if(pHealth) {
-			pHealth.TakeDamage(10f, Vector3.Normalize( pHealth.transform.position - transform.position ) * 50f);
+			Vector3 pushDir = Vector3.Normalize( pHealth.transform.position - transform.position );
+			pushDir.y = 0f;
+			pHealth.TakeDamage(m_Damage, pushDir * m_DamagePush);
 		}
 		Destroy(this.gameObject);
 	}

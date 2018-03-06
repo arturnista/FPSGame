@@ -5916,14 +5916,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229206084585054}
-  m_LocalRotation: {x: -0, y: -0.9967171, z: -0, w: 0.08096369}
-  m_LocalPosition: {x: -8.88, y: 1.071, z: -0.62}
+  m_LocalRotation: {x: -0, y: -0.5187835, z: -0, w: 0.85490566}
+  m_LocalPosition: {x: -8.583314, y: 1.071, z: -2.4193141}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4971548552651588}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -170.712, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -62.501003, z: 0}
 --- !u!4 &4390269468172806
 Transform:
   m_ObjectHideFlags: 1
@@ -9335,6 +9335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff6a7ced168c44529fd488e115f9af5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  godMode: 1
   m_MaxHealth: 100
 --- !u!114 &114347407316860358
 MonoBehaviour:
@@ -9417,7 +9418,6 @@ MonoBehaviour:
   gravity: 12
   height: 1.8
   ignoreGravity: 0
-  m_StairSpeed: 8
 --- !u!114 &114852379781225934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9464,9 +9464,9 @@ MonoBehaviour:
   m_MagazineSize: 30
   m_MaxAmmo: 100
   m_ReloadTime: 2
-  m_Damage: 7
+  m_Damage: 3
   m_IsAutomatic: 1
-  m_FireRate: 20
+  m_FireRate: 10
   m_Penetration: 1
   m_ShotAudios:
   - {fileID: 8300000, guid: 3b3cba36e2de14d228eaa17e24f4528f, type: 3}

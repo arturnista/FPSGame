@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class Interactive : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	[SerializeField]
+	private EnemyMovement[] m_EnemyToNotice; 
 
 	public virtual void Use() {
-		
+		foreach(EnemyMovement en in m_EnemyToNotice) en.NoticePlayer();
 	}
 }

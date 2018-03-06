@@ -7,6 +7,9 @@ public class CyclopMovement : EnemyMovement {
 	private Animation m_Animation;
 	private CyclopHealth m_Health;
 
+	[Header("Cyclop")]
+	[SerializeField]	
+	private float m_Damage = 25f;
 	[SerializeField]	
 	private float m_StunTime;
 	[SerializeField]
@@ -120,8 +123,8 @@ public class CyclopMovement : EnemyMovement {
 		if(m_IsDying) return;
 		if(m_IsStunned) return;
 
-		if(Vector3.Distance(m_Player.transform.position, transform.position) <= 2f) {
-			m_Player.TakeDamage(25f, Vector3.Normalize( m_Player.transform.position - transform.position ) * 10f);
+		if(Vector3.Distance(m_Player.transform.position, transform.position) <= 3f) {
+			m_Player.TakeDamage(m_Damage);
 		}		
 	}
 

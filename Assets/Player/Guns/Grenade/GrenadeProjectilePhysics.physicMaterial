@@ -8,6 +8,6 @@ PhysicMaterial:
   m_Name: GrenadeProjectilePhysics
   dynamicFriction: 0.85
   staticFriction: 0.6
-  bounciness: 0.3
+  bounciness: 0.4
   frictionCombine: 0
   bounceCombine: 0

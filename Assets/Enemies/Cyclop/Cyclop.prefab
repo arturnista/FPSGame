@@ -1861,6 +1861,9 @@ MonoBehaviour:
   jumpForce: 1
   gravity: 12
   height: 2
+  ignoreGravity: 0
+  m_IsFollowingPlayer: 0
+  m_Damage: 15
   m_StunTime: 3
   m_RunSpeed: 10
 --- !u!114 &114807065673552658

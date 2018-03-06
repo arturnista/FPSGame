@@ -62,9 +62,13 @@ public class FloatingDemonMovement : EnemyMovement {
 	}
 
 	void Fire() {
-		RaycastHit hit;
-		// if(Physics.Raycast(transform.position + transform.forward * 2f, transform.forward, out hit, 20f, m_Player.gameObject.layer)) {
+		Vector3 castPosition = transform.position + transform.forward * 2f;
+		float distance = Vector3.Distance(castPosition, m_Player.transform.position);
+		if(distance >= 30f) return;
+		
+		RaycastHit[] hits = Physics.RaycastAll(castPosition, transform.forward, distance);
+		if(hits.Length == 1) {
 			Instantiate(projectilePrefab, transform.position + transform.forward * 2f, Quaternion.Euler(transform.eulerAngles));
-		// }
+		}
 	}
 }
