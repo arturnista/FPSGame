@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DoorActivate : Interactive {
 
-	private Door m_Door;
+	public Door door;
 
 	void Awake () {
-		m_Door = GetComponentInParent<Door>();
+		if(!door) door = GetComponentInParent<Door>();
 	}
 	
 	// Update is called once per frame
@@ -17,6 +17,6 @@ public class DoorActivate : Interactive {
 
 	public override void Use() {
 		base.Use();
-		m_Door.Toggle();
+		door.Toggle();
 	}
 }
