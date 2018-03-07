@@ -33,7 +33,7 @@ public class MaterialType : MonoBehaviour {
 
 		GameObject imp = Instantiate(impactPrefab, position, Quaternion.LookRotation(normal * -1)) as GameObject;
 		imp.transform.position -= imp.transform.forward * .01f;
-		imp.transform.SetParent(transform);
+		// imp.transform.SetParent(transform);
 
 		if(doubleSide && m_Renderer != null) {
 			GameObject imp2 = Instantiate(impactPrefab, position, Quaternion.LookRotation(normal)) as GameObject;
@@ -43,7 +43,7 @@ public class MaterialType : MonoBehaviour {
 			float mult = impDirection.magnitude + .01f;
 
 			imp2.transform.position -= imp2.transform.forward * mult;
-			imp2.transform.SetParent(transform);
+			// imp2.transform.SetParent(transform);
 		}
 	}
 
