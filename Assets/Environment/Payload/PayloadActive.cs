@@ -11,7 +11,7 @@ public class PayloadActive : DoorActivate {
 	}
 	
 	public override void Use () {
-		base.Use();
+		if(!door.isOpen) base.Use();
 		m_PayloadBehaviour.Activate();
 	}
 }
