@@ -9418,6 +9418,14 @@ MonoBehaviour:
   gravity: 12
   height: 1.8
   ignoreGravity: 0
+  m_StepSize: 2
+  m_StepSounds:
+  - {fileID: 8300000, guid: 1538cf5bf1fbd46908223119d8506b7c, type: 3}
+  - {fileID: 8300000, guid: 8511cb641f51b4ebebecf87ddca52e5d, type: 3}
+  - {fileID: 8300000, guid: 31a405a8c0f0c4975b9bcdcabf697d86, type: 3}
+  - {fileID: 8300000, guid: 7590246cd3ece41d1a631fd2f0a26497, type: 3}
+  - {fileID: 8300000, guid: ec98b7dd7afc047a0a86731402c36135, type: 3}
+  - {fileID: 8300000, guid: 2d703b9add0694354b80e3b7f8ff3500, type: 3}
 --- !u!114 &114852379781225934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9474,7 +9482,7 @@ MonoBehaviour:
   m_ReloadAudio: {fileID: 0}
   m_SelectAudio: {fileID: 0}
   m_InitialSpread: 0.003
-  m_DefaultSpread: 0.1
+  m_DefaultSpread: 0.07
   m_RecoverSpreadDelay: 0.2
   m_SpreadList: []
   m_Flash: {fileID: 198121769876316800}
