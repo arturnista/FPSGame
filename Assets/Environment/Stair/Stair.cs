@@ -15,7 +15,6 @@ public class Stair : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other) {
-		Debug.Log("Coll");
 		PlayerMovement player = other.transform.GetComponent<PlayerMovement>();
 		if(player) {
 			Debug.Log("Set position");

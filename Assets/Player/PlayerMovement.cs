@@ -20,6 +20,7 @@ public class PlayerMovement : PhysicEntity {
 	private AudioClip[] m_StepSounds;
 	private AudioSource m_AudioSource;
 	private Vector3 m_LastPosition;
+	private float m_AmountWalked;
 
 	protected override void Awake () {
 		base.Awake();
@@ -48,12 +49,13 @@ public class PlayerMovement : PhysicEntity {
 		bool lastGrounded = m_Controller.isGrounded;
 		float verticalSpeed = m_Velocity.y;
 
-		if(m_Controller.isGrounded && Vector3.Distance(m_LastPosition, transform.position) >= m_StepSize) {
-			m_LastPosition = transform.position;
+		m_AmountWalked += Vector3.Distance(m_LastPosition, transform.position);
+		m_LastPosition = transform.position;
+		if(m_Controller.isGrounded && m_AmountWalked >= m_StepSize) {
+			m_AmountWalked = 0f;
 			if(m_StepSounds.Length > 0) {
 				SoundController.PlaySound(m_AudioSource, m_StepSounds);
 			}
-			Debug.Log("Step!");
 		}
 		CollisionFlags coll = this.Move(speed);
 

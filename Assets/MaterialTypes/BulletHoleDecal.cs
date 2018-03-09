@@ -9,8 +9,8 @@ public class BulletHoleDecal : MonoBehaviour {
 	private float m_PassedTime;
 
 	void Start() {
-		float angle = Random.Range(0f, 360f);
-		transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, angle);
+		// float angle = Random.Range(0f, 360f);
+		// transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, angle);
 	}
 	
 	// Update is called once per frame
