@@ -12,7 +12,7 @@ public class EnemyMovement : PhysicEntity {
     }
 
     protected virtual void Start() {
-		    m_Player = PlayerHealth.Instance;        
+		    m_Player = Player.health;
     }
 
     public virtual void TakeDamage(float damage, string name) {

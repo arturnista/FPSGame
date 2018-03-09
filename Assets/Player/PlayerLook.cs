@@ -8,8 +8,7 @@ public class PlayerLook : MonoBehaviour {
 	private Camera m_FPSCamera;
 	private Rigidbody m_Rigidbody;
 
-	public float sensitivityX = 15F;
-	public float sensitivityY = 15F;
+	public float sensitivity = 3F;
 	public float minimumX = -360F;
 	public float maximumX = 360F;
 	public float minimumY = -60F;
@@ -68,8 +67,8 @@ public class PlayerLook : MonoBehaviour {
 			else Cursor.lockState = CursorLockMode.Locked;
 		}
 		// Read the mouse input axis
-		rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-		rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+		rotationX += Input.GetAxis("Mouse X") * sensitivity;
+		rotationY += Input.GetAxis("Mouse Y") * sensitivity;
 
 		rotationX = ClampAngle (rotationX, minimumX, maximumX);
 		rotationY = ClampAngle (rotationY, minimumY, maximumY);

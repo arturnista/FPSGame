@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour {
 
-	public static PlayerHealth Instance;
-
 	public float health {
 		get {
 			return m_CurrentHealth;
@@ -22,7 +20,6 @@ public class PlayerHealth : MonoBehaviour {
 	private HUDController m_HUDController;
 
 	void Awake () {
-		Instance = this;
 		m_CurrentHealth = m_MaxHealth;
 		m_HUDController = GameObject.FindObjectOfType<HUDController>();
 		m_Movement = GetComponent<PlayerMovement>();

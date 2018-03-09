@@ -21,7 +21,7 @@ public class GrenadeProjectile : MonoBehaviour {
 
     public void Throw(Vector3 dir, float holdTime) {
         m_Rigidbody = GetComponent<Rigidbody>();
-        m_Rigidbody.velocity = dir * m_ThrowForce + PlayerMovement.Instance.currentVelocity;
+        m_Rigidbody.velocity = dir * m_ThrowForce + Player.movement.currentVelocity;
 
         m_DurationTime = 0f;
     }
