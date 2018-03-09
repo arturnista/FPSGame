@@ -43,6 +43,7 @@ public class PlayerHealth : MonoBehaviour {
 
 	public void TakeDamage(float damage, Vector3 pushVelocity) {
 		if(!godMode) m_CurrentHealth -= damage;
+		Debug.Log("DAMAGE_TAKEN|"+damage);
 
 		if(pushVelocity != Vector3.zero) m_Movement.AddVelocity(pushVelocity);
 		

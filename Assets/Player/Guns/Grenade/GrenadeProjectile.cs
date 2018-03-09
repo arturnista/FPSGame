@@ -46,7 +46,7 @@ public class GrenadeProjectile : MonoBehaviour {
                 if(pl) {
                     float dmg = m_Damage * 1 / Vector3.Distance(transform.position, pl.transform.position);
                     Vector3 pushDir = Vector3.Normalize( pl.transform.position - transform.position );
-                    pl.TakeDamage(dmg, pushDir * dmg);
+                    pl.TakeDamage(dmg, pushDir * dmg * .3f);
                 }
             }
         }
