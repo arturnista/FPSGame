@@ -71,3 +71,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 6531e4f5d902f48a7bab3d8fc8b02c24, type: 3}
     bulletHoleDecals:
     - {fileID: 1000010191825552, guid: 83e55d3418297934fab882559d009285, type: 2}
+  - name: wood
+    penetration: 0.5
+    impactAudios: []
+    bulletHoleDecals:
+    - {fileID: 1000011190285628, guid: beb3acff7ab73944fb8f470f24d74ed3, type: 2}

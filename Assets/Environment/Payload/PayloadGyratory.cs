@@ -6,14 +6,11 @@ class ItemInside {
 
 	public ItemInside (Transform t) {
 		transform = t;
-		SetOriginalRotation();
-	}
-	public void SetOriginalRotation() {
-		originalRotation = transform.eulerAngles.y; 		
+		parent = t.parent;
 	}
 
-	public float originalRotation;
 	public Transform transform;
+	public Transform parent;
 }
 
 public class PayloadGyratory : MonoBehaviour {
@@ -43,13 +40,7 @@ public class PayloadGyratory : MonoBehaviour {
 		rotation.y = Mathf.Lerp(m_OriginalRotation, m_OriginalRotation + 90f, t);
 		transform.eulerAngles = rotation;
 
-		foreach(ItemInside c in m_ObjectsInside) {
-			Vector3 cRot = c.transform.eulerAngles;
-			cRot.y = Mathf.Lerp(c.originalRotation, c.originalRotation + 90f, t);
-			c.transform.eulerAngles = cRot;
-		}
-
-		if(t >= 1f) m_IsRotating = false;
+		if(t >= 1f) this.Stop();
 	}
 
 	public void Activate() {
@@ -58,19 +49,22 @@ public class PayloadGyratory : MonoBehaviour {
 
 		m_StartTime = Time.time;
 		m_OriginalRotation = transform.eulerAngles.y;
-		foreach(ItemInside c in m_ObjectsInside) c.SetOriginalRotation();
 	}
 
 	public void Stop() {
-
+		m_IsRotating = false;
 	}
 
 	void OnTriggerEnter(Collider coll) {
 		m_ObjectsInside.Add(new ItemInside(coll.transform));
+		coll.transform.SetParent(transform);
 	}
 
 	void OnTriggerExit(Collider coll) {
 		ItemInside c = m_ObjectsInside.Find(x => x.transform == coll.transform);
+		if(c == null) return;
+
+		c.transform.SetParent(c.parent);
 		m_ObjectsInside.Remove(c);
 	}
 }

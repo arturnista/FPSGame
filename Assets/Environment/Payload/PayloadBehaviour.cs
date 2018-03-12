@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PayloadBehaviour : MonoBehaviour {
 
-
-	public GameObject prefab;
 	[SerializeField]
 	private float m_MoveSpeed = 5f;
 
@@ -17,9 +15,23 @@ public class PayloadBehaviour : MonoBehaviour {
 	}
 	
 	void Update () {
-		if(m_IsMoving) {
+		if(m_IsMoving && CheckRail()) {
 			transform.Translate(Vector3.up * m_MoveSpeed * Time.deltaTime);
 		}
+	}
+
+	bool CheckRail() {
+		float horizontalSize = transform.lossyScale.y;
+		float verticalSize = transform.lossyScale.z;
+		RaycastHit[] hits = Physics.RaycastAll(transform.position + transform.up * horizontalSize, transform.forward, verticalSize);
+		// Debug.DrawRay(transform.position + transform.up * horizontalSize, transform.forward * verticalSize, Color.red, 2f);
+
+		foreach(RaycastHit h in hits) {
+			if(h.transform.tag == "Rail") return true;
+		}
+
+		m_IsMoving = false;
+		return false;
 	}
 
 	public void Activate() {

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23839087260291030}
   - component: {fileID: 114809477985602434}
   - component: {fileID: 114900810244580244}
+  - component: {fileID: 135127617316194914}
   m_Layer: 0
   m_Name: PayloadGyratory
   m_TagString: Untagged
@@ -59,9 +60,10 @@ GameObject:
   - component: {fileID: 65667045924519074}
   - component: {fileID: 23660805480894002}
   - component: {fileID: 114264530459184872}
+  - component: {fileID: 114133761565136824}
   m_Layer: 0
   m_Name: Rails
-  m_TagString: Untagged
+  m_TagString: Rail
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,7 +91,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1255149563730396}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -2.5, y: -3.97, z: -7.5}
   m_LocalScale: {x: 5, y: 0.1, z: 5}
   m_Children:
@@ -98,7 +100,7 @@ Transform:
   - {fileID: 4532891440309100}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4411698716334832
 Transform:
   m_ObjectHideFlags: 1
@@ -107,7 +109,7 @@ Transform:
   m_GameObject: {fileID: 1735084890048066}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1.2, z: 0}
-  m_LocalScale: {x: 0.06, y: 1.2, z: 0.9}
+  m_LocalScale: {x: 0.06, y: 1.2, z: 1}
   m_Children: []
   m_Father: {fileID: 4048733522955094}
   m_RootOrder: 0
@@ -119,8 +121,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1799164682095520}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 16.000002, z: -0.5}
-  m_LocalScale: {x: 0.6000004, y: 30, z: 0.08000004}
+  m_LocalPosition: {x: -0, y: 16.000002, z: -0.4}
+  m_LocalScale: {x: 1, y: 30, z: 0.08000004}
   m_Children: []
   m_Father: {fileID: 4048733522955094}
   m_RootOrder: 2
@@ -132,8 +134,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1475172770095258}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 16, z: 0.5}
-  m_LocalScale: {x: 0.60000014, y: 30, z: 0.08000002}
+  m_LocalPosition: {x: 0, y: 16, z: 0.4}
+  m_LocalScale: {x: 1, y: 30, z: 0.08000002}
   m_Children: []
   m_Father: {fileID: 4048733522955094}
   m_RootOrder: 1
@@ -256,6 +258,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114133761565136824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1735084890048066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fc4a61ecfe8d419295db556d2ef494e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114264530459184872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -311,3 +324,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25672cded925c48d288dc6a78a0ae71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &135127617316194914
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1255149563730396}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 0}

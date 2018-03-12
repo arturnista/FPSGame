@@ -74,10 +74,8 @@ public class PhysicEntity : MonoBehaviour {
 			m_Velocity = new Vector3(m_DesiredVelocity.x, m_Velocity.y, m_DesiredVelocity.z);
 		}
 
-		Debug.Log("1: " + m_Velocity);
 		CollisionFlags coll = m_Controller.Move((m_Velocity + m_ExtraVelocity) * Time.deltaTime);		
 		if(coll == CollisionFlags.Above && m_Velocity.y > 0f) m_Velocity.y = 0f;
-		Debug.Log("3: " + m_Velocity);
 		// if(m_Velocity.magnitude > 20f) EditorApplication.isPaused = true;
 
 		m_ForwardDirection = transform.forward;
