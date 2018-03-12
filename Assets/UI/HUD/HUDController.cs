@@ -22,8 +22,8 @@ public class HUDController : MonoBehaviour {
 	private float m_HitStartTime;
 
 	void Awake () {
-		m_AmmoText = transform.Find("AmmoText").GetComponent<Text>();
-		m_HealthText = transform.Find("HealthText").GetComponent<Text>();
+		m_AmmoText = transform.Find("AmmoContainer/AmmoText").GetComponent<Text>();
+		m_HealthText = transform.Find("HealthContainer/HealthText").GetComponent<Text>();
 		m_HitIndicator = transform.Find("HitIndicator").GetComponent<Image>();
 		m_HitColorTransparent = new Color(1f, 0f, 0f, 0f);
 

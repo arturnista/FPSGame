@@ -82,14 +82,10 @@ public class PlayerLook : MonoBehaviour {
 	}
 
 	void LateUpdate() {
-		m_FPSCamera.transform.position = m_Head.position;
-		m_FPSCamera.transform.rotation = m_Head.rotation;
+		// m_FPSCamera.transform.position = m_Head.position;
+		// m_FPSCamera.transform.rotation = m_Head.rotation;
 
-		// m_PlayerGun.transform.localPosition = new Vector3(
-		// 	m_GunOriginalPosition.x + m_HeadBobbingHorizontal, 
-		// 	m_GunOriginalPosition.y - m_HeadBobbingVertical, 
-		// 	m_GunOriginalPosition.z
-		// );
+		// m_FPSCamera.transform.position = m_Head.position + new Vector3( m_HeadBobbingHorizontal, m_HeadBobbingVertical, 0f);
 	}
 
 	void HeadBobbing() {
