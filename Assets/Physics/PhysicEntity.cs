@@ -108,11 +108,11 @@ public class PhysicEntity : MonoBehaviour {
 	}
 
     void OnControllerColliderHit(ControllerColliderHit hit) {
-		if((m_Controller.collisionFlags & CollisionFlags.Sides) != 0) {
-			Vector3 dir = Vector3.Normalize( hit.point - transform.position );
-			dir.y = 0f;
-        	m_Velocity -= dir * m_Velocity.magnitude;
-		}
+		// if((m_Controller.collisionFlags & CollisionFlags.Sides) != 0) {
+		// 	Vector3 dir = Vector3.Normalize( hit.point - transform.position );
+		// 	dir.y = 0f;
+        // 	m_Velocity -= dir * m_Velocity.magnitude;
+		// }
     }
 
 }

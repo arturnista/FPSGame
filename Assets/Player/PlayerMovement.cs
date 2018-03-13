@@ -56,8 +56,8 @@ public class PlayerMovement : PhysicEntity {
 		CollisionFlags coll = this.Move(speed);
 
 		if(!lastGrounded && m_Controller.isGrounded) {
-			float floatDamage = Mathf.Abs(verticalSpeed);
-			if(floatDamage >= 10f) m_Health.TakeDamage(floatDamage * 3);
+			float floatDamage = Mathf.Lerp(-15f, 100f, Mathf.Abs(verticalSpeed) / 50);
+			if(floatDamage > 0f) m_Health.TakeDamage(floatDamage);
 		}
 
 		if(m_Controller.isGrounded && Input.GetKeyDown(KeyCode.Space)) {
@@ -85,7 +85,7 @@ public class PlayerMovement : PhysicEntity {
 		float speed = base.ComputeSpeed();
 
 		if(m_IsWalking || m_IsCrouched) speed *= .4f;
-		if(m_StairMode) speed *= .6f;
+		if(m_StairMode) speed *= .8f;
 		return speed;
 	}
 
