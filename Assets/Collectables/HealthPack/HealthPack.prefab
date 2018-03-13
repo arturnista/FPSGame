@@ -170,6 +170,7 @@ MonoBehaviour:
   m_Type: 2
   m_Amount: 20
   m_GunName: 
+  m_PickUpAudio: {fileID: 8300000, guid: 87abb7d59ee01497b9bbee926139c436, type: 3}
 --- !u!114 &114796882354208258
 MonoBehaviour:
   m_ObjectHideFlags: 1

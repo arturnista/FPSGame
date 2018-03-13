@@ -154,3 +154,4 @@ MonoBehaviour:
   m_Type: 0
   m_Amount: 40
   m_GunName: m4a4
+  m_PickUpAudio: {fileID: 8300000, guid: 2eae66430c79749d9b13ab56bc988740, type: 3}

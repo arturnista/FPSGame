@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
     public static PlayerGun gun;
     public static PlayerLook look;
     public static PlayerWeapon weapon;
+    public static AudioSource audioSource;
 
     void Awake() {
         health = GetComponent<PlayerHealth>();
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour {
         gun = GetComponent<PlayerGun>();
         look = GetComponent<PlayerLook>();
         weapon = GetComponent<PlayerWeapon>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public bool IsPlayer(GameObject go) {

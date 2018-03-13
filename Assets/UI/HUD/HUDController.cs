@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class HUDController : MonoBehaviour {
 
+	public static HUDController main;
+
 	private Text m_AmmoText;
 	private Text m_HealthText;
 	private Image m_HitIndicator;
@@ -22,6 +24,8 @@ public class HUDController : MonoBehaviour {
 	private float m_HitStartTime;
 
 	void Awake () {
+		main = this;
+
 		m_AmmoText = transform.Find("AmmoContainer/AmmoText").GetComponent<Text>();
 		m_HealthText = transform.Find("HealthContainer/HealthText").GetComponent<Text>();
 		m_HitIndicator = transform.Find("HitIndicator").GetComponent<Image>();
@@ -61,5 +65,9 @@ public class HUDController : MonoBehaviour {
 		Color col = m_HitColor;
 		col.a = 1f;
 		m_HitIndicator.color = col;
+	}
+
+	public void PickUpItem(string itemName, int amount) {
+		
 	}
 }
