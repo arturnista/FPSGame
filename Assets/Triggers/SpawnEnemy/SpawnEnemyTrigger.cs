@@ -6,6 +6,7 @@ using UnityEngine;
 class SpawnEnemyEntity {
 	public GameObject enemyPrefab;
 	public Vector3 position;
+	public bool noticePlayer = true;
 }
 
 public class SpawnEnemyTrigger : MonoBehaviour {
@@ -18,7 +19,7 @@ public class SpawnEnemyTrigger : MonoBehaviour {
 		if(pl) {
 			foreach(SpawnEnemyEntity en in m_EnemyList) {
 				EnemyMovement enMov = Instantiate(en.enemyPrefab, en.position, Quaternion.identity).GetComponent<EnemyMovement>();
-				enMov.NoticePlayer();
+				if(en.noticePlayer) enMov.NoticePlayer();
 			}
 			Destroy(this.gameObject);
 		}

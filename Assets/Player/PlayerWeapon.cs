@@ -66,6 +66,7 @@ public class PlayerWeapon : MonoBehaviour {
 
 	void SelectWeapon(int index, bool force = false) {
 		if(!force && m_CurrentWeapon == index) return;
+		if(!m_Guns[index].isAvailable) return;
 
 		if(m_CurrentGun) m_CurrentGun.Deselect();
 		m_LastWeapon = m_CurrentWeapon;
@@ -78,13 +79,35 @@ public class PlayerWeapon : MonoBehaviour {
 		m_CurrentGun.Select();
 	}
 
+	public int GiveGun(string gunName, int amount) {
+		PlayerGun gun = FindGun(gunName);
+		if(gun == null) {
+			Debug.LogWarning("Giving gun to unknown gun " + gunName);
+			return amount;
+		}
+		bool beforeAvailable = gun.isAvailable;
+		
+		int nAmount = gun.GiveGun(amount);
+
+		if(!beforeAvailable) {
+			int index = m_Guns.FindIndex(x => x.gunName == gunName);
+			SelectWeapon(index);
+		}
+		return nAmount;
+	}
+
 	public int GiveAmmo(string gunName, int amount) {
-		PlayerGun gun = m_Guns.Find(x => x.gunName == gunName);
+		PlayerGun gun = FindGun(gunName);
 		if(gun == null) {
 			Debug.LogWarning("Giving ammo to unknown gun " + gunName);
 			return amount;
 		}
 
 		return gun.GiveAmmo(amount);
+	}
+	
+	private PlayerGun FindGun(string gunName) {
+		PlayerGun gun = m_Guns.Find(x => x.gunName == gunName);
+		return gun;
 	}
 }

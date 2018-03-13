@@ -6,6 +6,7 @@ public class Collectable : MonoBehaviour {
 
 	protected enum CollectableType {
 		Ammo,
+		Gun,
 		Health,
 		Custom
 	}
@@ -32,6 +33,12 @@ public class Collectable : MonoBehaviour {
 				int newAmount = weapon.GiveAmmo(m_GunName, m_Amount);
 				m_Amount = newAmount;
 				if(newAmount == 0) Destroy(this.gameObject);
+			}
+		} else if(m_Type == CollectableType.Gun) {
+			PlayerWeapon weapon = coll.GetComponent<PlayerWeapon>();
+			if(weapon) {
+				weapon.GiveGun(m_GunName, m_Amount);
+				Destroy(this.gameObject);
 			}
 		} else if(m_Type == CollectableType.Health) {
 			PlayerHealth health = coll.GetComponent<PlayerHealth>();

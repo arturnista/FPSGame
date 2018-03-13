@@ -8,6 +8,18 @@ public class MaterialType : MonoBehaviour {
 	protected Renderer m_Renderer;
 	protected string m_Name;
 
+	public MaterialTypeConfig config {
+		get {
+			return m_Config;
+		}
+	}
+
+	public string materialName {
+		get {
+			return m_Name;
+		}
+	}
+
 	protected virtual void Awake () {
 		m_Renderer = this.GetComponent<Renderer>();
 	}

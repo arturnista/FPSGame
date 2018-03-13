@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c70fbe43ac194c37864245f9403800b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Type: 1
+  m_Type: 2
   m_Amount: 20
   m_GunName: 
 --- !u!114 &114796882354208258

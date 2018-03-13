@@ -7,6 +7,7 @@ public class MaterialTypeConfig {
     [Range(0f, 1f)]
     public float penetration = 1f;
     public AudioClip[] impactAudios;
+    public AudioClip[] stepsAudios;
     public GameObject[] bulletHoleDecals;
 
 }

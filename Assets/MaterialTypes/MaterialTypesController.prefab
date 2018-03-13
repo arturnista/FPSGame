@@ -55,11 +55,19 @@ MonoBehaviour:
   - name: metal
     penetration: 0.05
     impactAudios: []
+    stepsAudios:
+    - {fileID: 8300000, guid: d2666fcd2727d4e02b32ebfa4fd2d983, type: 3}
+    - {fileID: 8300000, guid: cbc7775a78d774991b4092938e637453, type: 3}
+    - {fileID: 8300000, guid: dfc779a181f4d4ded96c0818c37e0dba, type: 3}
+    - {fileID: 8300000, guid: 3a7f9c24ab5384440ab6e82d229d2b2f, type: 3}
+    - {fileID: 8300000, guid: fe5e8f011e1d640a4a760a6d6921f899, type: 3}
+    - {fileID: 8300000, guid: a053292aabc75419298650704e404bf2, type: 3}
     bulletHoleDecals:
     - {fileID: 1326317616144618, guid: 7085636b7d8304060aa9fa51353aa2ed, type: 2}
   - name: glass
     penetration: 0.9
     impactAudios: []
+    stepsAudios: []
     bulletHoleDecals:
     - {fileID: 1326317616144618, guid: f86c92d5cd3aa466a9694081b2c33cdc, type: 2}
     - {fileID: 1326317616144618, guid: a5f8464bce9814b099877b5afcfc9b3c, type: 2}
@@ -69,10 +77,42 @@ MonoBehaviour:
     impactAudios:
     - {fileID: 8300000, guid: b5249bec242fb4ff392d818414f56306, type: 3}
     - {fileID: 8300000, guid: 6531e4f5d902f48a7bab3d8fc8b02c24, type: 3}
+    stepsAudios: []
     bulletHoleDecals:
     - {fileID: 1000010191825552, guid: 83e55d3418297934fab882559d009285, type: 2}
   - name: wood
     penetration: 0.5
     impactAudios: []
+    stepsAudios:
+    - {fileID: 8300000, guid: 2b18886c5a2e54e3db7d1d3ae19fd304, type: 3}
+    - {fileID: 8300000, guid: 65b8ae546ad3e47e28ff28ff9fca7f74, type: 3}
+    - {fileID: 8300000, guid: 8c804f943cdb2464381711c022d05e37, type: 3}
+    - {fileID: 8300000, guid: 42b39493449b04155bf5d6d18e8884e6, type: 3}
+    - {fileID: 8300000, guid: 745081fa6765c40a4997428fd23a688e, type: 3}
+    - {fileID: 8300000, guid: a351ca2da89644fca99f1ad4611cb9b3, type: 3}
     bulletHoleDecals:
     - {fileID: 1000011190285628, guid: beb3acff7ab73944fb8f470f24d74ed3, type: 2}
+  - name: concrete
+    penetration: 0
+    impactAudios: []
+    stepsAudios:
+    - {fileID: 8300000, guid: 1538cf5bf1fbd46908223119d8506b7c, type: 3}
+    - {fileID: 8300000, guid: 8511cb641f51b4ebebecf87ddca52e5d, type: 3}
+    - {fileID: 8300000, guid: 31a405a8c0f0c4975b9bcdcabf697d86, type: 3}
+    - {fileID: 8300000, guid: 7590246cd3ece41d1a631fd2f0a26497, type: 3}
+    - {fileID: 8300000, guid: ec98b7dd7afc047a0a86731402c36135, type: 3}
+    - {fileID: 8300000, guid: 2d703b9add0694354b80e3b7f8ff3500, type: 3}
+    bulletHoleDecals:
+    - {fileID: 1323825628184696, guid: c28eea42eb69a4add96d4fc2ae4f3a5c, type: 2}
+  - name: stone
+    penetration: 1
+    impactAudios: []
+    stepsAudios:
+    - {fileID: 8300000, guid: 0586952c8872a4c2ba01f84f6bec72f8, type: 3}
+    - {fileID: 8300000, guid: 6c348cc9502cb416682ced5f6882c933, type: 3}
+    - {fileID: 8300000, guid: 89ae108546acc4032bca89d69d1b3e9a, type: 3}
+    - {fileID: 8300000, guid: 60821fbf6bd664e3faef8c1793cae09a, type: 3}
+    - {fileID: 8300000, guid: f2c0fb8bdc2e34837aafa89cf73eaf7a, type: 3}
+    - {fileID: 8300000, guid: d1bebe3a2eea34900b12b006eae82f61, type: 3}
+    bulletHoleDecals:
+    - {fileID: 1323825628184696, guid: c28eea42eb69a4add96d4fc2ae4f3a5c, type: 2}

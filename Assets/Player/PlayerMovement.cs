@@ -50,7 +50,14 @@ public class PlayerMovement : PhysicEntity {
 		if(m_Controller.isGrounded && m_AmountWalked >= m_StepSize) {
 			m_AmountWalked = 0f;
 			if(m_StepSounds.Length > 0) {
-				SoundController.PlaySound(m_AudioSource, m_StepSounds);
+				Collider[] colliders = Physics.OverlapBox(transform.position - transform.up * height / 2f, new Vector3(1f, .3f, 1f), Quaternion.identity);
+				foreach(Collider c in colliders) {
+					MaterialType mt = c.GetComponent<MaterialType>();
+					if(mt) {
+						SoundController.PlaySound(m_AudioSource, mt.config.stepsAudios);
+						break;
+					}
+				}
 			}
 		}
 		CollisionFlags coll = this.Move(speed);

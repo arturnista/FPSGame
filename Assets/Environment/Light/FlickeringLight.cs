@@ -31,8 +31,8 @@ public class FlickeringLight : MonoBehaviour {
 		if(m_Time >= m_Duration) {
 			m_Time = 0f;
 
-			m_Light.range = m_OriginalRange * Random.Range(m_FlickeringRange, 1 + m_FlickeringRange);
-			m_Light.intensity = m_OriginalIntensity * Random.Range(m_FlickeringRange, 1 + m_FlickeringRange);
+			m_Light.range = m_OriginalRange * Random.Range(1 - m_FlickeringRange, 1 + m_FlickeringRange);
+			m_Light.intensity = m_OriginalIntensity * Random.Range(1 - m_FlickeringRange, 1 + m_FlickeringRange);
 		}
 	}
 }

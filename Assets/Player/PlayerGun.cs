@@ -25,9 +25,18 @@ public class PlayerGun : MonoBehaviour {
 			return m_GunName;
 		}
 	}
+	public bool isAvailable {
+		get {
+			return m_IsAvailable;
+		}
+	}
 
 	[SerializeField]
 	private string m_GunName;
+	[SerializeField]
+	protected bool m_IsAvailable;
+	[SerializeField]
+	protected int m_InitialAmmo = 0;
 
 	[SerializeField]
 	protected int m_MagazineSize;
@@ -93,7 +102,11 @@ public class PlayerGun : MonoBehaviour {
 	[SerializeField]
 	protected ParticleSystem m_Cartridge;
 
+	protected bool m_HasAwaken;
+
 	void Awake () {
+		m_HasAwaken = true;
+
 		m_PlayerMovement = GetComponentInParent<PlayerMovement>();
 		m_Animator = GetComponent<Animator>();
 		m_AudioSource = GetComponentInParent<AudioSource>();
@@ -101,8 +114,8 @@ public class PlayerGun : MonoBehaviour {
 		renderer.sortingOrder = 5000;
 
 		m_FireDelay = 1 / m_FireRate;
-		m_CurrentMagazine = m_MagazineSize;
-		m_CurrentAmmo = m_MaxAmmo;
+		m_CurrentAmmo = m_InitialAmmo;
+		m_CurrentMagazine = 0;
 
 		m_CurrentSpread = 0;
 		m_CurrentSpreadBullet = 0;
@@ -128,7 +141,14 @@ public class PlayerGun : MonoBehaviour {
 		transform.localPosition = m_OriginalPosition;
 	}
 
+	public virtual int GiveGun(int amount) {
+		m_IsAvailable = true;
+		return GiveAmmo(amount);
+	}
+
 	public virtual int GiveAmmo(int amount) {
+		if(!m_HasAwaken) m_InitialAmmo += amount;
+
 		m_CurrentAmmo += amount;
 		if(m_CurrentAmmo > m_MaxAmmo) {
 			int diff = m_CurrentAmmo - m_MaxAmmo;
@@ -137,7 +157,7 @@ public class PlayerGun : MonoBehaviour {
 		}
 		return 0;
 	}
-	
+
 	public virtual void StartShooting (Transform head) {
 		if(m_IsReloading) return;
 		if(Time.time < m_NextShootTime) return;
@@ -178,6 +198,7 @@ public class PlayerGun : MonoBehaviour {
 
 	public virtual void Select() {
 		if(m_SelectAudio) SoundController.PlaySound(m_AudioSource, m_SelectAudio);
+		if(m_CurrentMagazine == 0) this.Reload();
 
 		transform.localPosition = m_OriginalPosition;
 		transform.localEulerAngles = m_OriginalEuler;
