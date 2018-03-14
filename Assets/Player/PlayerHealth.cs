@@ -29,9 +29,12 @@ public class PlayerHealth : MonoBehaviour {
 		
 	}
 
-	public void GiveHealth(float amount) {
+	public bool GiveHealth(float amount) {
+		if(m_CurrentHealth >= m_MaxHealth) return false;
+		
 		m_CurrentHealth += amount;
 		if(m_CurrentHealth > m_MaxHealth) m_CurrentHealth = m_MaxHealth;
+		return true;
 	}
 
 	public void TakeDamage(float damage) {

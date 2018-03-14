@@ -9423,7 +9423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff6a7ced168c44529fd488e115f9af5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  godMode: 1
+  godMode: 0
   m_MaxHealth: 100
 --- !u!114 &114347407316860358
 MonoBehaviour:
@@ -9615,7 +9615,7 @@ MonoBehaviour:
   m_Penetration: 0.5
   m_ShotAudios:
   - {fileID: 8300000, guid: b23ccb9d86db041c8bcd2e5ee5925a22, type: 3}
-  m_EmptyAudio: {fileID: 0}
+  m_EmptyAudio: {fileID: 8300000, guid: a2785c76091ae4db1a285b14004512fb, type: 3}
   m_ReloadAudio: {fileID: 8300000, guid: 2a7ec8eb2a0974938a64e629225d1037, type: 3}
   m_SelectAudio: {fileID: 8300000, guid: c91c229fd830d46289916db51df6ebd8, type: 3}
   m_InitialSpread: 0.01

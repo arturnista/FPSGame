@@ -7,9 +7,12 @@ public class HUDController : MonoBehaviour {
 
 	public static HUDController main;
 
+	public GameObject pickupFeedItem;
+
 	private Text m_AmmoText;
 	private Text m_HealthText;
 	private Image m_HitIndicator;
+	private Transform m_PickupFeed;
 
 	[SerializeField]
 	private Color m_HitColor;
@@ -29,10 +32,11 @@ public class HUDController : MonoBehaviour {
 		m_AmmoText = transform.Find("AmmoContainer/AmmoText").GetComponent<Text>();
 		m_HealthText = transform.Find("HealthContainer/HealthText").GetComponent<Text>();
 		m_HitIndicator = transform.Find("HitIndicator").GetComponent<Image>();
+		m_PickupFeed = transform.Find("PickupFeed");
 		m_HitColorTransparent = new Color(1f, 0f, 0f, 0f);
 
-		m_PlayerWeapon = GameObject.FindObjectOfType<PlayerWeapon>();
-		m_PlayerHealth = GameObject.FindObjectOfType<PlayerHealth>();
+		m_PlayerWeapon = Player.weapon;
+		m_PlayerHealth = Player.health;
 	}
 	
 	void Update () {
@@ -68,6 +72,9 @@ public class HUDController : MonoBehaviour {
 	}
 
 	public void PickUpItem(string itemName, int amount) {
-		
+		Debug.Log("Pick " + itemName + "  " + amount);
+		PickupFeedItem it = Instantiate(pickupFeedItem, transform.position, Quaternion.identity).GetComponent<PickupFeedItem>();
+		it.transform.SetParent(m_PickupFeed);
+		it.Configure(itemName, amount);
 	}
 }
