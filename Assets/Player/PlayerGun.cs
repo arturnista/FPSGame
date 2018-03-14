@@ -212,12 +212,12 @@ public class PlayerGun : MonoBehaviour {
 
 	protected virtual void FinishReload() {
 		m_IsReloading = false;
-		if(m_CurrentAmmo > m_MagazineSize) {
+		if(m_CurrentAmmo > m_MagazineSize - m_CurrentMagazine) {
 			int ammoToReload = m_MagazineSize - m_CurrentMagazine;
 			m_CurrentMagazine = m_MagazineSize;
 			m_CurrentAmmo -= ammoToReload;
 		} else {
-			m_CurrentMagazine = m_CurrentAmmo;
+			m_CurrentMagazine += m_CurrentAmmo;
 			m_CurrentAmmo = 0;
 		}
 		m_CurrentSpread = 0;

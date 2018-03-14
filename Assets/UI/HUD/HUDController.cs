@@ -31,17 +31,21 @@ public class HUDController : MonoBehaviour {
 
 		m_AmmoText = transform.Find("AmmoContainer/AmmoText").GetComponent<Text>();
 		m_HealthText = transform.Find("HealthContainer/HealthText").GetComponent<Text>();
+		
 		m_HitIndicator = transform.Find("HitIndicator").GetComponent<Image>();
-		m_PickupFeed = transform.Find("PickupFeed");
 		m_HitColorTransparent = new Color(1f, 0f, 0f, 0f);
 
+		m_PickupFeed = transform.Find("PickupFeed");
+	}
+
+	void Start() {
 		m_PlayerWeapon = Player.weapon;
 		m_PlayerHealth = Player.health;
 	}
 	
 	void Update () {
 		if(m_IsDead) return;
-
+		
 		m_AmmoText.text = m_PlayerWeapon.magazine + " / " + m_PlayerWeapon.ammo;
 		m_HealthText.text = Mathf.RoundToInt(m_PlayerHealth.health).ToString();
 
@@ -72,7 +76,6 @@ public class HUDController : MonoBehaviour {
 	}
 
 	public void PickUpItem(string itemName, int amount) {
-		Debug.Log("Pick " + itemName + "  " + amount);
 		PickupFeedItem it = Instantiate(pickupFeedItem, transform.position, Quaternion.identity).GetComponent<PickupFeedItem>();
 		it.transform.SetParent(m_PickupFeed);
 		it.Configure(itemName, amount);
