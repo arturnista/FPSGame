@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CyclopMovement : EnemyMovement {
 	
 	private Animation m_Animation;
 	private CyclopHealth m_Health;
+	private UnityEngine.AI.NavMeshAgent m_NavMeshAgent;
 
 	[Header("Cyclop")]
 	[SerializeField]	
@@ -28,6 +30,7 @@ public class CyclopMovement : EnemyMovement {
 
 		m_Animation = GetComponent<Animation>();
 		m_Health = GetComponent<CyclopHealth>();
+		m_NavMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
 		m_WalkSpeed = moveSpeed;
 	}
@@ -37,24 +40,17 @@ public class CyclopMovement : EnemyMovement {
 			return;
 		}
 
-		bool lookAtPlayer = true;
+		bool canRotate = true;
 		bool canMove = true;
 
 		if(!m_IsFollowingPlayer || m_IsStunned) {
-			lookAtPlayer = false;
+			canRotate = false;
 			canMove = false;
 		} else if(m_IsAttacking || (!m_IsAngry && m_IsTakingHit)) {
 			canMove = false;
 		}
 
 		PlayAnimation();
-
-		if(lookAtPlayer) {
-			transform.LookAt(m_Player.transform);
-			Vector3 nRot = transform.eulerAngles;
-			nRot.x = nRot.z = 0f;
-			transform.eulerAngles = nRot;
-		}
 
 		if(canMove) {
 			if(Vector3.Distance(m_Player.transform.position, transform.position) <= 2f) {
@@ -63,12 +59,28 @@ public class CyclopMovement : EnemyMovement {
 			}
 
 			m_ForwardSpeed = 1f;	
+			m_NavMeshAgent.isStopped = false;
+			NavMeshPath path = new NavMeshPath();
+			m_NavMeshAgent.CalculatePath(m_Player.transform.position, path);
+			if(path.status == NavMeshPathStatus.PathComplete) {
+				Vector3 target = path.corners[0];
+
+				Debug.Log(target);
+				
+				if(canRotate) {
+					transform.LookAt(target);
+					Vector3 nRot = transform.eulerAngles;
+					nRot.x = nRot.z = 0f;
+					transform.eulerAngles = nRot;
+				}
+
+				float speed = this.ComputeSpeed();
+				this.Move(speed);
+			}
 		} else {
 			m_ForwardSpeed = 0f;
+			m_NavMeshAgent.isStopped = true;
 		}	
-		
-		float speed = this.ComputeSpeed();
-		this.Move(speed);
 	}
 
 	void PlayAnimation() {

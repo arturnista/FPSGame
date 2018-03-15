@@ -2375,6 +2375,7 @@ GameObject:
   - component: {fileID: 114824848419330040}
   - component: {fileID: 65002008572243998}
   - component: {fileID: 114914354912542156}
+  - component: {fileID: 114957174142912870}
   m_Layer: 0
   m_Name: DoorFrame
   m_TagString: Untagged
@@ -14348,6 +14349,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c397e116fe9a04af59e3c785cc0acc9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114957174142912870
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1825893666208584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!114 &114962915874457792
 MonoBehaviour:
   m_ObjectHideFlags: 1
