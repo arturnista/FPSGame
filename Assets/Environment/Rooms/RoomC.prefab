@@ -478,7 +478,6 @@ GameObject:
   - component: {fileID: 114927246879830510}
   - component: {fileID: 65486751762840816}
   - component: {fileID: 114352547473616768}
-  - component: {fileID: 114267218109982516}
   m_Layer: 0
   m_Name: DoorFrame
   m_TagString: Untagged
@@ -1727,6 +1726,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912151010655522}
   - component: {fileID: 114296730905347212}
+  - component: {fileID: 114354714734833958}
   m_Layer: 0
   m_Name: Gate (1)
   m_TagString: Untagged
@@ -1763,7 +1763,6 @@ GameObject:
   - component: {fileID: 23845370114454352}
   - component: {fileID: 64713428996267016}
   - component: {fileID: 114323509921491064}
-  - component: {fileID: 114457752182612816}
   m_Layer: 0
   m_Name: DoorFrame
   m_TagString: Untagged
@@ -8100,21 +8099,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acaa61e1fd1a244fe9aa94f1d9b450aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114267218109982516
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1293921303597122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 0
-  m_IgnoreFromBuild: 1
-  m_AffectedAgents: ffffffff
 --- !u!114 &114279282725311072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8217,6 +8201,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25672cded925c48d288dc6a78a0ae71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114354714734833958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944388647637252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!114 &114359022817022232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8276,21 +8275,6 @@ MonoBehaviour:
   m_Amount: 10
   m_GunName: glock
   m_PickUpAudio: {fileID: 8300000, guid: 2eae66430c79749d9b13ab56bc988740, type: 3}
---- !u!114 &114457752182612816
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1963455888415216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!114 &114494876615129598
 MonoBehaviour:
   m_ObjectHideFlags: 1

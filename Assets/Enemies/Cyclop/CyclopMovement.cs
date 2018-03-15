@@ -62,10 +62,8 @@ public class CyclopMovement : EnemyMovement {
 			m_NavMeshAgent.isStopped = false;
 			NavMeshPath path = new NavMeshPath();
 			m_NavMeshAgent.CalculatePath(m_Player.transform.position, path);
-			if(path.status == NavMeshPathStatus.PathComplete) {
-				Vector3 target = path.corners[0];
-
-				Debug.Log(target);
+			if(path.status == NavMeshPathStatus.PathComplete && path.corners.Length > 1) {
+				Vector3 target = path.corners[1];
 				
 				if(canRotate) {
 					transform.LookAt(target);

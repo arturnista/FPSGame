@@ -7,8 +7,8 @@ public class FloatingDemonMovement : EnemyMovement {
 	public GameObject projectilePrefab;
 	[SerializeField]
 	private float m_MinDistance = 20f;
-	private float m_FireRate = 1f;
-	private float m_FireDelay = 1f;
+	private float m_FireRate = .3f;
+	private float m_FireDelay;
 
 	private float m_FireTime = 0f;
 
@@ -35,6 +35,7 @@ public class FloatingDemonMovement : EnemyMovement {
 			if(m_FireTime >= m_FireDelay) {
 				m_FireTime = 0f;
 				Fire();
+				ChangeVariation();
 			}
 		}
 
@@ -47,18 +48,21 @@ public class FloatingDemonMovement : EnemyMovement {
 
 			float distance = Vector3.Distance(transform.position, m_Player.transform.position);
 			if(distance <= m_MinDistance) m_ForwardSpeed = 0f;
-			
-			if(transform.position.y < m_Player.transform.position.y + 3) {
-				m_DesiredVelocity.y = 4f;
-			} else {
-				m_DesiredVelocity.y = 0f;
-			}
 		} else {
 			m_ForwardSpeed = 0f;
 		}
 		
 		float speed = this.ComputeSpeed();
 		this.Move(speed);
+	}
+
+	void ChangeVariation() {
+		m_SidewaysSpeed = Random.Range(-.5f, .5f);
+		if(transform.position.y < m_Player.transform.position.y + 3) {
+			m_VerticalSpeed = Random.Range(0, 2f);
+		} else {
+			m_VerticalSpeed = Random.Range(-2f, 0f);
+		}
 	}
 
 	void Fire() {
@@ -68,7 +72,13 @@ public class FloatingDemonMovement : EnemyMovement {
 		
 		RaycastHit[] hits = Physics.RaycastAll(castPosition, transform.forward, distance);
 		if(hits.Length == 1) {
-			Instantiate(projectilePrefab, transform.position + transform.forward * 2f, Quaternion.Euler(transform.eulerAngles));
+			for(int x = 0; x < 3; x++) {
+				Invoke("FireProjectile", .3f * x);
+			}
 		}
+	}
+
+	void FireProjectile() {
+		Instantiate(projectilePrefab, transform.position + transform.forward * 2f, Quaternion.Euler(transform.eulerAngles));
 	}
 }

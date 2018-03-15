@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 114303931776727688}
   - component: {fileID: 95842955056227644}
   - component: {fileID: 114227457818978210}
+  - component: {fileID: 114362531512168206}
   m_Layer: 0
   m_Name: InitialGateElevator
   m_TagString: Untagged
@@ -839,6 +840,7 @@ GameObject:
   - component: {fileID: 114319502158597656}
   - component: {fileID: 95513612119974684}
   - component: {fileID: 114249214339574506}
+  - component: {fileID: 114990229635833516}
   m_Layer: 0
   m_Name: FinalGateElevator
   m_TagString: Untagged
@@ -2118,6 +2120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4555909989401648}
   - component: {fileID: 114419209740840644}
+  - component: {fileID: 114586745081177912}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -2375,7 +2378,6 @@ GameObject:
   - component: {fileID: 114824848419330040}
   - component: {fileID: 65002008572243998}
   - component: {fileID: 114914354912542156}
-  - component: {fileID: 114957174142912870}
   m_Layer: 0
   m_Name: DoorFrame
   m_TagString: Untagged
@@ -13608,6 +13610,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acaa61e1fd1a244fe9aa94f1d9b450aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114362531512168206
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1099301028836014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!114 &114371688928386716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13868,6 +13885,21 @@ MonoBehaviour:
   m_OnMaterial: {fileID: 2100000, guid: fe3d7f74bcb386249b9f331665436fd5, type: 2}
   m_OffMaterial: {fileID: 2100000, guid: 5a39bd3dffc95dc4ca4759d5823e6622, type: 2}
   m_IsOnInitially: 1
+--- !u!114 &114586745081177912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1741885658416594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!114 &114593444719833394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14349,21 +14381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c397e116fe9a04af59e3c785cc0acc9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114957174142912870
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1825893666208584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 0
-  m_IgnoreFromBuild: 1
-  m_AffectedAgents: ffffffff
 --- !u!114 &114962915874457792
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14411,3 +14428,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c397e116fe9a04af59e3c785cc0acc9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114990229635833516
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1254604586769608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff

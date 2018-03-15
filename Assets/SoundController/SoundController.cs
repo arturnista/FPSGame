@@ -23,11 +23,16 @@ public class SoundController : MonoBehaviour {
 	}
 	
 	public static void PlaySound (AudioSource source, AudioClip[] audiosClip) {
+		if(audiosClip == null) return;
+		if(audiosClip.Length == 0) return;
+
 		AudioClip audio = audiosClip[Random.Range(0, audiosClip.Length)];
 		PlaySound(source, audio);
 	}
 	
 	public static void PlaySound (AudioSource source, AudioClip audioClip) {
+		if(audioClip == null) return;
+		
 		float soundVolume = source.volume * i_Instance.m_MasterVolume;
 		if(soundVolume <= 0f) return;
 		source.PlayOneShot(audioClip, soundVolume);

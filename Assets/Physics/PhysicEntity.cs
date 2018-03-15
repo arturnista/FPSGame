@@ -53,6 +53,7 @@ public class PhysicEntity : MonoBehaviour {
 	protected virtual void Awake () {
 		m_Controller = GetComponent<CharacterController>();
 		m_Controller.height = height;
+		m_VerticalSpeed = 0f;
 	}
 
 	protected virtual float ComputeSpeed() {
@@ -81,10 +82,12 @@ public class PhysicEntity : MonoBehaviour {
 		m_ForwardDirection = transform.forward;
 		m_SidewaysDirection = transform.right;
 
-		if(m_Controller.isGrounded) {
-			m_Velocity.y = -.1f;
+		if(ignoreGravity || m_Controller.isGrounded) {
 			m_DesiredVelocity = (m_ForwardDirection * m_ForwardSpeed + m_SidewaysDirection * m_SidewaysSpeed) * speed;
-		} else if(!ignoreGravity) {
+
+			if(!ignoreGravity) m_Velocity.y = -.1f;
+			else m_DesiredVelocity += m_VerticalSpeed * transform.up;
+		} else {
 			m_Velocity.y -= gravity * Time.deltaTime;
 		}
 
