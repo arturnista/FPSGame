@@ -1553,7 +1553,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: e52ecb5e8fa1040f7be4d8646b2bf4bc, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 424f2792c06284157a65988cb0f2d124, type: 2}
 --- !u!4 &641308592 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4624486234102224, guid: e1c8ad93b81694875a8439471b916f46,
@@ -1566,6 +1566,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1555930185}
     m_Modifications:
+    - target: {fileID: 114890267933883876, guid: abad1da51e261408f9b6123caf867465,
+        type: 2}
+      propertyPath: m_EnemyToNotice.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4612956071045430, guid: abad1da51e261408f9b6123caf867465, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1613,6 +1618,11 @@ Prefab:
       propertyPath: m_EnemyToNotice.Array.data[2]
       value: 
       objectReference: {fileID: 975559823}
+    - target: {fileID: 114890267933883876, guid: abad1da51e261408f9b6123caf867465,
+        type: 2}
+      propertyPath: m_EnemyToNotice.Array.data[3]
+      value: 
+      objectReference: {fileID: 1110359325}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abad1da51e261408f9b6123caf867465, type: 2}
   m_IsPrefabParent: 0
@@ -2678,6 +2688,12 @@ Transform:
   m_Father: {fileID: 981570396}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 21.106678, y: 57.14466, z: 8.634971}
+--- !u!114 &1110359325 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114774267401080708, guid: 30433c881b495423883560de8c20b950,
+    type: 2}
+  m_PrefabInternal: {fileID: 1444985368}
+  m_Script: {fileID: 11500000, guid: 7e929d44d8d634639b177edc4beacf06, type: 3}
 --- !u!1 &1110654081
 GameObject:
   m_ObjectHideFlags: 0
@@ -4583,6 +4599,11 @@ Prefab:
     - target: {fileID: 1558200646532760, guid: 6bbcb0f797b6c4e848d5c52931891ffa, type: 2}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114728649368869020, guid: 6bbcb0f797b6c4e848d5c52931891ffa,
+        type: 2}
+      propertyPath: m_FireRate
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6bbcb0f797b6c4e848d5c52931891ffa, type: 2}

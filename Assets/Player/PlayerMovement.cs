@@ -14,7 +14,6 @@ public class PlayerMovement : PhysicEntity {
 	[Header("Step configuration")]
 	[SerializeField]
 	private float m_StepSize;
-	[SerializeField]
 	private AudioClip[] m_StepSounds;
 	private AudioSource m_AudioSource;
 	private Vector3 m_LastPosition;
@@ -49,14 +48,12 @@ public class PlayerMovement : PhysicEntity {
 		m_LastPosition = transform.position;
 		if(m_Controller.isGrounded && m_AmountWalked >= m_StepSize) {
 			m_AmountWalked = 0f;
-			if(m_StepSounds.Length > 0) {
-				Collider[] colliders = Physics.OverlapBox(transform.position - transform.up * height / 2f, new Vector3(1f, .3f, 1f), Quaternion.identity);
-				foreach(Collider c in colliders) {
-					MaterialType mt = c.GetComponent<MaterialType>();
-					if(mt) {
-						SoundController.PlaySound(m_AudioSource, mt.config.stepsAudios);
-						break;
-					}
+			Collider[] colliders = Physics.OverlapBox(transform.position - transform.up * height / 2f, new Vector3(.3f, .3f, .3f), Quaternion.identity);
+			foreach(Collider c in colliders) {
+				MaterialType mt = c.GetComponent<MaterialType>();
+				if(mt) {
+					SoundController.PlaySound(m_AudioSource, mt.config.stepsAudios);
+					break;
 				}
 			}
 		}
