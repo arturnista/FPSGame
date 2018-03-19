@@ -39,8 +39,7 @@ GameObject:
   - component: {fileID: 33800734877906016}
   - component: {fileID: 23110209403684014}
   - component: {fileID: 64957734664660074}
-  - component: {fileID: 114980958130745626}
-  - component: {fileID: 114183597541961370}
+  - component: {fileID: 114577337357095632}
   m_Layer: 0
   m_Name: CeilingLampA
   m_TagString: Untagged
@@ -167,17 +166,6 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114183597541961370
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1935885256939992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acaa61e1fd1a244fe9aa94f1d9b450aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114429477830259402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,7 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FlickeringRange: 0.3
   m_FlickeringRate: 2
---- !u!114 &114980958130745626
+--- !u!114 &114577337357095632
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
