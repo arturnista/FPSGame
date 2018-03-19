@@ -126,8 +126,8 @@ public class PlayerGun : MonoBehaviour {
 
 	void Update() {
 		m_PlayerSpeed = Mathf.RoundToInt(m_PlayerMovement.planeVelocity.sqrMagnitude);
-		m_Animator.SetInteger("sqrSpeed", m_PlayerSpeed);
-		m_Animator.SetBool("isGrounded", m_PlayerMovement.isGrounded);
+		// m_Animator.SetInteger("sqrSpeed", m_PlayerSpeed);
+		// m_Animator.SetBool("isGrounded", m_PlayerMovement.isGrounded);
 
 		if(!m_IsShooting && m_CurrentSpreadBullet > 0) {
 			m_RecoverSpreadTime += Time.deltaTime;

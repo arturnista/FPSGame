@@ -21,7 +21,6 @@ public class PlayerLook : MonoBehaviour {
 	private Vector3 m_GunOriginalPosition;
 	
 	private Transform m_Head;
-	private Vector3 m_HeadOriginalPosition;
 	
 	private bool m_HeadBobbingDown;
 
@@ -49,7 +48,6 @@ public class PlayerLook : MonoBehaviour {
 			m_Rigidbody.freezeRotation = true;
 		}
 		
-		m_HeadOriginalPosition = m_Head.localPosition;
 		m_HeadBobbingDown = true;
 		
 		// m_PlayerGun = GetComponentInChildren<PlayerGun>();
@@ -83,14 +81,16 @@ public class PlayerLook : MonoBehaviour {
 
 	void LateUpdate() {
 		// m_FPSCamera.transform.position = m_Head.position;
-		// m_FPSCamera.transform.rotation = m_Head.rotation;
-
-		// m_FPSCamera.transform.position = m_Head.position + new Vector3( m_HeadBobbingHorizontal, m_HeadBobbingVertical, 0f);
+		Vector3 offset = m_HeadBobbingVertical * m_Head.up + m_HeadBobbingHorizontal * m_Head.right;
+		offset *= Time.deltaTime;
+		
+		m_FPSCamera.transform.position = m_Head.position + offset;
+		m_FPSCamera.transform.rotation = m_Head.rotation;
 	}
 
 	void HeadBobbing() {
 		float moveSpeed = m_PlayerMovement.planeVelocity.magnitude;
-		if(m_HeadBobbingDown && moveSpeed <= 0f) {
+		if(!m_PlayerMovement.isGrounded || moveSpeed <= 0f) {
 			m_HeadBobbingVertical = 0f;
 			m_HeadBobbingHorizontal = 0f;
 			m_HeadBobbingStart = 0f;
@@ -102,15 +102,16 @@ public class PlayerLook : MonoBehaviour {
 		if(!m_IsMoving) m_HeadBobbingStart = Time.time;
 		m_IsMoving = true;
 
-		float t = (Time.time - m_HeadBobbingStart) / (m_HeadBobbingDuration / moveSpeed);
+		float duration = m_HeadBobbingDuration / moveSpeed;
+		float t = (Time.time - m_HeadBobbingStart) / duration;
 
 		float bobMin = m_HeadBobbingMin * moveSpeed;
 
 		if(m_HeadBobbingDown) {
-			m_HeadBobbingVertical = Mathf.Lerp(0f, bobMin, t);
+			m_HeadBobbingVertical = Mathf.Lerp(-bobMin, bobMin, t);
 			// m_HeadBobbingHorizontal = Mathf.Lerp(-bobMin, bobMin, t);
 		} else {
-			m_HeadBobbingVertical = Mathf.Lerp(bobMin, 0f, t);
+			m_HeadBobbingVertical = Mathf.Lerp(bobMin, -bobMin, t);
 			// m_HeadBobbingHorizontal = Mathf.Lerp(bobMin, -bobMin, t);
 		}
 		if(t >= 1f) {

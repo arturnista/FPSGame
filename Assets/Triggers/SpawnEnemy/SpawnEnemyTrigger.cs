@@ -18,8 +18,7 @@ public class SpawnEnemyTrigger : MonoBehaviour {
 		Player pl = other.GetComponent<Player>();
 		if(pl) {
 			foreach(SpawnEnemyEntity en in m_EnemyList) {
-				EnemyMovement enMov = Instantiate(en.enemyPrefab, en.position, Quaternion.identity).GetComponent<EnemyMovement>();
-				if(en.noticePlayer) enMov.NoticePlayer();
+				Instantiate(en.enemyPrefab, en.position, Quaternion.identity);
 			}
 			Destroy(this.gameObject);
 		}

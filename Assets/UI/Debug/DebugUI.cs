@@ -5,23 +5,21 @@ using UnityEngine.UI;
 
 public class DebugUI : MonoBehaviour {
 
-	private Text m_DesiredVelocityText;
-	private Text m_VelocityText;
-	private Text m_PositionText;
+	private Text m_DebugText;
 
 	private PlayerMovement m_PlayerMovement;
 
-	void Awake () {
-		m_DesiredVelocityText = transform.Find("DesiredVelocityText").GetComponent<Text>();
-		m_VelocityText = transform.Find("VelocityText").GetComponent<Text>();
-		m_PositionText = transform.Find("PositionText").GetComponent<Text>();
+	void Start () {
+		m_DebugText = transform.Find("DebugText").GetComponent<Text>();
 
-		m_PlayerMovement = GameObject.FindObjectOfType<PlayerMovement>();
+		m_PlayerMovement = Player.movement;
 	}
 	
 	void Update () {
-		m_DesiredVelocityText.text = "D: " + m_PlayerMovement.desiredVelocity + " (" + Mathf.Round(m_PlayerMovement.desiredVelocity.magnitude) + ")";
-		m_VelocityText.text = "V: " + m_PlayerMovement.currentVelocity + " (" + Mathf.Round(m_PlayerMovement.currentVelocity.magnitude) + ")";
-		m_PositionText.text = "P: " + m_PlayerMovement.transform.position;
+		m_DebugText.text = "";
+		m_DebugText.text += "D: " + m_PlayerMovement.desiredVelocity + " (" + Mathf.Round(m_PlayerMovement.desiredVelocity.magnitude) + ")\n";
+		m_DebugText.text += "V: " + m_PlayerMovement.currentVelocity + " (" + Mathf.Round(m_PlayerMovement.currentVelocity.magnitude) + ")\n";
+		m_DebugText.text += "P: " + m_PlayerMovement.transform.position + "\n";
+		m_DebugText.text += "G: " + (m_PlayerMovement.isGrounded ? "IS GROUNDED" : "IS IN THE AIR") + "\n";
 	}
 }

@@ -56,6 +56,9 @@ public class PayloadGyratory : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider coll) {
+		PayloadBehaviour payload = coll.GetComponent<PayloadBehaviour>();
+		if(!payload) return;
+
 		m_ObjectsInside.Add(new ItemInside(coll.transform));
 		coll.transform.SetParent(transform);
 	}
