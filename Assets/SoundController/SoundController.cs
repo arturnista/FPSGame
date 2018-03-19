@@ -37,4 +37,11 @@ public class SoundController : MonoBehaviour {
 		if(soundVolume <= 0f) return;
 		source.PlayOneShot(audioClip, soundVolume);
 	}
+	
+	public static void PlaySound (AudioSource source) {
+		AudioClip audioClip = source.clip;
+		float soundVolume = source.volume * i_Instance.m_MasterVolume;
+		if(soundVolume <= 0f) return;
+		source.PlayOneShot(audioClip, soundVolume);
+	}
 }

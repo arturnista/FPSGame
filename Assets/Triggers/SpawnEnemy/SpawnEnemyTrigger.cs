@@ -23,4 +23,6 @@ public class SpawnEnemyTrigger : MonoBehaviour {
 			Destroy(this.gameObject);
 		}
 	}
+
 }
+

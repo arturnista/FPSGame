@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class BodyPart : MonoBehaviour {
 
+    public string partName {
+        get {
+            return m_BodyPartName;
+        }
+    }
+
     [SerializeField]
     private string m_BodyPartName;
     [SerializeField]

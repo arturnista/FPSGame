@@ -11,11 +11,19 @@ public class FloatingDemonMovement : EnemyMovement {
 	private float m_FireDelay;
 
 	private float m_FireTime = 0f;
+	private List<Transform> m_Guns;
+
+	private int m_GunToFire;
 
 	protected override void Awake () {
 		base.Awake();
 
 		m_FireDelay = 1 / m_FireRate;
+		m_Guns = new List<Transform>();
+		BodyPart[] bodyParts = GetComponentsInChildren<BodyPart>();
+		foreach(BodyPart part in bodyParts) {
+			if(part.partName == "gun") m_Guns.Add(part.transform);
+		}
 	}
 
 	void Update () {
@@ -41,6 +49,7 @@ public class FloatingDemonMovement : EnemyMovement {
 
 		if(canTurn) {
 			transform.LookAt(m_Player.transform);
+			foreach(Transform gun in m_Guns) gun.LookAt(m_Player.transform);
 		}
 
 		if(canMove) {
@@ -69,6 +78,8 @@ public class FloatingDemonMovement : EnemyMovement {
 		Vector3 castPosition = transform.position + transform.forward * 2f;
 		float distance = Vector3.Distance(castPosition, m_Player.transform.position);
 		if(distance >= 30f) return;
+
+		m_GunToFire = 0;
 		
 		RaycastHit[] hits = Physics.RaycastAll(castPosition, transform.forward, distance);
 		if(hits.Length == 1) {
@@ -79,6 +90,7 @@ public class FloatingDemonMovement : EnemyMovement {
 	}
 
 	void FireProjectile() {
-		Instantiate(projectilePrefab, transform.position + transform.forward * 2f, Quaternion.Euler(transform.eulerAngles));
+		Instantiate(projectilePrefab, m_Guns[m_GunToFire].position + m_Guns[m_GunToFire].forward * 2f, Quaternion.Euler(m_Guns[m_GunToFire].eulerAngles));
+		m_GunToFire++;
 	}
 }
