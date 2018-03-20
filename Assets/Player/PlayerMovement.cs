@@ -11,21 +11,12 @@ public class PlayerMovement : PhysicEntity {
 	private Transform m_Head;
 	private PlayerHealth m_Health;
 
-	[Header("Step configuration")]
-	[SerializeField]
-	private float m_StepSize;
-	private AudioClip[] m_StepSounds;
-	private AudioSource m_AudioSource;
-	private Vector3 m_LastPosition;
-	private float m_AmountWalked;
-
 	protected override void Awake () {
 		base.Awake();
 
 		m_IsCrouched = false;
 		m_Head = transform.Find("Head");
 		m_Health = GetComponent<PlayerHealth>();
-		m_AudioSource = GetComponent<AudioSource>();
 	}
 
 	void Update() {
@@ -44,19 +35,6 @@ public class PlayerMovement : PhysicEntity {
 		bool lastGrounded = m_Controller.isGrounded;
 		float verticalSpeed = m_Velocity.y;
 
-		m_AmountWalked += Vector3.Distance(m_LastPosition, transform.position);
-		m_LastPosition = transform.position;
-		if(m_Controller.isGrounded && m_AmountWalked >= m_StepSize) {
-			m_AmountWalked = 0f;
-			Collider[] colliders = Physics.OverlapBox(transform.position - transform.up * height / 2f, new Vector3(.3f, .3f, .3f), Quaternion.identity);
-			foreach(Collider c in colliders) {
-				MaterialType mt = c.GetComponent<MaterialType>();
-				if(mt) {
-					SoundController.PlaySound(m_AudioSource, mt.config.stepsAudios);
-					break;
-				}
-			}
-		}
 		CollisionFlags coll = this.Move(speed);
 
 		if(!lastGrounded && m_Controller.isGrounded) {

@@ -25,6 +25,14 @@ public class CyclopMovement : EnemyMovement {
 	private bool m_IsDying;
 	private bool m_IsAngry;
 
+	[Header("Sounds")]
+	[SerializeField]
+	private AudioClip[] m_NoticePlayerSounds;
+	[SerializeField]
+	private AudioClip[] m_AngrySounds;
+	[SerializeField]
+	private AudioClip[] m_DamageSounds;
+
 	protected override void Awake () {
 		base.Awake();
 
@@ -142,8 +150,14 @@ public class CyclopMovement : EnemyMovement {
 		m_IsAttacking = false;
 	}
 
+	public override void NoticePlayer() {
+		base.NoticePlayer();
+		SoundController.PlaySound(m_AudioSource, m_NoticePlayerSounds);
+	}
+
     public override void TakeDamage(float damage, string name) {
 		if(m_IsDying) return;
+		SoundController.PlaySound(m_AudioSource, m_DamageSounds);
 		m_IsFollowingPlayer = true;
 
 		m_IsTakingHit = true;
@@ -170,10 +184,14 @@ public class CyclopMovement : EnemyMovement {
     }
 
 	void SetAngry() {
+		if(m_IsAngry) return;
+		
 		acceleration *= 2f;
 		moveSpeed = m_RunSpeed;
 		m_IsAngry = true;
 		foreach (AnimationState state in m_Animation) state.speed = 2f;
+		SoundController.PlaySound(m_AudioSource, m_AngrySounds);
+		
 	}
 
 	void FinishStunned() {

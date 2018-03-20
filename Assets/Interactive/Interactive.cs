@@ -8,6 +8,8 @@ public class Interactive : MonoBehaviour {
 	private EnemyMovement[] m_EnemyToNotice; 
 
 	public virtual void Use() {
-		foreach(EnemyMovement en in m_EnemyToNotice) en.NoticePlayer();
+		foreach(EnemyMovement en in m_EnemyToNotice) {
+			if(en) en.NoticePlayer();
+		}
 	}
 }

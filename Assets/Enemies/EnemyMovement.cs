@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyMovement : PhysicEntity {
 
 	protected PlayerHealth m_Player;
-
+  
 	[SerializeField]
     protected bool m_IsFollowingPlayer = false;
 
@@ -12,7 +12,7 @@ public class EnemyMovement : PhysicEntity {
     }
 
     protected virtual void Start() {
-		    m_Player = Player.health;
+		m_Player = Player.health;
     }
 
     public virtual void TakeDamage(float damage, string name) {
@@ -20,6 +20,6 @@ public class EnemyMovement : PhysicEntity {
     }
     
     public virtual void NoticePlayer() {
-		m_IsFollowingPlayer = true;
-	}
+        m_IsFollowingPlayer = true;
+    }
 }

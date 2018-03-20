@@ -48,9 +48,19 @@ public class PhysicEntity : MonoBehaviour {
 	protected Vector3 m_ExtraVelocity;
 
 	protected CharacterController m_Controller;
+	protected AudioSource m_AudioSource;
+
+	[Header("Steps")]
+	[SerializeField]
+	protected float m_StepSize;
+
+	protected Vector3 m_LastPosition;
+	protected float m_AmountWalked;
 
 	protected virtual void Awake () {
 		m_Controller = GetComponent<CharacterController>();
+		m_AudioSource = GetComponent<AudioSource>();
+
 		m_Controller.height = height;
 		m_VerticalSpeed = 0f;
 	}
@@ -65,7 +75,6 @@ public class PhysicEntity : MonoBehaviour {
 	protected virtual CollisionFlags Move(float speed) {
 
 		if(acceleration > 0f) {
-			float horizontalSpeed = m_Velocity.y;
 			Vector3 nVelocity = Vector3.MoveTowards(m_Velocity, m_DesiredVelocity, acceleration * Time.deltaTime);
 			if(!ignoreGravity) nVelocity.y = m_Velocity.y;
 			
@@ -76,7 +85,6 @@ public class PhysicEntity : MonoBehaviour {
 
 		CollisionFlags coll = m_Controller.Move((m_Velocity + m_ExtraVelocity) * Time.deltaTime);		
 		if(coll == CollisionFlags.Above && m_Velocity.y > 0f) m_Velocity.y = 0f;
-		// if(m_Velocity.magnitude > 20f) EditorApplication.isPaused = true;
 
 		m_ForwardDirection = transform.forward;
 		m_SidewaysDirection = transform.right;
@@ -90,8 +98,28 @@ public class PhysicEntity : MonoBehaviour {
 			m_Velocity.y -= gravity * Time.deltaTime;
 		}
 
+		this.Step();
+
 		return coll;
 	}
+
+    protected void Step() {
+		if(!m_AudioSource) return;
+
+        m_AmountWalked += Vector3.Distance(m_LastPosition, transform.position);
+        m_LastPosition = transform.position;
+        if(m_Controller.isGrounded && m_AmountWalked >= m_StepSize) {
+            m_AmountWalked = 0f;
+            Collider[] colliders = Physics.OverlapBox(transform.position - transform.up * height / 2f, new Vector3(.3f, .5f, .3f), Quaternion.identity);
+            foreach(Collider c in colliders) {
+                MaterialType mt = c.GetComponent<MaterialType>();
+                if(mt) {
+                    SoundController.PlaySound(m_AudioSource, mt.config.stepsAudios);
+                    break;
+                }
+            }
+        }
+    }
 
 	protected virtual void Jump() {
 		m_Velocity.y = jumpForce;
