@@ -10306,6 +10306,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   door: {fileID: 0}
 --- !u!114 &114894348146947946
 MonoBehaviour:

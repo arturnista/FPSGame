@@ -2386,10 +2386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb47609ddb20426aa2b6b31ce6f9a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyToNotice:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_EnemyToNotice: []
   door: {fileID: 0}
 --- !u!114 &114148013490967234
 MonoBehaviour:
