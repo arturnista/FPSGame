@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 399822836}
-  m_IndirectSpecularColor: {r: 0.373122, g: 0.3807418, b: 0.35872626, a: 1}
+  m_IndirectSpecularColor: {r: 0.37312242, g: 0.3807421, b: 0.35872677, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -294,15 +294,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4389364491604702, guid: 6bbcb0f797b6c4e848d5c52931891ffa, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.61
+      value: 4.19
       objectReference: {fileID: 0}
     - target: {fileID: 4389364491604702, guid: 6bbcb0f797b6c4e848d5c52931891ffa, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.337
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 4389364491604702, guid: 6bbcb0f797b6c4e848d5c52931891ffa, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 29.11
+      value: -17.57
       objectReference: {fileID: 0}
     - target: {fileID: 4389364491604702, guid: 6bbcb0f797b6c4e848d5c52931891ffa, type: 2}
       propertyPath: m_LocalRotation.x
@@ -573,7 +573,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: a16b76166c4fb4cacb752171fbb1110c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 956496a8283704909acf4e071f625830, type: 2}
 --- !u!4 &641308592 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4624486234102224, guid: e1c8ad93b81694875a8439471b916f46,
@@ -1801,7 +1801,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1619561571}
   m_LocalRotation: {x: -0, y: 0.9999692, z: -0, w: -0.007853948}
-  m_LocalPosition: {x: 1.6099997, y: 1.757, z: 29.11}
+  m_LocalPosition: {x: 4.1899996, y: 0.5999999, z: -17.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 737208852}

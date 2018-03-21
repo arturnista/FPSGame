@@ -33,7 +33,7 @@ public class HUDController : MonoBehaviour {
 		m_AmmoText = transform.Find("AmmoContainer/AmmoText").GetComponent<Text>();
 		m_HealthText = transform.Find("HealthContainer/HealthText").GetComponent<Text>();
 		m_ObjectiveText = transform.Find("ObjectiveText").GetComponent<Text>();
-		CleanText();
+		ShowText("Bring the payload to the open field");
 		
 		m_HitIndicator = transform.Find("HitIndicator").GetComponent<Image>();
 		m_HitColorTransparent = new Color(1f, 0f, 0f, 0f);

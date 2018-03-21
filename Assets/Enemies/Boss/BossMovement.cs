@@ -128,16 +128,17 @@ public class BossMovement : EnemyMovement {
 		SoundController.PlaySound(m_AudioSource, m_DamageSounds);
 		m_IsFollowingPlayer = true;
 
-		m_IsTakingHit = true;
-
 		if(m_Health.healthPerc <= 0f) {
 			m_IsDying = true;
 			foreach(Collider coll in GetComponentsInChildren<Collider>()) coll.enabled = false;
 			m_Animator.SetTrigger("Die");
 			Invoke("FinishDeath", 10f);
 		} else {
-			if(Random.Range(0f, 1f) > .8f) m_Animator.SetTrigger("GetHit");
-			Invoke("FinishTakeDamage", .57f);
+			if(Random.Range(0f, 1f) > .8f) {
+				m_Animator.SetTrigger("GetHit");
+				m_IsTakingHit = true;
+				Invoke("FinishTakeDamage", .57f);
+			}
 		}
     }
 
