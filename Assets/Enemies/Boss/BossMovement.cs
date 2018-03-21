@@ -84,7 +84,7 @@ public class BossMovement : EnemyMovement {
 	}
 
 	void PlayAnimation() {
-        if (planeVelocity.magnitude > 0.1f) m_Animator.SetBool("IsWalking", true);
+        if (planeVelocity.magnitude > .01f) m_Animator.SetBool("IsWalking", true);
 		else m_Animator.SetBool("IsWalking", false);
 	}
 
@@ -136,7 +136,7 @@ public class BossMovement : EnemyMovement {
 			m_Animator.SetTrigger("Die");
 			Invoke("FinishDeath", 10f);
 		} else {
-			m_Animator.SetTrigger("GetHit");
+			if(Random.Range(0f, 1f) > .8f) m_Animator.SetTrigger("GetHit");
 			Invoke("FinishTakeDamage", .57f);
 		}
     }

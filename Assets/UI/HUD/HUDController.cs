@@ -11,6 +11,7 @@ public class HUDController : MonoBehaviour {
 
 	private Text m_AmmoText;
 	private Text m_HealthText;
+	private Text m_ObjectiveText;
 	private Image m_HitIndicator;
 	private Transform m_PickupFeed;
 
@@ -31,6 +32,8 @@ public class HUDController : MonoBehaviour {
 
 		m_AmmoText = transform.Find("AmmoContainer/AmmoText").GetComponent<Text>();
 		m_HealthText = transform.Find("HealthContainer/HealthText").GetComponent<Text>();
+		m_ObjectiveText = transform.Find("ObjectiveText").GetComponent<Text>();
+		CleanText();
 		
 		m_HitIndicator = transform.Find("HitIndicator").GetComponent<Image>();
 		m_HitColorTransparent = new Color(1f, 0f, 0f, 0f);
@@ -79,5 +82,14 @@ public class HUDController : MonoBehaviour {
 		PickupFeedItem it = Instantiate(pickupFeedItem, transform.position, Quaternion.identity).GetComponent<PickupFeedItem>();
 		it.transform.SetParent(m_PickupFeed);
 		it.Configure(itemName, amount);
+	}
+
+	public void ShowText(string text) {
+		m_ObjectiveText.text = text;
+		Invoke("CleanText", 10f);
+	}
+
+	void CleanText() {
+		m_ObjectiveText.text = "";
 	}
 }
