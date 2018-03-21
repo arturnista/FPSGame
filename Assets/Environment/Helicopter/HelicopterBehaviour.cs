@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class HelicopterBehaviour : MonoBehaviour {
 
+	public Vector3 landPosition {
+		get {
+			return m_LandPosition;
+		}
+	}
+
 	[SerializeField]
 	private Vector3 m_LandPosition;
+	private HelicopterFreeSpace m_FreeSpace;
 
 	private float m_MoveSpeed = 10f;
 
@@ -13,7 +20,7 @@ public class HelicopterBehaviour : MonoBehaviour {
 	private bool m_CanLand = false;
 
 	void Awake () {
-		
+		m_FreeSpace = GameObject.FindObjectOfType<HelicopterFreeSpace>();
 	}
 	
 	void Update () {
@@ -48,6 +55,8 @@ public class HelicopterBehaviour : MonoBehaviour {
 		if(distance <= 0.1f) {
 			m_CanLand = false;
 			m_CanMoveToLand = false;
+
+			m_FreeSpace.Explode();
 		}
 	}
 

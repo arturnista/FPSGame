@@ -36,7 +36,7 @@ Transform:
   m_GameObject: {fileID: 1930463330467120}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 15, y: 5, z: 50}
-  m_LocalScale: {x: 20, y: 1, z: 30}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -51,7 +51,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 20, z: 1}
+  m_Size: {x: 20, y: 20, z: 30}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114138666042303660
 MonoBehaviour:
@@ -64,3 +64,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a73d17410f9cd4951bab50a97a423469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 1709190137586284, guid: e077fa2cd32ba47a990f4f600bf74308,
+    type: 2}
+  boss: {fileID: 0}
