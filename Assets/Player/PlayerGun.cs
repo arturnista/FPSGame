@@ -137,8 +137,6 @@ public class PlayerGun : MonoBehaviour {
 				if(m_CurrentSpread > 0 && m_SpreadList[m_CurrentSpread].bullet > m_CurrentSpreadBullet) m_CurrentSpread--;
 			}
 		}
-		transform.localEulerAngles = m_OriginalEuler;
-		transform.localPosition = m_OriginalPosition;
 	}
 
 	public virtual int GiveGun(int amount) {
@@ -208,6 +206,9 @@ public class PlayerGun : MonoBehaviour {
 		this.StopShooting();
 		m_IsReloading = false;
 		CancelInvoke();
+		
+		transform.localEulerAngles = m_OriginalEuler;
+		transform.localPosition = m_OriginalPosition;
 	}
 
 	protected virtual void FinishReload() {

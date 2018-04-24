@@ -37,6 +37,7 @@ public class PlayerWeapon : MonoBehaviour {
 	}
 
 	void Start() {
+		GiveGun("glock", 1);		
 		SelectWeapon(0, true);		
 	}
 	
@@ -93,6 +94,8 @@ public class PlayerWeapon : MonoBehaviour {
 			int index = m_Guns.FindIndex(x => x.gunName == gunName);
 			SelectWeapon(index);
 		}
+
+		HUDController.main.GiveGun(gunName);		
 		return nAmount;
 	}
 

@@ -8,12 +8,14 @@ public class HUDController : MonoBehaviour {
 	public static HUDController main;
 
 	public GameObject pickupFeedItem;
+	public GameObject gunsFeedItem;
 
 	private Text m_AmmoText;
 	private Text m_HealthText;
 	private Text m_ObjectiveText;
 	private Image m_HitIndicator;
 	private Transform m_PickupFeed;
+	private Transform m_GunsFeed;
 
 	[SerializeField]
 	private Color m_HitColor;
@@ -27,6 +29,8 @@ public class HUDController : MonoBehaviour {
 	private float m_HitDuration = .5f;
 	private float m_HitStartTime;
 
+	private List<string> m_GunsPickedUp;
+
 	void Awake () {
 		main = this;
 
@@ -39,6 +43,8 @@ public class HUDController : MonoBehaviour {
 		m_HitColorTransparent = new Color(1f, 0f, 0f, 0f);
 
 		m_PickupFeed = transform.Find("PickupFeed");
+		m_GunsFeed = transform.Find("GunsFeed");
+		m_GunsPickedUp = new List<string>();
 	}
 
 	void Start() {
@@ -82,6 +88,15 @@ public class HUDController : MonoBehaviour {
 		PickupFeedItem it = Instantiate(pickupFeedItem, transform.position, Quaternion.identity).GetComponent<PickupFeedItem>();
 		it.transform.SetParent(m_PickupFeed);
 		it.Configure(itemName, amount);
+	}
+
+	public void GiveGun(string gunName) {
+		if(m_GunsPickedUp.Contains(gunName)) return;
+		m_GunsPickedUp.Add(gunName);
+
+		GunsFeedItem it = Instantiate(gunsFeedItem, transform.position, Quaternion.identity).GetComponent<GunsFeedItem>();
+		it.transform.SetParent(m_GunsFeed);
+		it.Configure(gunName);
 	}
 
 	public void ShowText(string text) {

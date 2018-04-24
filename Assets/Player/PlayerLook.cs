@@ -56,7 +56,7 @@ public class PlayerLook : MonoBehaviour {
 		m_IsMoving = false;
 
 		originalRotation = Quaternion.identity;
-		// Cursor.lockState = CursorLockMode.Locked;
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 	void Update () {

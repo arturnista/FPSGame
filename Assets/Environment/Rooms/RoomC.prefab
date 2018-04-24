@@ -352,7 +352,6 @@ GameObject:
   - component: {fileID: 114638836931631640}
   - component: {fileID: 95383522427542730}
   - component: {fileID: 114359022817022232}
-  - component: {fileID: 114584117129643774}
   m_Layer: 0
   m_Name: GateSmallFrameA
   m_TagString: Untagged
@@ -461,6 +460,7 @@ GameObject:
   - component: {fileID: 114927246879830510}
   - component: {fileID: 65486751762840816}
   - component: {fileID: 114352547473616768}
+  - component: {fileID: 208320068960281134}
   m_Layer: 0
   m_Name: DoorFrame
   m_TagString: Untagged
@@ -1791,7 +1791,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4912151010655522}
   - component: {fileID: 114296730905347212}
-  - component: {fileID: 114354714734833958}
   m_Layer: 0
   m_Name: Gate (1)
   m_TagString: Untagged
@@ -1828,6 +1827,7 @@ GameObject:
   - component: {fileID: 23845370114454352}
   - component: {fileID: 64713428996267016}
   - component: {fileID: 114323509921491064}
+  - component: {fileID: 208784976461949236}
   m_Layer: 0
   m_Name: DoorFrame
   m_TagString: Untagged
@@ -5930,7 +5930,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5317f3e76581f4165b16ede5caa5f14b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8602,21 +8602,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25672cded925c48d288dc6a78a0ae71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114354714734833958
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1944388647637252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 0
-  m_IgnoreFromBuild: 1
-  m_AffectedAgents: ffffffff
 --- !u!114 &114359022817022232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8742,21 +8727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc4a61ecfe8d419295db556d2ef494e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114584117129643774
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231681122005038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 1
-  m_IgnoreFromBuild: 1
-  m_AffectedAgents: ffffffff
 --- !u!114 &114587817402304578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9108,3 +9078,33 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &208320068960281134
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1293921303597122}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!208 &208784976461949236
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1963455888415216}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.5, y: 2, z: 0.2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 2.5, y: 1, z: -0.2}
+  m_TimeToStationary: 0.5
