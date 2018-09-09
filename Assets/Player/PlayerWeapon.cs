@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerWeapon : MonoBehaviour {
-	
+
 	private Transform m_Head;
 	private List<PlayerGun> m_Guns;
 	private PlayerGun m_CurrentGun;
@@ -24,93 +24,93 @@ public class PlayerWeapon : MonoBehaviour {
 	private int m_CurrentWeapon;
 
 	void Awake () {
-		m_Head = transform.Find("Head");
+		m_Head = transform.Find ("Head");
 
-		m_Guns = new List<PlayerGun>();
-		foreach(Transform child in m_Head) {
-			PlayerGun g = child.GetComponent<PlayerGun>();
-			if(g) {
-				m_Guns.Add(g);
-				g.gameObject.SetActive(false);
+		m_Guns = new List<PlayerGun> ();
+		foreach (Transform child in m_Head) {
+			PlayerGun g = child.GetComponent<PlayerGun> ();
+			if (g) {
+				m_Guns.Add (g);
+				g.gameObject.SetActive (false);
 			}
 		}
 	}
 
-	void Start() {
-		GiveGun("glock", 1);		
-		SelectWeapon(0, true);		
+	void Start () {
+		GiveGun ("glock", 1);
+		SelectWeapon (0, true);
 	}
-	
+
 	void Update () {
-		if(Input.GetMouseButtonDown(0)) {
-			m_CurrentGun.StartShooting(m_Head);
-		} else if(Input.GetMouseButtonUp(0)) {
-			m_CurrentGun.StopShooting();
+		if (Input.GetMouseButtonDown (0)) {
+			m_CurrentGun.StartShooting (m_Head);
+		} else if (Input.GetMouseButtonUp (0)) {
+			m_CurrentGun.StopShooting ();
 		}
 
-		if(Input.GetKeyDown(KeyCode.R)) {
-			m_CurrentGun.Reload();
+		if (Input.GetKeyDown (KeyCode.R)) {
+			m_CurrentGun.Reload ();
 		}
 
-		if(Input.GetKeyDown(KeyCode.Alpha1)) {
-			SelectWeapon(0);
-		} else if(Input.GetKeyDown(KeyCode.Alpha2)) {
-			SelectWeapon(1);
-		} else if(Input.GetKeyDown(KeyCode.Alpha3)) {
-			SelectWeapon(2);
-		} else if(Input.GetKeyDown(KeyCode.Alpha4)) {
-			SelectWeapon(3);
-		} else if(Input.GetKeyDown(KeyCode.Q)) {
-			SelectWeapon(m_LastWeapon);			
+		if (Input.GetKeyDown (KeyCode.Alpha1)) {
+			SelectWeapon (0);
+		} else if (Input.GetKeyDown (KeyCode.Alpha2)) {
+			SelectWeapon (1);
+		} else if (Input.GetKeyDown (KeyCode.Alpha3)) {
+			SelectWeapon (2);
+		} else if (Input.GetKeyDown (KeyCode.Alpha4)) {
+			SelectWeapon (3);
+		} else if (Input.GetKeyDown (KeyCode.Q)) {
+			SelectWeapon (m_LastWeapon);
 		}
 	}
 
-	void SelectWeapon(int index, bool force = false) {
-		if(!force && m_CurrentWeapon == index) return;
-		if(!m_Guns[index].isAvailable) return;
+	void SelectWeapon (int index, bool force = false) {
+		if (!force && m_CurrentWeapon == index) return;
+		if (!m_Guns[index].isAvailable) return;
 
-		if(m_CurrentGun) m_CurrentGun.Deselect();
+		if (m_CurrentGun) m_CurrentGun.Deselect ();
 		m_LastWeapon = m_CurrentWeapon;
 
-		m_Guns[m_CurrentWeapon].gameObject.SetActive(false);
+		m_Guns[m_CurrentWeapon].gameObject.SetActive (false);
 		m_CurrentWeapon = index;
-		m_Guns[m_CurrentWeapon].gameObject.SetActive(true);
+		m_Guns[m_CurrentWeapon].gameObject.SetActive (true);
 
 		m_CurrentGun = m_Guns[m_CurrentWeapon];
-		m_CurrentGun.Select();
+		m_CurrentGun.Select ();
 	}
 
-	public int GiveGun(string gunName, int amount) {
-		PlayerGun gun = FindGun(gunName);
-		if(gun == null) {
-			Debug.LogWarning("Giving gun to unknown gun " + gunName);
+	public int GiveGun (string gunName, int amount) {
+		PlayerGun gun = FindGun (gunName);
+		if (gun == null) {
+			Debug.LogWarning ("Giving gun to unknown gun " + gunName);
 			return amount;
 		}
 		bool beforeAvailable = gun.isAvailable;
-		
-		int nAmount = gun.GiveGun(amount);
 
-		if(!beforeAvailable) {
-			int index = m_Guns.FindIndex(x => x.gunName == gunName);
-			SelectWeapon(index);
+		int nAmount = gun.GiveGun (amount);
+
+		if (!beforeAvailable) {
+			int index = m_Guns.FindIndex (x => x.gunName == gunName);
+			SelectWeapon (index);
 		}
 
-		HUDController.main.GiveGun(gunName);		
+		HUDController.main.GiveGun (gunName);
 		return nAmount;
 	}
 
-	public int GiveAmmo(string gunName, int amount) {
-		PlayerGun gun = FindGun(gunName);
-		if(gun == null) {
-			Debug.LogWarning("Giving ammo to unknown gun " + gunName);
+	public int GiveAmmo (string gunName, int amount) {
+		PlayerGun gun = FindGun (gunName);
+		if (gun == null) {
+			Debug.LogWarning ("Giving ammo to unknown gun " + gunName);
 			return amount;
 		}
 
-		return gun.GiveAmmo(amount);
+		return gun.GiveAmmo (amount);
 	}
-	
-	private PlayerGun FindGun(string gunName) {
-		PlayerGun gun = m_Guns.Find(x => x.gunName == gunName);
+
+	private PlayerGun FindGun (string gunName) {
+		PlayerGun gun = m_Guns.Find (x => x.gunName == gunName);
 		return gun;
 	}
 }

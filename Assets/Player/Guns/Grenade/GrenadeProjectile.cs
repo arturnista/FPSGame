@@ -19,38 +19,38 @@ public class GrenadeProjectile : MonoBehaviour {
 
     private float m_DurationTime;
 
-    public void Throw(Vector3 dir, float holdTime) {
-        m_Rigidbody = GetComponent<Rigidbody>();
+    public void Throw (Vector3 dir, float holdTime) {
+        m_Rigidbody = GetComponent<Rigidbody> ();
         m_Rigidbody.velocity = dir * m_ThrowForce + Player.movement.currentVelocity;
 
         m_DurationTime = 0f;
     }
 
-    void Update() {
+    void Update () {
         m_DurationTime += Time.deltaTime;
-        if(m_DurationTime >= m_ExplosionTime) {
-            Explode();
+        if (m_DurationTime >= m_ExplosionTime) {
+            Explode ();
         }
     }
 
-    void Explode() {
-        Instantiate(explosionEffect, transform.position, Quaternion.identity);
-        Collider[] colls = Physics.OverlapSphere(transform.position, m_Radius);
-        foreach(Collider c in colls) {
-            EnemyHealth en = c.GetComponent<EnemyHealth>();
-            if(en) {
-                float dmg = m_Damage * 1 / Vector3.Distance(transform.position, en.transform.position);
-                en.DealDamage(dmg, "body");
+    void Explode () {
+        Instantiate (explosionEffect, transform.position, Quaternion.identity);
+        Collider[] colls = Physics.OverlapSphere (transform.position, m_Radius);
+        foreach (Collider c in colls) {
+            EnemyHealth en = c.GetComponent<EnemyHealth> ();
+            if (en) {
+                float dmg = m_Damage * 1 / Vector3.Distance (transform.position, en.transform.position);
+                en.DealDamage (dmg, "body");
             } else {
-                PlayerHealth pl = c.GetComponent<PlayerHealth>();
-                if(pl) {
-                    float dmg = m_Damage * 1 / Vector3.Distance(transform.position, pl.transform.position);
-                    Vector3 pushDir = Vector3.Normalize( pl.transform.position - transform.position );
-                    pl.TakeDamage(dmg, pushDir * dmg * .3f);
+                PlayerHealth pl = c.GetComponent<PlayerHealth> ();
+                if (pl) {
+                    float dmg = m_Damage * 1 / Vector3.Distance (transform.position, pl.transform.position);
+                    Vector3 pushDir = Vector3.Normalize (pl.transform.position - transform.position);
+                    pl.TakeDamage (dmg, pushDir * dmg * .3f);
                 }
             }
         }
-        Destroy(this.gameObject);
+        Destroy (this.gameObject);
     }
 
 }
