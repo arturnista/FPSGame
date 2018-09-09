@@ -29,8 +29,6 @@ public class BossMovement : EnemyMovement {
 	protected override void Awake () {
 		base.Awake();
 
-		m_IsFollowingPlayer = true;
-
 		m_Health = GetComponent<BossHealth>();
 		m_Animator = GetComponent<Animator>();
 		m_NavMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
