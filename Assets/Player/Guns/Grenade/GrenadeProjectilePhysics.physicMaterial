@@ -7,7 +7,7 @@ PhysicMaterial:
   m_PrefabInternal: {fileID: 0}
   m_Name: GrenadeProjectilePhysics
   dynamicFriction: 0.85
-  staticFriction: 0.6
+  staticFriction: 1
   bounciness: 0.4
   frictionCombine: 0
   bounceCombine: 0
