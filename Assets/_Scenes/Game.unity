@@ -608,8 +608,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114834465834078650, guid: 6bbcb0f797b6c4e848d5c52931891ffa,
         type: 2}
+      propertyPath: moveSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114834465834078650, guid: 6bbcb0f797b6c4e848d5c52931891ffa,
+        type: 2}
       propertyPath: acceleration
-      value: 75
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6bbcb0f797b6c4e848d5c52931891ffa, type: 2}
@@ -2227,6 +2232,16 @@ Prefab:
     - target: {fileID: 114416170375605614, guid: 7aff7083de6ec4f40b0b50bb2a882ad3,
         type: 2}
       propertyPath: m_FontData.m_VerticalOverflow
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224820760210338652, guid: 7aff7083de6ec4f40b0b50bb2a882ad3,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.6999512
+      objectReference: {fileID: 0}
+    - target: {fileID: 224729541268610918, guid: 7aff7083de6ec4f40b0b50bb2a882ad3,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
