@@ -5,6 +5,7 @@ public class EnemyHealth : MonoBehaviour {
     [SerializeField]
     protected float m_MaxHealth;
     protected float m_CurrentHealth;
+    public string petriName;
 
     protected EnemyMovement m_EnemyMovement;
 
@@ -24,6 +25,7 @@ public class EnemyHealth : MonoBehaviour {
         m_EnemyMovement.TakeDamage(damage, name);
         
         if(m_CurrentHealth <= 0f) {
+		    PetriNetController.main.petriNet.AddMarkers(petriName, 1);            
             gameObject.SetActive(false);
             Destroy(gameObject);
         }

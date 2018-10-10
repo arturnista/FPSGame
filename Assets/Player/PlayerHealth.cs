@@ -26,6 +26,10 @@ public class PlayerHealth : MonoBehaviour {
 	}
 	
 	void Update () {
+
+		if(Input.GetKeyDown(KeyCode.G)) {
+			godMode = !godMode;
+		}
 		
 	}
 

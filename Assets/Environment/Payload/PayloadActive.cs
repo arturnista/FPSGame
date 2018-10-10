@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PayloadActive : DoorActivate {
 
+	public string petriName;
 	private PayloadBehaviour m_PayloadBehaviour;
 
 	void Start () {
@@ -11,7 +12,7 @@ public class PayloadActive : DoorActivate {
 	}
 	
 	public override void Use () {
-		if(!door.isOpen) base.Use();
+		PetriNetController.main.petriNet.AddMarkers(petriName, 1);
 		m_PayloadBehaviour.Activate();
 	}
 }
