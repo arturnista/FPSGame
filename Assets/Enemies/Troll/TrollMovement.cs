@@ -22,6 +22,7 @@ public class TrollMovement : EnemyMovement {
 	
 	void Update () {
 		if(m_IsDying) return;
+		if(!m_IsFollowingPlayer) return;
 
 		transform.LookAt(m_Player.transform);
 		Vector3 nRot = transform.eulerAngles;
@@ -57,6 +58,8 @@ public class TrollMovement : EnemyMovement {
 
     public override void TakeDamage(float damage, string name) {
 		if(m_IsDying) return;
+
+		m_IsFollowingPlayer = true;
 
 		m_IsTakingHit = true;
 		m_Velocity = Vector3.zero;

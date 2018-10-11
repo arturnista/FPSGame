@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(AudioSource))]
 public class PhysicEntity : MonoBehaviour {
 
 	public float acceleration = 100f;
@@ -63,6 +65,10 @@ public class PhysicEntity : MonoBehaviour {
 
 		m_Controller.height = height;
 		m_VerticalSpeed = 0f;
+	}
+
+	void Start() {
+		gravity = GameController.main.gravity;		
 	}
 
 	protected virtual float ComputeSpeed() {
