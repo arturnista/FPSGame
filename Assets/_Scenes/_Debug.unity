@@ -1053,7 +1053,6 @@ GameObject:
   - component: {fileID: 931945076}
   - component: {fileID: 931945075}
   - component: {fileID: 931945074}
-  - component: {fileID: 931945073}
   m_Layer: 9
   m_Name: FPSCamera
   m_TagString: Untagged
@@ -1074,18 +1073,6 @@ Transform:
   m_Father: {fileID: 1920328069}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &931945073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 931945071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: 83217ec868ea8496dbea5ce8e1e27a61, type: 2}
 --- !u!81 &931945074
 AudioListener:
   m_ObjectHideFlags: 0
