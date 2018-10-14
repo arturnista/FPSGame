@@ -14,11 +14,11 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Start () {
-		Invoke ("StartGame", 2f);
+		Invoke ("StartGame", 1f);
 	}
 
 	void StartGame () {
-		HUDController.main.ShowText ("Thanks for testing the game!");
+		HUDController.main.ShowText ("Move the Payload outside");
 	}
 
 }
