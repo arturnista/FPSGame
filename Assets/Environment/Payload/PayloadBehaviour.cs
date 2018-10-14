@@ -8,10 +8,9 @@ public class PayloadBehaviour : MonoBehaviour {
 	private float m_MoveSpeed = 5f;
 
 	private bool m_IsMoving;
-	private CapsuleCollider m_CapsuleCollider;
 
 	void Awake () {
-		m_CapsuleCollider = GetComponent<CapsuleCollider>();
+		
 	}
 	
 	void Update () {

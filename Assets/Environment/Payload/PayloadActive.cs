@@ -11,6 +11,8 @@ public class PayloadActive : DoorActivate {
 	}
 	
 	public override void Use () {
+		if(!GameController.main.powerIsOn) return;
+		
 		if(!door.isOpen) base.Use();
 		m_PayloadBehaviour.Activate();
 	}

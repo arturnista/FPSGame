@@ -95,8 +95,8 @@ public class FloatingDemonMovement : EnemyMovement {
 
 		RaycastHit[] hits = Physics.RaycastAll (castPosition, transform.forward, distance);
 		if (hits.Length == 1) {
-			for (int x = 0; x < 3; x++) {
-				Invoke ("FireProjectile", .3f * x);
+			for (int x = 0; x < m_Guns.Count; x++) {
+				Invoke ("FireProjectile", .5f * x);
 			}
 		}
 	}

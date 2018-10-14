@@ -13,6 +13,8 @@ public class CyclopMovement : EnemyMovement {
 	[SerializeField]	
 	private float m_Damage = 25f;
 	[SerializeField]	
+	private float m_DamageRange = 2f;
+	[SerializeField]	
 	private float m_StunTime;
 	[SerializeField]
 	private float m_RunSpeed;
@@ -61,7 +63,7 @@ public class CyclopMovement : EnemyMovement {
 		PlayAnimation();
 
 		if(canMove) {
-			if(Vector3.Distance(m_Player.transform.position, transform.position) <= 2f) {
+			if(Vector3.Distance(m_Player.transform.position, transform.position) <= m_DamageRange) {
 				this.Attack();
 				return;
 			}
@@ -141,7 +143,7 @@ public class CyclopMovement : EnemyMovement {
 		if(m_IsDying) return;
 		if(m_IsStunned) return;
 
-		if(Vector3.Distance(m_Player.transform.position, transform.position) <= 3f) {
+		if(Vector3.Distance(m_Player.transform.position, transform.position) <= m_DamageRange * 1.1f) {
 			m_Player.TakeDamage(m_Damage);
 		}		
 	}
@@ -162,7 +164,7 @@ public class CyclopMovement : EnemyMovement {
 
 		m_IsTakingHit = true;
 
-		if(m_Health.healthPerc <= .5f) this.SetAngry();
+		if(m_Health.healthPerc <= .2f) this.SetAngry();
 		
 		if(m_Health.healthPerc <= 0f) {
 			m_IsDying = true;
