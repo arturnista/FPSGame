@@ -9,7 +9,7 @@ public class PhysicEntity : MonoBehaviour {
 	public float acceleration = 100f;
 	public float moveSpeed = 8f;
 	public float jumpForce = 4f; 
-	public float gravity = 12f;
+	protected float gravity = 12f;
 	public float height = 1.5f;
 	public bool ignoreGravity = false;
 

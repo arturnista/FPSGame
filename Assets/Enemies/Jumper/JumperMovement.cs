@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class JumperMovement : EnemyMovement {
 
-	protected PlayerMovement m_Player;
+	[Header("Jumper")]
+	[SerializeField]	
+	private float m_Damage = 10f;
+
 	private JumperHealth m_Health;
+	private UnityEngine.AI.NavMeshAgent m_NavMeshAgent;
 
 	private bool m_IsAttacking;
 	private bool m_IsTakingHit;
@@ -14,14 +19,27 @@ public class JumperMovement : EnemyMovement {
 	protected override void Awake () {
 		base.Awake();
 
-		m_Player = GameObject.FindObjectOfType<PlayerMovement>();
 		m_Health = GetComponent<JumperHealth>();
+		m_NavMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 	}
 	
 	void Update () {
 		if(m_IsDying) return;
 
-		if(m_IsFollowingPlayer) {
+		float playerDist = Vector3.Distance(m_Player.transform.position, transform.position);
+
+		if(!m_IsAttacking && m_IsFollowingPlayer) {
+			// NavMeshPath path = new NavMeshPath();
+			// m_NavMeshAgent.CalculatePath(m_Player.transform.position, path);
+			// if(path.status == NavMeshPathStatus.PathComplete && path.corners.Length > 1) {
+			// 	Vector3 target = path.corners[1];
+				
+			// 	transform.LookAt(target);
+			// 	Vector3 nRot = transform.eulerAngles;
+			// 	nRot.x = nRot.z = 0f;
+			// 	transform.eulerAngles = nRot;
+			// }
+			
 			transform.LookAt(m_Player.transform);
 			Vector3 nRot = transform.eulerAngles;
 			nRot.x = nRot.z = 0f;
@@ -29,17 +47,15 @@ public class JumperMovement : EnemyMovement {
 
 			m_ForwardSpeed = 1f;
 
-			if(m_Controller.isGrounded) {
-				m_ForwardSpeed = 1.5f;
-				Jump();
-			}
-		}
+			if(playerDist <= 2f) {
+				Attack();
+			} else if(playerDist <= 10f) {
+				m_ForwardSpeed = 5f;
 
-		if(m_IsAttacking) {
-			m_ForwardSpeed = 0f;
-		} else if(Vector3.Distance(m_Player.transform.position, transform.position) <= 2f) {
-			this.Attack();
-			return;
+				if(m_Controller.isGrounded) {
+					Jump();
+				}
+			}
 		}
 
 		float speed = this.ComputeSpeed();
@@ -48,9 +64,9 @@ public class JumperMovement : EnemyMovement {
 
 	void Attack() {
 		m_IsAttacking = true;
-		// if(Random.Range(0f, 1f) > .5f) m_Animation.CrossFade("Attack_01");
-		// else m_Animation.CrossFade("attack_2");
-		Invoke("FinishAttack", 1.15f);		
+
+		m_Player.TakeDamage(m_Damage);
+		Invoke("FinishAttack", 2f);
 	}
 
 	void FinishAttack() {
