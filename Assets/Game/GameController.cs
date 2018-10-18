@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour {
 
 	[Header("Constants")]
 	[SerializeField]
-	private bool m_PowerIsOn;
+	private bool m_PowerIsOn = true;
 	public bool powerIsOn {
 		get {
 			return m_PowerIsOn;
@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour {
 
 	void Awake() {
 		main = this;
+		m_PowerIsOn = true;
 	}
 
 	void Start () {

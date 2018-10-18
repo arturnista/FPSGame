@@ -71,14 +71,16 @@ public class BossMovement : EnemyMovement {
 					nRot.x = nRot.z = 0f;
 					transform.eulerAngles = nRot;
 				}
-
-				float speed = this.ComputeSpeed();
-				this.Move(speed);
 			}
 		} else {
 			m_ForwardSpeed = 0f;
 			m_NavMeshAgent.isStopped = true;
 		}	
+	}
+
+	void FixedUpdate() {
+		float speed = this.ComputeSpeed();
+		this.Move(speed);
 	}
 
 	void PlayAnimation() {

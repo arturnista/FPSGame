@@ -46,9 +46,7 @@ public class CyclopMovement : EnemyMovement {
 	}
 	
 	void Update () {
-		if(m_IsDying) {
-			return;
-		}
+		if(m_IsDying) return;
 
 		bool canRotate = true;
 		bool canMove = true;
@@ -62,18 +60,20 @@ public class CyclopMovement : EnemyMovement {
 
 		PlayAnimation();
 
-		if(canMove) {
-			if(Vector3.Distance(m_Player.transform.position, transform.position) <= m_DamageRange) {
-				this.Attack();
-				return;
-			}
+		if(!m_IsAttacking && m_IsFollowingPlayer && Vector3.Distance(m_Player.transform.position, transform.position) <= m_DamageRange) {
+			this.Attack();
+			return;
+		}
 
-			m_ForwardSpeed = 1f;	
+		m_ForwardSpeed = 0f;
+		if(canMove) {
 			m_NavMeshAgent.isStopped = false;
 			NavMeshPath path = new NavMeshPath();
 			m_NavMeshAgent.CalculatePath(m_Player.transform.position, path);
 			if(path.status == NavMeshPathStatus.PathComplete && path.corners.Length > 1) {
+				
 				Vector3 target = path.corners[1];
+				m_ForwardSpeed = 1f;	
 				
 				if(canRotate) {
 					transform.LookAt(target);
@@ -82,13 +82,17 @@ public class CyclopMovement : EnemyMovement {
 					transform.eulerAngles = nRot;
 				}
 
-				float speed = this.ComputeSpeed();
-				this.Move(speed);
 			}
 		} else {
-			m_ForwardSpeed = 0f;
 			m_NavMeshAgent.isStopped = true;
 		}	
+	}
+
+	void FixedUpdate() {
+		if(m_IsDying) return;
+		
+		float speed = this.ComputeSpeed();
+		this.Move(speed);
 	}
 
 	void PlayAnimation() {

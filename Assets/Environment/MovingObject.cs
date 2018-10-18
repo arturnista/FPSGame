@@ -43,6 +43,7 @@ public class MovingObject : MonoBehaviour {
 	public void On() {
 		m_Active = true;
 		m_Light.enabled = true;
+		m_InitialTime = Time.time;
 	}
 
 	public void Off() {

@@ -116,7 +116,7 @@ public class PhysicEntity : MonoBehaviour {
         m_LastPosition = transform.position;
         if(m_Controller.isGrounded && m_AmountWalked >= m_StepSize) {
             m_AmountWalked = 0f;
-            Collider[] colliders = Physics.OverlapBox(transform.position - transform.up * height / 2f, new Vector3(.3f, .5f, .3f), Quaternion.identity);
+            Collider[] colliders = Physics.OverlapBox(transform.position - transform.up * (height / 2f), new Vector3(.3f, height, .3f), Quaternion.identity);
             foreach(Collider c in colliders) {
                 MaterialType mt = c.GetComponent<MaterialType>();
                 if(mt) {

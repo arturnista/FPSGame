@@ -68,7 +68,9 @@ public class FloatingDemonMovement : EnemyMovement {
 		} else {
 			m_ForwardSpeed = 0f;
 		}
+	}
 
+	void FixedUpdate() {
 		float speed = this.ComputeSpeed ();
 		this.Move (speed);
 	}

@@ -39,7 +39,11 @@ public class TrollMovement : EnemyMovement {
         if (planeVelocity.magnitude > 0.1f) m_Animation.CrossFade("Run");
         else m_Animation.CrossFade("Idle_01");
 		m_ForwardSpeed = 1f;
+	}
 
+	void FixedUpdate() {
+		if(m_IsDying) return;
+		
 		float speed = this.ComputeSpeed();
 		this.Move(speed);
 	}

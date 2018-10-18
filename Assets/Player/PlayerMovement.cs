@@ -45,7 +45,6 @@ public class PlayerMovement : PhysicEntity {
 		if(m_Controller.isGrounded && Input.GetKeyDown(KeyCode.Space)) {
 			if(m_StairMode) m_Velocity = m_Velocity + transform.forward * -10f; 
 			else Jump();
-			
 		}
 
 		if(Input.GetKeyDown(KeyCode.LeftControl)) {
