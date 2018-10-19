@@ -19,11 +19,15 @@ public class ButtonText : Button, IPointerEnterHandler, IPointerExitHandler {
     public override void OnPointerEnter(PointerEventData pointerEventData) {
         // mText.fontStyle = FontStyles.Underline;
         mText.fontStyle = (FontStyles) ((int) FontStyles.SmallCaps) + ((int) FontStyles.Underline);
-        Debug.Log("Cursor Entering " + name + " GameObject");
     }
 
     public override void OnPointerExit(PointerEventData pointerEventData) {
         mText.fontStyle = FontStyles.SmallCaps;
-        Debug.Log("Cursor Exiting " + name + " GameObject");
     }
+
+    protected override void OnDisable() {
+        base.OnDisable();
+        mText.fontStyle = FontStyles.SmallCaps;
+    }
+
 }

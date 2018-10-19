@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour {
 
 	void Start () {
 		Invoke ("StartGame", 1f);
+		GameOptions.main.ApplyOptions();
 	}
 
 	void Update() {

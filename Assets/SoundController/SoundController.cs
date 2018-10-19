@@ -16,6 +16,10 @@ public class SoundController : MonoBehaviour {
 		i_AudioSource = GetComponent<AudioSource>();
 	}
 
+	public void ApplyVolume(float volume) {
+		m_MasterVolume = volume;
+	}
+
 	public static void PlaySound (AudioClip audio, Vector3 position, float volume = 1f) {
 		float soundVolume = volume * i_Instance.m_MasterVolume;
 		if(soundVolume <= 0f) return;
