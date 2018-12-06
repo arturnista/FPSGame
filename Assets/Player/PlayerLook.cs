@@ -62,7 +62,8 @@ public class PlayerLook : MonoBehaviour {
 	
 	public void ApplySensibility(float sensitivity) {
 		this.sensitivity = sensitivity;
-	}
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.P)) {

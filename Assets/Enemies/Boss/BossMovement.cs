@@ -79,6 +79,8 @@ public class BossMovement : EnemyMovement {
 	}
 
 	void FixedUpdate() {
+		if(m_IsDying) return;
+		
 		float speed = this.ComputeSpeed();
 		this.Move(speed);
 	}
