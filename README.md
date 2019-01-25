@@ -1,2 +1,2 @@
 # FPSGame
-Random FPS game. Used just for test and learning
+FPS game developing for tests and learning
