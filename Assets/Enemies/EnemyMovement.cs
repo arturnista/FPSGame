@@ -7,7 +7,7 @@ public class EnemyMovement : PhysicEntity {
 	[SerializeField]
     protected bool m_IsFollowingPlayer = false;
 
-    protected virtual void Awake() {
+    protected override void Awake() {
         base.Awake();
     }
 

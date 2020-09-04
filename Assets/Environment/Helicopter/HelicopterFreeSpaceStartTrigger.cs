@@ -11,6 +11,9 @@ public class HelicopterFreeSpaceStartTrigger : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		m_FreeSpace.StartWaiting();
+		if (other.gameObject.CompareTag("Player"))
+		{
+			m_FreeSpace.StartWaiting();
+		}
 	}
 }
