@@ -20,6 +20,9 @@ public class HUDController : MonoBehaviour {
 	private Transform m_GunsFeed;
 
 	[SerializeField]
+	private Color m_EndGameColor;
+
+	[SerializeField]
 	private Color m_HitColor;
 	private Color m_HitColorTransparent;
 	private PlayerWeapon m_PlayerWeapon;
@@ -85,6 +88,31 @@ public class HUDController : MonoBehaviour {
 		Color col = m_HitColor;
 		col.a = 1f;
 		m_HitIndicator.color = col;
+	}
+
+	public void EndGame () {
+		m_IsDead = true;
+
+		m_AmmoText.text = "";
+		m_HealthText.text = "";
+		StartCoroutine(EndGameFadeOut());
+	}
+
+	IEnumerator EndGameFadeOut()
+	{
+
+		float alpha = 0f;
+		Color color = m_EndGameColor;
+		color.a = alpha;
+		while (alpha < 1f)
+		{
+			alpha += 0.5f * Time.deltaTime;
+			color.a = alpha;
+			m_HitIndicator.color = color;
+
+			yield return null;
+		}
+
 	}
 
 	public void PickUpItem (string itemName, int amount) {

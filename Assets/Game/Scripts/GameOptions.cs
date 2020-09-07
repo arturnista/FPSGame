@@ -28,19 +28,17 @@ public class GameOptions : MonoBehaviour {
         }
 		main = this;
         DontDestroyOnLoad(gameObject);
+
+        m_SoundVolume = PlayerPrefs.GetFloat("Volume", .2f);
+        m_Sensibility = PlayerPrefs.GetFloat("Sensibility", 3f);
 	}
 
     public void SetOptions(float sensibility, float volume) {
         m_Sensibility = sensibility;
         m_SoundVolume = volume / 100f;
-    }
 
-    public void ApplyOptions() {
-        SoundController sc = GameObject.FindObjectOfType<SoundController>();
-        sc.ApplyVolume(m_SoundVolume);
-
-        PlayerLook pl = GameObject.FindObjectOfType<PlayerLook>();
-        pl.ApplySensibility(m_Sensibility);
+        PlayerPrefs.SetFloat("Volume", m_SoundVolume);
+        PlayerPrefs.SetFloat("Sensibility", m_Sensibility);
     }
 
 }

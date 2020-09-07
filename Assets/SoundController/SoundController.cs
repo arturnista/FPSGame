@@ -14,6 +14,7 @@ public class SoundController : MonoBehaviour {
 	void Awake () {
 		i_Instance = this;
 		i_AudioSource = GetComponent<AudioSource>();
+        ApplyVolume(PlayerPrefs.GetFloat("Volume", .2f));
 	}
 
 	public void ApplyVolume(float volume) {

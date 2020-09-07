@@ -27,6 +27,8 @@ public class CyclopMovement : EnemyMovement {
 	private bool m_IsDying;
 	private bool m_IsAngry;
 
+	private Vector3 m_TargetPosition;
+
 	[Header("Sounds")]
 	[SerializeField]
 	private AudioClip[] m_NoticePlayerSounds;
@@ -58,6 +60,11 @@ public class CyclopMovement : EnemyMovement {
 			canMove = false;
 		}
 
+		if (m_IsFollowingPlayer)
+		{
+			m_TargetPosition = m_Player.transform.position;
+		}
+
 		PlayAnimation();
 
 		if(!m_IsAttacking && m_IsFollowingPlayer && Vector3.Distance(m_Player.transform.position, transform.position) <= m_DamageRange) {
@@ -69,7 +76,7 @@ public class CyclopMovement : EnemyMovement {
 		if(canMove) {
 			m_NavMeshAgent.isStopped = false;
 			NavMeshPath path = new NavMeshPath();
-			m_NavMeshAgent.CalculatePath(m_Player.transform.position, path);
+			m_NavMeshAgent.CalculatePath(m_TargetPosition, path);
 			if(path.status == NavMeshPathStatus.PathComplete && path.corners.Length > 1) {
 				
 				Vector3 target = path.corners[1];

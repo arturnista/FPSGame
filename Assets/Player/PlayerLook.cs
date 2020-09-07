@@ -5,7 +5,10 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour {
 
 	private PlayerMovement m_PlayerMovement;
+
 	private Camera m_FPSCamera;
+	public Camera FPSCamera { get => m_FPSCamera; }
+	
 	private Rigidbody m_Rigidbody;
 
 	public float sensitivity = 3F;
@@ -58,12 +61,24 @@ public class PlayerLook : MonoBehaviour {
 		originalRotation = Quaternion.identity;
 		// Cursor.lockState = CursorLockMode.Locked;
 		Cursor.lockState = CursorLockMode.None;
+
+        ApplySensibility(PlayerPrefs.GetFloat("Sensibility", 3f));
 	}
 	
-	public void ApplySensibility(float sensitivity) {
+	public void ApplySensibility(float sensitivity)
+	{
 		this.sensitivity = sensitivity;
-        Cursor.lockState = CursorLockMode.Locked;
     }
+	
+	void OnEnable()
+	{
+        Cursor.lockState = CursorLockMode.Locked;
+	}
+
+	void OnDisable()
+	{
+		Cursor.lockState = CursorLockMode.None;
+	}
 
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.P)) {

@@ -5,7 +5,6 @@ using UnityEngine;
 public class HelicopterFreeSpace : MonoBehaviour {
 
 	public GameObject explosionPrefab;
-	public GameObject boss;
 
 	private int m_EnemiesInSpace;
 	private bool m_IsWaiting;
@@ -51,7 +50,7 @@ public class HelicopterFreeSpace : MonoBehaviour {
 	public void Explode() {
 		Instantiate(explosionPrefab, m_Helicopter.landPosition, Quaternion.identity);
 		Destroy(m_Helicopter.gameObject);
-		boss.SetActive(true);
+		EndGameController.Instance.CreateBoss();
 	}
 
 	public void StartWaiting() {

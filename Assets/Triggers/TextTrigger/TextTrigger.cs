@@ -18,7 +18,7 @@ public class TextTrigger : MonoBehaviour {
 
 	void Update() {
 		if(m_Text.gameObject.active) {
-			m_Text.transform.LookAt(m_Player.transform);
+			m_Text.transform.LookAt(Player.look.FPSCamera.transform);
 		}
 	}
 
